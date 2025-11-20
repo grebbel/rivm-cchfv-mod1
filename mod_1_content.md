@@ -224,7 +224,6 @@ In healthcare and slaughterhouse settings, personal protective equipment (PPE) a
 
 Abattoir and healthcare staff should be trained in proper animal handling, safe butchering techniques, and infection prevention protocols to reinforce PPE effectiveness.
 
-
 ## Controlling Ticks and Livestock
 
 ### Vector control
@@ -247,6 +246,102 @@ At-risk communities can be taught to avoid risky exposures, recognize symptoms e
 
 # Laboratory Diagnosis
 
+
+
+**Diagnosis in the Danger Zone: The Lab’s Critical Role in Fighting Crimean-Congo Hemorrhagic Fever**
+
+**Crimean-Congo Hemorrhagic Fever (CCHF) is a severe, potentially fatal tick-borne illness endemic across vast areas of Europe, Africa, and Asia****. Caused by the CCHF virus (CCHFV), this disease presents a formidable public health challenge due to its high fatality rate (ranging from 5% to 30% in hospitalized patients) and its capacity for nosocomial transmission****.**
+
+**Rapid and reliable diagnosis is absolutely essential**** not only for early initiation of patient supportive care, which is the mainstay of treatment, but also for the immediate implementation of infection control measures to prevent further spread****.**
+
+**The initial phase of CCHF is marked by non-specific symptoms such as abrupt fever, severe headache, and malaise, often making clinical diagnosis difficult as it mimics other infections like malaria or leptospirosis****. Therefore, definitive diagnosis relies heavily on specialized laboratory testing, guided by the specific phase of the illness****.**
+
+**The Laboratory Toolkit: Direct vs. Indirect Detection**
+
+**Laboratory diagnosis of CCHF is generally accomplished through a ****combination of methods**** (molecular and serological) to detect either the virus directly or the host's immune response indirectly****.**
+
+**Phase 1: Detecting the Virus (Molecular Methods)**
+
+**During the ****early phase of the disease (typically the first 5–7 days)** **, the patient is highly viremic, making ****direct viral detection**** the method of choice****.**
+
+**1. Reverse Transcriptase-Polymerase Chain Reaction (RT-PCR)**
+
+**Molecular detection of viral RNA via RT-PCR is the primary front-line diagnostic tool****.**
+
+**• ****Utility:**** RT-PCR is ****sensitive, specific, and rapid****. It detects viral RNA in various clinical samples, including ****whole blood, plasma, serum, urine** **, and tissue samples****. While viremia can occasionally be detected up to 18 days after illness onset, PCR is ****most successful during the first 5 days**** before the development of antibodies****.**
+
+**• ****Prognostic Value:**** Quantitative real-time RT-PCR (RT-qPCR) is highly valuable because the ****viral load is significantly associated with the severity and outcome of the disease****. Studies, such as one analyzing data from Iraq, confirm that the ****cycle threshold (Ct) value has strong prognostic significance** **, providing a quantitative estimate of patient outcomes, with a higher viral load (lower Ct value) predicting a poorer prognosis****.**
+
+**• ****Challenges:**** The CCHFV exhibits ****substantial genetic diversity****. Consequently, molecular protocols must pay close attention to ensure they can ****detect all currently known genetic lineages**** of the virus, otherwise, diagnostic accuracy may be affected****.**
+
+**2. Advanced and Point-of-Need Assays**
+
+**For low-resource settings, several novel isothermal assays are being investigated to eliminate the need for costly thermal cycling equipment****:**
+
+**• ****Loop-Mediated Isothermal Amplification (RT-LAMP):**** This technique can be used in low-resource laboratories or in the field (point-of-need)****. RT-LAMP has been shown to amplify different CCHFV genotypes and, in some studies comparing it to RT-qPCR, demonstrated greater sensitivity in urine samples****.**
+
+**• ****Recombinase Polymerase Assay (RPA):**** An isothermal assay that is rapid (often lasting 5–7 minutes) and highly sensitive, capable of detecting viral components from all seven S-section clades of CCHFV****.**
+
+**3. Virus Isolation and Antigen Detection**
+
+**• ****Virus Isolation:**** This traditional technique involves inoculating cell lines (like Vero or BHK-21) or newborn mice with the patient's sample****. Isolation is usually successful during the first 5 days of high viremia****. However, it is ****time-consuming**** (1–6 days for cell culture) and, due to the highly pathogenic nature of CCHFV, generally ****requires Biosafety Level 4 (BSL-4) containment facilities****.**
+
+**• ****Antigen Detection:**** CCHFV antigen detection is achieved during the first 5 days of illness****. Recently developed highly specific methods, such as the double antibody sandwich ELISA (sELISA), utilize the highly conserved and immunogenic CCHFV nucleoprotein (NP) as an early diagnostic marker and can be used for detection in human serum, ticks, and culture supernatant****.**
+
+**Phase 2: Detecting the Immune Response (Serology)**
+
+**Serological methods**** are the definitive approach once the viremic period wanes, beginning usually ****after the fifth day of illness****.**
+
+**• ****Methods:**** ****Enzyme-Linked Immunosorbent Assays (ELISA)**** and ****Indirect Immunofluorescent Assays (IFA)**** are the standard methods used to detect CCHFV-specific IgM and IgG antibodies****. Commercial kits for IgM and IgG detection are available****.**
+
+**• ****Antibody Kinetics:**
+
+**    ◦ ****IgM antibodies**** are typically detectable after the ****fifth day of illness****. They indicate acute or recent infection and peak within 2–3 weeks, declining substantially by month 4****.**
+
+**    ◦ ****IgG antibodies**** become detectable a few days later, typically ****after the seventh to ninth day of illness****. IgG remains detectable for a longer period, often ****at least 3 to 5 years** **, suggesting past exposure****.**
+
+**• ****Interpretation:**** An acute infection is confirmed by detecting CCHFV-specific IgM, or by ****seroconversion**** (a minimum four-fold increase in IgG titer between paired acute and convalescent samples)****.**
+
+**• ****Critical Limitation:**** Antibody production, particularly IgM, can be ****delayed or entirely absent in severe cases or fatal outcomes****. The absence of an antibody response is generally associated with a fatal outcome****. For these cases, direct viral assays must be used for diagnostic clarification****.**
+
+**Ancillary and Prognostic Testing**
+
+**• ****Immunohistochemistry (IHC):**** IHC can detect CCHFV antigens in necropsy or biopsy samples, providing support for diagnosis in fatal cases and aiding the study of pathogenesis by showing virus localization in cells like mononuclear phagocytes, endothelial cells, and hepatocytes****.**
+
+**• ****Next-Generation Sequencing (NGS):**** NGS protocols are expected to serve as a ****powerful tool**** for identifying pathogens, agnostic of prior knowledge, and monitoring the genetic evolution of CCHFV strains****.**
+
+**• ****Biomarkers:**** Beyond viral load, laboratory findings such as ****thrombocytopenia, leukopenia, elevated liver enzymes**** (AST/ALT), and prolonged coagulation times (PT/aPTT) are critical early indicators****. Furthermore, elevated inflammatory cytokines, such as IL-6 and TNF-α, are often associated with severe or fatal outcomes****.**
+
+**The Operational Challenge: Biosafety and Future Needs**
+---------------------------------------------------------
+
+**The laboratory management of CCHFV infections is significantly complicated by the high level of biosafety precautions required and the geographical distribution of the disease in often resource-limited settings****.
+
+**Biosafety Requirements**
+
+**Handling clinical samples from suspected CCHF cases, particularly for virus isolation procedures, necessitates ****high biocontainment facilities (BSL-4)**** and specialized, well-trained personnel****.**
+
+**• ****Inactivation:**** A common practice to reduce the BSL requirement is to ****inactivate the clinical sample prior to testing****. CCHFV, being an enveloped virus, is susceptible to inactivation through methods like heating (e.g., 56°C for 30 minutes) or treatment with disinfectants (e.g., 1% hypochlorite or 2% glutaraldehyde)****. However, inactivation methods must be chosen carefully to ensure compatibility with the chosen diagnostic assay****.**
+
+**The Urgent Need for Point-of-Care (POC) Tests**
+
+**There is a critical need for new CCHF diagnostic tests****. Endemic regions are frequently rural or have limited diagnostic capacity, leading to reliance on distant reference laboratories and subsequent delays in diagnosis and implementation of infection control measures****.**
+
+**• ****Missing Tools:**** Currently, there are ****no commercial rapid CCHF diagnostic tests**** available for widespread clinical use****. The development of a commercially available, bio-safe, rapid point-of-care test is an urgent need identified by WHO****. POC assays would ideally be highly sensitive, reduce specimen handling, and minimize aerosol production to ensure safety, especially in facilities that lack high biocontainment capabilities****.**
+
+**
+--
+
+**
+
+**Conclusion**
+
+**Laboratory services are central to CCHF detection, enabling optimized supportive care, informing public health surveillance, and driving research efforts****. An accurate diagnosis hinges on clinicians having a high index of suspicion, collecting a detailed history (including recent tick exposure or contact with livestock/patients), and applying the correct diagnostic tool (molecular vs. serological) corresponding to the day of illness****. Continued efforts must prioritize enhancing country capacity, standardizing protocols across the diverse CCHFV genotypes, and developing accessible, rapid diagnostics that can effectively reach high-risk, resource-constrained areas****.**
+
+
+
+
+
 Diagnosis relies on:
 
 Preferred clinical specimen is whole blood or serum/plasma.
@@ -260,173 +355,21 @@ Preferred clinical specimen is whole blood or serum/plasma.
 **Antigen detection**: Mainly targeting CCHFV nucleoprotein (NP).
 
 
-# Epidemiology of Crimean-Congo Hemorrhagic Fever Virus in Animals and Humans
+### Diagnostic Laboratories
 
-## 3. Geographic Distribution and Expansion
+Use of BSL-2 or BSL-3 containment for routine serology or PCR if validated inactivation is confirmed.
 
-### **3.1 Endemic and Epidemic Regions**
+Strict adherence to universal precautions.
 
-CCHFV is distributed across:
+Training for staff on recognition and handling of high-risk samples.
 
-* **Africa:** Widespread, including South Africa, Sudan, Uganda, Nigeria, and others.
-* **Asia:** Pakistan, Afghanistan, Iran, Iraq, India, China (Xinjiang), and others.
-* **Middle East:** Turkey, Iran, Iraq, Oman, Saudi Arabia, UAE, and others.
-* **Eastern and Southern Europe:** Russia, Bulgaria, Albania, Greece, Kosovo, Bosnia, Spain, and others (Papa et al., 2015; Spengler et al., 2019).
+### Research Laboratories
 
-The distribution of CCHFV closely matches that of Hyalomma ticks.
+All work with live CCHFV or infected animals must be performed in BSL-4 facilities.
 
-### **3.2 Factors Driving Geographic Expansion**
+Regular biosafety audits and certification of containment equipment.
 
-* **Climate change:** Warmer temperatures and altered rainfall patterns expand tick habitats into new regions (Estrada-Peña et al., 2012).
-* **Animal movement and trade:** Movement of livestock and wildlife, as well as migratory birds carrying infected ticks, facilitate spread (Spengler et al., 2016).
-* **Land use and agricultural practices:** Increased livestock rearing and land fragmentation create suitable environments for ticks and their hosts.
-
-### **3.3 Emergence in New Regions**
-
-Recent reports of CCHFV in Spain and the Balkans highlight the potential for further expansion into Western Europe (Negredo et al., 2017; Papa et al., 2015).
-
-## 4. Epidemiology in Animals
-
-### **4.1 Seroprevalence Studies**
-
-Serological surveys indicate widespread exposure in livestock:
-
-* **Cattle and sheep**: Seroprevalence can exceed 50% in endemic areas.
-* **Camels and goats**: Also exhibit high seroprevalence, especially in arid regions (Spengler et al., 2016).
-* **Wild mammals**: Lower but significant rates of seropositivity.
-
-Seroprevalence increases with animal age, reflecting cumulative tick exposure (Whitehouse, 2004).
-
-### **4.2 Animal Disease**
-
-CCHFV infection in animals is almost always asymptomatic. Viremia is short-lived (3–7 days), but sufficient to infect feeding ticks. No significant economic losses are directly attributed to CCHFV in livestock, but the presence of the virus restricts animal trade (Whitehouse, 2004).
-
-### **4.3 Seasonality**
-
-Tick activity (and thus virus transmission) is highly seasonal, peaking during warm months. This seasonality is mirrored in seroprevalence and human case data (Bente et al., 2013).
-
-## 5. Epidemiology in Humans
-
-### **5.1 Incidence and Outbreaks**
-
-#### **5.1.1 Endemicity and Outbreaks**
-
-Human cases occur sporadically, as isolated cases or outbreaks, often linked to agricultural or animal-handling activities. Notable outbreaks:
-
-* **Turkey:** Since 2002, thousands of cases with case fatality rates (CFR) of 5–10% (Ergönül, 2006).
-* **Iran, Pakistan, Afghanistan, Russia, and Balkans:** Recurrent outbreaks with varying CFRs.
-
-#### **5.1.2 Case Fatality Rate**
-
-CFR varies by region, outbreak, and healthcare availability, ranging from 5% to over 30% (Papa et al., 2015; Ergönül, 2006).
-
-### **5.2 Risk Factors for Human Infection**
-
-* **Occupation:** Farmers, butchers, veterinarians, abattoir workers, healthcare workers (nosocomial exposure).
-* **Exposure:** Tick bites, handling of livestock, slaughtering, and contact with animal tissues or blood.
-* **Gender and age:** More common in males and adults, reflecting occupational exposure patterns.
-* **Seasonality:** Most cases occur during peak tick activity (spring and summer) (Ergönül, 2006; Spengler et al., 2016).
-
-### **5.3 Modes of Transmission**
-
-#### **5.3.1 Tick Bites**
-
-Most primary human cases result from tick bites during outdoor activities.
-
-#### **5.3.2 Contact with Infected Animals**
-
-Handling or slaughtering viremic animals is a significant risk, especially in rural settings and during religious festivals involving animal sacrifice (Spengler et al., 2016).
-
-#### **5.3.3 Nosocomial Transmission**
-
-Secondary cases occur through contact with blood, secretions, or tissues of infected patients, particularly in healthcare settings lacking adequate infection control (Ergönül, 2006; Mardani & Keshtkar-Jahromi, 2007).
-
-#### **5.3.4 Person-to-Person Transmission**
-
-Direct human-to-human transmission (not vector-borne) is rare but can occur through exposure to infectious blood or body fluids.
-
-## 6. Outbreak Dynamics and Patterns
-
-### **6.1 Zoonotic Spillover**
-
-Most outbreaks result from zoonotic spillover events, often linked to:
-
-* **Increased tick activity**
-* **Animal movements**
-* **Slaughtering of livestock**
-
-### **6.2 Clustered and Nosocomial Outbreaks**
-
-Outbreaks may be:
-
-* **Clustered in families or communities** due to shared exposure.
-* **Nosocomial** due to inadequate infection control in hospitals (Mardani & Keshtkar-Jahromi, 2007).
-
-### **6.3 Surveillance Challenges**
-
-Underreporting is common due to:
-
-* **Non-specific early symptoms**
-* **Lack of diagnostic facilities in rural areas**
-* **Stigmatization and fear of isolation**
-
-## 7. Molecular Epidemiology
-
-### **7.1 Genetic Diversity**
-
-CCHFV exhibits high genetic diversity, with multiple genotypes circulating in different regions (Deyde et al., 2006). Phylogenetic analyses reveal several distinct lineages associated with Africa, Asia, Eastern Europe, and the Middle East.
-
-### **7.2 Reassortment and Evolution**
-
-The segmented genome allows for genetic reassortment, contributing to the emergence of novel strains with potential changes in virulence, transmissibility, and antigenicity (Bente et al., 2013).
-
-## 8. Surveillance and Control
-
-### **8.1 Animal Surveillance**
-
-* **Serosurveys in livestock**: Useful for mapping endemicity and risk.
-* **Tick surveillance**: Identification of infected tick populations and mapping their distribution.
-
-### **8.2 Human Surveillance**
-
-* **Case reporting**: Notifiable disease in many endemic countries.
-* **Laboratory diagnostics**: Real-time RT-PCR and serology (ELISA, IFA) are mainstays (Ergönül, 2006).
-
-### **8.3 Prevention and Control Strategies**
-
-* **Personal protection**: Avoidance of tick bites, use of repellents, and protective clothing.
-* **Tick control on animals**: Regular use of acaricides.
-* **Safe animal handling**: Protective measures during slaughtering and veterinary procedures.
-* **Hospital infection control**: Strict barrier nursing, isolation of suspected cases, and safe handling of blood and tissues.
-* **Public awareness**: Education campaigns in rural and at-risk populations.
-
-### **8.4 Vaccination**
-
-No widely licensed vaccine exists for humans or animals, although an inactivated vaccine is used on a limited basis in Bulgaria and Russia (Ergönül, 2006; Spengler et al., 2016).
-
-## 9. Impact of Climate and Environmental Changes
-
-### **9.1 Climate Change**
-
-Warming temperatures and altered precipitation patterns are expanding the habitats of Hyalomma ticks, increasing the risk of CCHFV emergence in new regions (Estrada-Peña et al., 2012).
-
-### **9.2 Land Use and Human Activity**
-
-Deforestation, agricultural expansion, and changes in animal husbandry practices influence tick and host populations, affecting virus transmission dynamics.
-
-## 10. One Health Perspective
-
-The epidemiology of CCHFV exemplifies the interconnectedness of human, animal, and environmental health:
-
-* **Animals and ticks** serve as reservoirs and amplifiers.
-* **Humans** are exposed through environmental, occupational, and behavioral factors.
-* **Integrated surveillance** across veterinary and human health sectors is critical for early detection and response (Spengler et al., 2016).
-
-## Conclusion
-
-The epidemiology of Crimean-Congo hemorrhagic fever virus is characterized by a complex tick-animal-human transmission cycle, broad geographic distribution, and the potential for explosive outbreaks in humans. Ticks, particularly Hyalomma spp., are both vectors and reservoirs, maintaining the virus in nature through vertical and horizontal transmission. Domestic and wild animals serve as amplifying hosts, while humans are incidental hosts who may acquire infection through tick bites or contact with infected animals or humans.
-
-The risk of CCHFV emergence and spread is influenced by climate change, animal and human movement, land use changes, and gaps in surveillance and control. Addressing these challenges requires a One Health approach, integrating veterinary, human, and environmental health efforts to monitor, prevent, and control this important zoonotic threat.
+Simulation of emergency procedures (e.g., spills, exposure).
 
 # Risks in Laboratory
 
@@ -606,47 +549,3 @@ No widely available vaccine exists for laboratory workers. An inactivated vaccin
 * All work with live CCHFV or infected animals must be performed in BSL-4 facilities.
 * Regular biosafety audits and certification of containment equipment.
 * Simulation of emergency procedures (e.g., spills, exposure).
-
-### **8.1. Expanding Endemic Areas**
-
-As CCHFV spreads to new geographic regions, laboratories in previously non-endemic countries may encounter the virus for the first time, increasing risk due to unfamiliarity and lack of experience (Spengler et al., 2019).
-
-# References
-
-1. Kuhn JH, Alkhovsky SV, Avsic-Zupanc T, Bergeron E, Burt F, Ergunay K, et al. ICTV Virus Taxonomy Profile: Nairoviridae 2024. J Gen Virol. 2024;105(4).
-2. Chumakov MP, Butenko AM, Shalunova NV, Mart'ianova LI, Smirnova SE, Bashkirtsev Iu N, et al. [New data on the viral agent of Crimean hemorrhagic fever]. Vopr Virusol. 1968;13(3):377.
-3. Hoogstraal H. The epidemiology of tick-borne Crimean-Congo hemorrhagic fever in Asia, Europe, and Africa. J Med Entomol. 1979;15(4):307–417.
-4. Wiktorowicz CJ, Arnold B, Wiktorowicz JE, Murray ML, Kurosky A. Hemorrhagic fever virus, human blood, and tissues in Iron Age mortuary vessels. J Archaeol Sci. 2017;78:29–39.
-5. Simpson DI, Knight EM, Courtois G, Williams MC, Weinbren MP, Kibukamusoke JW. Congo virus: a hitherto undescribed virus occurring in Africa. I. Human isolations--clinical notes. East Afr Med J. 1967;44(2):86–92.
-6. Casals J. Antigenic similarity between the virus causing Crimean hemorrhagic fever and Congo virus. Proc Soc Exp Biol Med. 1969;131(1):233–6.
-7. Whitehouse CA. Crimean-Congo hemorrhagic fever. Antiviral Res. 2004;64(3):145–60.
-8. Hawman DW, Feldmann H. Crimean-Congo haemorrhagic fever virus. Nat Rev Microbiol. 2023;21(7):463–77.
-9. Ergonul O. Crimean-Congo haemorrhagic fever. Lancet Infect Dis. 2006;6(4):203–14.
-10. CDC. Select Agents and Toxins List 2025 [Available from: [https://www.selectagents.gov/sat/list.htm](https://www.selectagents.gov/sat/list.htm).
-11. CDC. Biosafety in Microbiological and Biomedical Laboratories (BMBL) 6th Edition 2025 [Available from: [https://www.cdc.gov/labs/bmbl/index.html](https://www.cdc.gov/labs/bmbl/index.html).
-12. WHO. Laboratory biosafety manual, 3rd edition 2004 [Available from: [https://www.who.int/publications/i/item/9241546506](https://www.who.int/publications/i/item/9241546506).
-13. Tsergouli K, Karampatakis T, Haidich AB, Metallidis S, Papa A. Nosocomial infections caused by Crimean-Congo haemorrhagic fever virus. J Hosp Infect. 2020;105(1):43–52.
-14. WHO. Crimean-Congo haemorrhagic fever 2025 [Available from: [https://www.who.int/health-topics/crimean-congo-haemorrhagic-fever#tab=tab_1](https://www.who.int/health-topics/crimean-congo-haemorrhagic-fever#tab=tab_1).
-15. Bente DA, Forrester NL, Watts DM, McAuley AJ, Whitehouse CA, Bray M. Crimean-Congo hemorrhagic fever: history, epidemiology, pathogenesis, clinical syndrome and genetic diversity. Antiviral Res. 2013;100(1):159–89.
-16. Flick R, Whitehouse CA. Crimean-Congo hemorrhagic fever virus. Curr Mol Med. 2005;5(8):753–60.
-17. Haddock E, Feldmann F, Hawman DW, Zivcec M, Hanley PW, Saturday G, et al. A cynomolgus macaque model for Crimean-Congo haemorrhagic fever. Nat Microbiol. 2018;3(5):556–62.
-18. Bente DA, Alimonti JB, Shieh WJ, Camus G, Stroher U, Zaki S, et al. Pathogenesis and immune response of Crimean-Congo hemorrhagic fever virus in a STAT-1 knockout mouse model. J Virol. 2010;84(21):11089–100.
-19. Golden JW, Zeng X, Cline CR, Smith JM, Daye SP, Carey BD, et al. The host inflammatory response contributes to disease severity in Crimean-Congo hemorrhagic fever virus infected mice. PLoS Pathog. 2022;18(5):e1010485.
-20. Hawman DW, Meade-White K, Haddock E, Habib R, Scott D, Thomas T, et al. Crimean-Congo Hemorrhagic Fever Mouse Model Recapitulating Human Convalescence. J Virol. 2019;93(18).
-21. Elaldi N, Bodur H, Ascioglu S, Celikbas A, Ozkurt Z, Vahaboglu H, et al. Efficacy of oral ribavirin treatment in Crimean-Congo haemorrhagic fever: a quasi-experimental study from Turkey. J Infect. 2009;58(3):238–44.
-22. Smith DR, Shoemaker CJ, Zeng X, Garrison AR, Golden JW, Schellhase CW, et al. Persistent Crimean-Congo hemorrhagic fever virus infection in the testes and within granulomas of non-human primates with latent tuberculosis. PLoS Pathog. 2019;15(9):e1008050.
-23. Dilber E, Cakir M, Acar EA, Orhan F, Yaris N, Bahat E, et al. Crimean-Congo haemorrhagic fever among children in north-eastern Turkey. Ann Trop Paediatr. 2009;29(1):23–8.
-24. Papa A, Dalla V, Papadimitriou E, Kartalis GN, Antoniadis A. Emergence of Crimean-Congo haemorrhagic fever in Greece. Clin Microbiol Infect. 2010;16(7):843–7.
-25. Swanepoel R, Gill DE, Shepherd AJ, Leman PA, Mynhardt JH, Harvey S. The clinical pathology of Crimean-Congo hemorrhagic fever. Rev Infect Dis. 1989;11 Suppl 4:S794–800.
-26. Cevik MA, Erbay A, Bodur H, Gulderen E, Bastug A, Kubar A, et al. Clinical and laboratory features of Crimean-Congo hemorrhagic fever: predictors of fatality. Int J Infect Dis. 2008;12(4):374–9.
-27. Bastug A, Kayaaslan B, Kazancioglu S, Aslaner H, But A, Akinci E, et al. Crimean-Congo Hemorrhagic Fever: Prognostic Factors and the Association of Leukocyte Counts with Mortality. Jpn J Infect Dis. 2016;69(1):51–5.
-28. Dokuzoguz B, Celikbas AK, Gok SE, Baykam N, Eroglu MN, Ergonul O. Severity scoring index for Crimean-Congo hemorrhagic fever and the impact of ribavirin and corticosteroids on fatality. Clin Infect Dis. 2013;57(9):1270–4.
-29. Elliott RM, Brennan B. Emerging phleboviruses. Curr Opin Virol. 2014;5(100):50–7.
-30. Deyde VM, Khristova ML, Rollin PE, Ksiazek TG, Nichol ST. Crimean-Congo hemorrhagic fever virus genomics and global diversity. J Virol. 2006;80(17):8834–42.
-31. Leblebicioglu H, Sunbul M, Guner R, Bodur H, Bulut C, Duygu F, et al. Healthcare-associated Crimean-Congo haemorrhagic fever in Turkey, 2002-2014: a multicentre retrospective cross-sectional study. Clin Microbiol Infect. 2016;22(4):387 e1– e4.
-32. Leblebicioglu H, Sunbul M, Memish ZA, Al-Tawfiq JA, Bodur H, Ozkul A, et al. Consensus report: Preventive measures for Crimean-Congo Hemorrhagic Fever during Eid-al-Adha festival. Int J Infect Dis. 2015;38:9–15.
-33. Mallhi TH, Khan YH, Sarriff A, Khan AH. Crimean-Congo haemorrhagic fever virus and Eid-Ul-Adha festival in Pakistan. Lancet Infect Dis. 2016;16(12):1332–3.
-34. Pshenichnaya NY, Nenadskaya SA. Probable Crimean-Congo hemorrhagic fever virus transmission occurred after aerosol-generating medical procedures in Russia: nosocomial cluster. Int J Infect Dis. 2015;33:120–2.
-35. Pshenichnaya NY, Sydenko IS, Klinovaya EP, Romanova EB, Zhuravlev AS. Possible sexual transmission of Crimean-Congo hemorrhagic fever. Int J Infect Dis. 2016;45:109–11.
-36. Mousavi-Jazi M, Karlberg H, Papa A, Christova I, Mirazimi A. Healthy individuals' immune response to the Bulgarian Crimean-Congo hemorrhagic fever virus vaccine. Vaccine. 2012;30(44):6225–9.
-37. Muzammil K, Rayyani S, Abbas Sahib A, Gholizadeh O, Naji Sameer H, Jwad Kazem T, et al. Recent Advances in Crimean-Congo Hemorrhagic Fever Virus Detection, Treatment, and Vaccination: Overview of Current Status and Challenges. Biol Proced Online. 2024;26(1):20.
