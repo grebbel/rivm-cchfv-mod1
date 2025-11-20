@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Crimean-Congo hemorrhagic fever</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- IMPORTANT: Load enhanced SCORM wrapper FIRST, before any other scripts -->
+    <script src="scorm-wrapper.js"></script>
+    
+    <style>
+        /* Override sidebar and content area scrolling to scroll together */
+        .main-layout {
+            display: flex;
+            flex: 1;
+            min-height: auto; /* Changed from 600px to auto */
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--rh-light-gray);
+            border-right: 2px solid #ddd;
+            padding: 0;
+            overflow-y: visible; /* Changed from auto to visible */
+            position: sticky;
+            top: 0;
+            height: fit-content;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 30px;
+            overflow-y: visible; /* Changed from auto to visible */
+            background-color: var(--rh-white);
+        }
+
+        /* Make sure the course container allows natural scrolling */
+        .course-container {
+            background-color: var(--rh-white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            width: 100%;
+            overflow: visible; /* Changed from hidden to visible */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Ensure body allows natural scrolling */
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--rh-light-blue);
+            color: var(--rh-black);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+
+        /* SCORM Status Indicator */
+        .scorm-status {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            z-index: 10000;
+            display: none;
+        }
+
+        .scorm-status.connected {
+            background: rgba(57, 135, 12, 0.9);
+            display: block;
+        }
+
+        .scorm-status.error {
+            background: rgba(231, 76, 60, 0.9);
+            display: block;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                order: 2;
+                max-height: none; /* Remove height restriction */
+                border-right: none;
+                border-top: 2px solid #ddd;
+                position: static; /* Remove sticky on mobile */
+            }
+            
+            .content-area {
+                order: 1;
+                padding: 20px;
+            }
+
+            .scorm-status {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- SCORM Status Indicator -->
+    <div class="scorm-status" id="scormStatus">
+        <span id="scormStatusText">🔗 SCORM: Connecting...</span>
+    </div>
+
+    <div class="course-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Module 1: Crimean-Congo hemorrhagic fever</h1>
+            <p>The Biology of the virus</p>
+        </header>
+
+        <!-- Main Layout with Sidebar and Content -->
+        <div class="main-layout">
+            <!-- Left Sidebar Navigation -->
+            <nav class="sidebar">
+                <div class="sidebar-header">Course Chapters</div>
+                <ul class="chapter-list">
+                    <li class="chapter-item active" data-tab="history">History</li>
+                    <li class="chapter-item" data-tab="pathology">Pathology</li>
+                    <li class="chapter-item" data-tab="biology">Biology</li>
+                    <li class="chapter-item" data-tab="prevention-control">Prevention & Control</li>
+                    <li class="chapter-item" data-tab="laboratory-diagnosis">Laboratory diagnosis</li>
+                
+                </ul>
+<!-- Score Thermometer -->
+<div class="score-thermometer">
+    <div class="thermometer-header">
+        <span class="thermometer-title">🎯 Course Score</span>
+        <div class="thermometer-temp">
+            <span class="current-score">0</span>/<span class="max-score">540</span>
+        </div>
+    </div>
+    
+    <div class="thermometer-container">
+        <div class="thermometer">
+            <div class="thermometer-bulb">
+                <div class="mercury-bulb" id="mercuryBulb"></div>
+            </div>
+            <div class="thermometer-tube">
+                <div class="mercury-fill" id="mercuryFill"></div>
+                <div class="thermometer-marks">
+                    <div class="mark" data-temp="100%">540</div>
+                    <div class="mark" data-temp="75%">405</div>
+                    <div class="mark" data-temp="50%">270</div>
+                    <div class="mark" data-temp="25%">135</div>
+                    <div class="mark" data-temp="0%">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="thermometer-status">
+        <div class="status-message" id="statusMessage">🌱 Just getting started!</div>
+        <div class="percentage-display" id="percentageDisplay">0%</div>
+    </div>
+    <!-- Add this right after the closing </div> of the .score-thermometer section -->
+<div class="score-reset-section">
+    <button class="reset-score-btn" id="resetScoreBtn" title="Reset all progress and scores to zero">
+        🔄 Reset Progress
+    </button>
+</div>
+</div>
+            </nav>
+            
+
+            <!-- Main Content Area -->
+            <main class="content-area">
+                <!-- History Section -->
+                <div id="history" class="content-section active">
+                    <h2>History</h2>
+                    
+                    <h3>Introduction</h3>
+                    <p>Crimean-Congo hemorrhagic fever (CCHF) is recognized as the most important tick-borne viral disease affecting humans, with a wide geographic range spanning Africa, Asia, the Middle East, and Eastern Europe. The causative agent, Crimean-Congo hemorrhagic fever virus (CCHFV), belongs to the genus <em>Orthonairovirus</em> (family <em>Nairoviridae</em>). The journey to understanding CCHFV highlights the convergence of discoveries from different continents and areas, illustrating the role of international collaboration in infectious disease research.</p>
+
+                    <h3>The first outbreaks in Crimea</h3>
+                    <p>CCHF emerged into the scientific literature in 1944, during World War II, when Soviet military personnel and local agricultural workers in Crimea experienced sudden, severe illness marked by high fever, muscle pain, and widespread bleeding. The mortality rate was alarming, leading to significant concern among public health officials. Dr. Mikhail P. Chumakov spearheaded the investigation, quickly associating the illness with exposure to <em>Hyalomma</em> ticks in the fields. Through inoculation experiments in laboratory animals, the team confirmed a viral cause. The disease was initially termed "Crimean hemorrhagic fever," but the exact identity and classification of the virus remained unclear for decades.</p>
+                    
+                    <div class="image-container">
+                        <img src="images/pic_1_Hyalomma.jpg" alt="Hyalomma tick" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <p class="image-caption" style="font-style: italic; color: #666; margin-top: 8px; font-size: 0.9em;">Hyalomma tick. By Tiia Monto - CC BY 4.0 - Wikimedia.org</p>
+                    </div>
+                    
+                    <p>Recent findings, including protein remnants in archaeological samples from Iron Age Germany, suggest CCHFV might have been present in Europe much earlier than previously appreciated.</p>
+
+                    <h3>Independent discovery in Africa</h3>
+                    <p>Decades prior, physicians in what is now the Democratic Republic of Congo reported similar hemorrhagic illnesses, but the pathogen's identity remained undetermined. In 1956, Belgian scientists isolated a virus from a patient presenting hemorrhagic fever in the Congo, naming it "Congo virus." Patients in both regions developed sudden fever, gastrointestinal symptoms, and bleeding, with a consistent link to tick bites, particularly from the <em>Hyalomma</em> genus.</p>
+
+                    <div class="image-container">
+                        <img src="images/pic_2_congo.jpg" alt="The Congo" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <p class="image-caption" style="font-style: italic; color: #666; margin-top: 8px; font-size: 0.9em;">The Congo. ©2025 by Robert ten Hove</p>
+                    </div>
+
+                    <h3>Linking the Crimean and Congo Viruses</h3>
+                    <p>For several years, the Crimea and Congo viruses were considered separate. Serological investigations in the late 1960s provided the breakthrough: serum from patients in either outbreak neutralized both virus strains, revealing them to be antigenically identical. The new unified name—Crimean-Congo hemorrhagic fever virus (CCHFV)—was now recognized as a single, globally relevant threat.</p>
+
+                    <h3>Vectors and reservoirs identified</h3>
+                    <p>Over the following decades, research established a tick-vertebrate-tick transmission cycle, confirming <em>Hyalomma</em> ticks as both <strong>vector</strong> and <strong>reservoir</strong>. CCHFV infects a broad spectrum of wild and domestic mammals, which usually remain asymptomatic but sustain viral amplification in nature. This clarified why CCHFV poses such a persistent risk to those with occupational or recreational exposure to ticks or livestock. Examples include soldiers, farmers, shepherds, butchers, and veterinarians.</p>
+
+                    <h3>Expansion of knowledge and early characterization</h3>
+                    <p>By the 1970s, CCHF was recognized as a significant emerging public health threat across continents, including Eastern Europe, the Middle East, Africa, and Asia. Advances in serological assays enabled broader surveillance, mapping the virus's spread and guiding preventive measures. Genetic studies classified CCHFV as a bunyavirus with a segmented RNA genome, distinguishing it from other hemorrhagic viruses like Ebola or Lassa.</p>
+                    
+                    <p>Today, CCHF is monitored globally, and its presence in new geographical regions, including potential incursions into western Europe, is watched closely as climate change alters tick distribution.</p>
+
+                    <h3>Conclusion</h3>
+                    <p>The early discovery of Crimean-Congo hemorrhagic fever virus is a fascinating example of parallel investigations converging to reveal the global significance of an emerging pathogen. From the initial outbreak in Crimea during World War II, through the isolation of a similar virus in Africa, to the eventual recognition of their identity, the story of CCHFV is a testament to the importance of international collaboration and vigilance in infectious disease research. Today, CCHF remains a major public health concern, particularly in regions where human-tick contact is common.</p>
+                    
+                    <div class="continue-section">
+                        <button class="continue-btn" data-next="pathology">CONTINUE</button>
+                    </div>
+                </div>
+
+                <!-- Pathology Section -->
+                <div id="pathology" class="content-section">
+                    <h2>Pathology</h2>
+                    
+                    <h3>Introduction</h3>
+                    <p>Crimean-Congo Hemorrhagic Fever (CCHF) is endemic in Africa, the Middle East, parts of Europe, and Asia, where sporadic outbreaks are marked by high fatality rates that can approach 40% among hospitalized patients. The virus remains a concern not only due to its potential to cause nosocomial outbreaks but also because of the historical classification as a select (formerly BSL-4) agent, underscoring its notoriety for laboratory and bioterror threat. With advances in biosafety protocols, the terminology of biosafety levels has evolved, but the stringent handling requirements remain unchanged.</p>
+
+                    <h3>Incubation Period and Early Pathogenesis</h3>
+                    <p>Upon entering the body, CCHFV targets cells such as endothelial cells lining blood vessels, hepatocytes in the liver, mononuclear phagocytes, and various other parenchymal cells. This extensive cellular tropism is responsible for the virus's rapid dissemination and the involvement of multiple organ systems. After entry to a human, CCHFV targets endothelial cells, hepatocytes, mononuclear phagocytes, and other cell types, leading to widespread dissemination and multi-organ involvement.</p>
+                    
+                    <p>The incubation period for CCHF depends on the route of exposure, typically lasting one to three days after a tick bite, with a maximum of nine days. When the exposure is through direct contact with infectious animal or human tissue, the incubation can be a bit longer, up to thirteen days. Initially, the virus replicates locally, before entering the bloodstream resulting in primary viremia. This leads to systemic dissemination to organs such as the liver, spleen, and lymph nodes.</p>
+
+                    <h3>Viral Tropism and Cellular Targets</h3>
+                    <p>CCHFV demonstrates broad cellular tropism, infecting cells that are central to both immune response and organ function. Infection of <strong>endothelial cells</strong> undermines the vascular barrier, increasing permeability and paving the way for hemorrhagic manifestations. <strong>Monocytes, macrophages, and dendritic cells</strong>, crucial for orchestrating immune defense, become dysfunctional, leading to immune dysregulation. <strong>Hepatic infection</strong> results in liver injury, while <strong>renal and gastrointestinal tissues</strong> may also be affected.</p>
+
+                    <h3>Clinical Stages</h3>
+                    <p>CCHF in humans follows a characteristic trajectory, defined by four clinical stages. CCHF generally progresses through four clinical phases:</p>
+                    
+                    <ol>
+                        <li><strong>Asymptomatic incubation phase.</strong></li>
+                        <li><strong>Pre-hemorrhagic (or prodromal) phase</strong>, characterized by the abrupt onset of symptoms such as high fever, severe muscle aches (often in the back and legs), intense headaches, and signs of gastrointestinal disturbance. Mood changes, irritability, confusion, and a sore throat may also be present. These symptoms, however, are non-specific, often complicating early diagnosis unless a recent risky exposure is recognized.</li>
+                        <li><strong>Hemorrhagic phase</strong>, defined by diffuse bleeding—visible as petechial rash, larger bruises, and frank bleeding from mucosal surfaces. Blood may be found in vomitus, stool, urine, or from sites of venipuncture and medical intervention. At this stage, disseminated intravascular coagulation, multiorgan dysfunction, and shock can rapidly ensue.</li>
+                        <li><strong>The convalescent phase</strong>, if the patient survives the previous phase, can last up to one year. This phase is often marked by prolonged weakness, hair loss, and even persistent neurological and psychiatric symptoms.</li>
+                    </ol>
+
+                    <h3>Pathophysiological Mechanisms</h3>
+                    <p>The virus has the ability to devastate the vascular system. Endothelial cells are directly infected and damaged, breaking down the vascular barrier and causing leakage of fluids and cells into tissues. Simultaneously, a cytokine storm is unleashed overwhelming the immune activation with a massive wave of pro-inflammatory cytokines. This intensifies vascular damage, encourages apoptosis, and activates clotting pathways that get rapidly depleted, manifesting as coagulopathy and widespread hemorrhage.</p>
+                    
+                    <p>Animal studies reveal a strong correlation between genetic background, the degree of viral replication, and organ damage in the liver and spleen, highlighting the importance of host genetic factors in determining disease outcome.</p>
+
+                    <h3>Organ-Specific Pathology</h3>
+                    <ul>
+                        <li><strong>Liver</strong>
+                            <ul>
+                                <li>The liver is a major target organ. Clinical and pathological findings include:</li>
+                                <li>Hepatomegaly and liver tenderness</li>
+                                <li>Elevation of liver enzymes</li>
+                                <li>Histopathology</li>
+                                <li>Jaundice</li>
+                            </ul>
+                        </li>
+                        <li><strong>Spleen and Lymphoid Tissue</strong>
+                            <ul>
+                                <li>Splenomegaly</li>
+                            </ul>
+                        </li>
+                        <li><strong>Kidneys</strong>
+                            <ul>
+                                <li>Acute tubular necrosis and interstitial nephritis may be seen.</li>
+                                <li>Hematuria</li>
+                                <li>Oliguria or anuria due to hypovolemia, shock, or direct renal injury.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Long-Term Sequelae</h3>
+                    <p>For those who recover, convalescence can be lengthy. Survivors may deal with complications like persistent low blood pressure, irregular heart rhythms, nerve inflammation, breathing problems, dryness of the mouth, sensory deficits, hair loss, and varying degrees of memory impairment.</p>
+
+                    <h3>Fatal vs. Non-Fatal Disease</h3>
+                    <p>A key determinant of outcome in CCHF is the viral load: fatal cases are typically associated with titers exceeding one billion (10<sup>9</sup>) genome copies per milliliter of plasma, levels that can be over a thousand times higher than in survivors. Laboratory signs up to five days after symptom onset—such as severe thrombocytopenia, extremely elevated liver enzymes, and a marked increase in pro-inflammatory cytokines—strongly predict mortality. Clinical features like vomiting blood, blood in stool, strong drowsiness, and the inability to mount a timely antibody response are also signals of a possible fatal course.</p>
+
+                    <h3>Laboratory Findings</h3>
+                    <p>CCHF shares many pathological features with other viral hemorrhagic fevers (VHFs) such as Ebola, Marburg, and Lassa fever. All are characterized by endothelial damage, a dysregulated cytokine and immune response, disruption to the clotting system, and multi-organ injury. The hallmark laboratory finding in CCHF is a profound drop in platelet count (thrombocytopenia), often joined by leukopenia and elevated liver enzymes such as AST and ALT.</p>
+                    
+                    <p>Key laboratory abnormalities reflecting pathology include:</p>
+                    <ul>
+                        <li>Thrombocytopenia</li>
+                        <li>Leukopenia → leukocytosis in severe cases</li>
+                        <li>Elevated liver enzymes (AST, ALT, LDH)</li>
+                        <li>Elevated creatinine and urea (renal involvement)</li>
+                        <li>Prolonged PT, aPTT, elevated D-dimer, low fibrinogen (DIC)</li>
+                        <li>Proteinuria and hematuria</li>
+                        <li>High viral load in blood and tissues</li>
+                    </ul>
+                    
+                    <p>CCHF RNA can be detected via RT-PCR, and viral loads typically peak during the first week of illness. Serum and whole blood being considered the gold standard. Viral RNA detection is also possible in peripheral samples such as saliva, urine, nasal, conjunctival, rectal, and vaginal swabs, especially in severe cases.</p>
+                    
+                    <div class="continue-section">
+                        <button class="continue-btn" data-next="biology">CONTINUE</button>
+                    </div>
+                </div>
+
+                <!-- Biology Section -->
+                <div id="biology" class="content-section">
+                    <h2>Biology</h2>
+
+                    <h3>Virology and Transmission</h3>
+                    <p>Crimean-Congo hemorrhagic fever virus (CCHFV) is a master of adaptation. As an enveloped, negative-sense single-stranded RNA virus with three genome segments (S, M, L), it employs a clever strategy: different segments separately code for the nucleoprotein, glycoproteins, and RNA-dependent RNA polymerase, allowing for rapid genetic shifts and survival in diverse environments, such as different hosts. The virus relies on <em>Hyalomma</em> ticks as both vectors and reservoirs. Humans typically become infected via tick bites, through crushing ticks, or contact with blood or tissues from infected animals or people. In healthcare, the threat is heightened by documented nosocomial outbreaks, underscoring CCHFV's capability for person-to-person spread if precautions lapse.</p>
+
+                    <p>CCHFV is an enveloped negative-sense RNA virus belonging to the Orthonairovirus genus in the Nairoviridae family of the Bunyavirales order. In addition to CCHFV, the Nairoviridae family consists of arthropod-borne viruses such as Nairobi sheep disease virus, Dugbe virus and Hazara virus (HAZV), although these viruses seem to cause little-to-no disease in humans. As in other bunyaviruses, the tri-segmented viral genome is coated with the viral nucleoprotein (NP) and bound by the L protein. The viral proteins are encoded by three genomic segments, and relative to other members of the order that can cause human disease, CCHFV has a more complex genomic organization. On entry, these proteins produce positive-sense viral RNA using the genomic negative-sense viral RNA as a template to initiate viral protein production and replication. The viral glycoproteins Gn and Gc are found on the virion surface and are responsible for receptor binding and viral entry.</p>
+
+                    <h3>Taxonomy and Classification</h3>
+                    <p>The genus to where CCHFV belongs to comprises several species, but CCHFV is the most significant human pathogen. The family Nairoviridae contains viruses primarily transmitted by ticks and is distinct from other bunyaviruses transmitted by mosquitoes or rodents.</p>
+                    
+                    <p><strong>Order:</strong> Bunyavirales<br>
+                    <strong>Family:</strong> Nairoviridae<br>
+                    <strong>Genus:</strong> Orthonairovirus<br>
+                    <strong>Species:</strong> Orthonairovirus haemorrhagiae (Crimean-Congo Hemorrhagic Fever Virus)</p>
+
+                    <h3>Virion Structure and Morphology</h3>
+                    <p>CCHFV virions are spherical to pleomorphic, enveloped particles with a diameter of 80–120 nm. The viral envelope is derived from the host cell membrane and is studded with two types of glycoprotein spikes: Gn and Gc.</p>
+
+                    <p>CCHFV particles are generally spherical (80–120 nm in diameter) with a flexible envelope derived from the host cell. Embedded in this envelope are two types of spiky glycoproteins (Gn and Gc), which give the virus both its ability to latch onto new cells and to dodge immune defenses. The interior contains the tripartite genome as ribonucleoprotein complexes, expertly packaged for rapid replication.</p>
+
+                    <h3>Genome Organization</h3>
+                    <p>The CCHFV genome is neatly divided into three segments, each segment with a specific job.</p>
+
+                    <p><strong>Small (S) Segment:</strong> Encodes the nucleoprotein (N).</p>
+                    <p><strong>Medium (M) Segment:</strong> Encodes the glycoprotein precursor (GPC), which is processed into Gn, Gc, and several nonstructural proteins.</p>
+                    <p><strong>Large (L) Segment:</strong> Encodes the RNA-dependent RNA polymerase (L protein).</p>
+
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Segment</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Size (kb)</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Key Protein(s)</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">S</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">~1.7</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Nucleoprotein (N)</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">RNA encapsidation, replication</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">~5.4</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Glycoproteins (Gn, Gc)</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Host entry, immune evasion</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">L</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">~12.1</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Polymerase (L)</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">RNA synthesis</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Each segment is flanked by conserved noncoding regions, crucial for replication and genome packing.</p>
+
+                    <h3>Replication Cycle</h3>
+                    <p>CCHFV replicates entirely within the cytoplasm, following a rapid and efficient cycle:</p>
+                    <ol>
+                        <li><strong>Entry:</strong> Gn and Gc glycoproteins lock onto receptors on host cells, then the virus enters via clathrin-mediated endocytosis.</li>
+                        <li><strong>Fusion & Release:</strong> Acidic conditions in the cell trigger Gc-glycoproteins, merging viral and endosomal membranes and releasing viral complexes into the cytoplasm.</li>
+                        <li><strong>Transcription/Translation:</strong> The L polymerase "steals" caps from host mRNA (cap-snatching) for viral mRNA synthesis; proteins are made on host ribosomes.</li>
+                        <li><strong>Genome Replication:</strong> Complementary full-length RNA is created to serve as templates for more genomic RNA.</li>
+                        <li><strong>Assembly and Release:</strong> Viral proteins and genomes are assembled at the Golgi or plasma membrane; new virus particles exit the cell by budding, armed for further infection.</li>
+                    </ol>
+
+                    <h3>Genetic Diversity and Evolution</h3>
+                    <p>CCHFV stands out as one of the most variable tick-borne viruses—strains can differ by up to 20% in their genetic code. This diversity results from:</p>
+                    <ul>
+                        <li><strong>The virus's segmented genome,</strong> promoting exchanges and rearrangements during co-infection by different strains within a host.</li>
+                        <li>A <strong>naturally high mutation rate</strong> due to lack of proofreading during replication.</li>
+                        <li>The evolution in a <strong>wide geographic range</strong> with circulation in many tick and animal hosts.</li>
+                    </ul>
+                    <p>Phylogenetic studies show major lineages in Africa, Asia, Eastern Europe, and the Middle East. This diversity of the virus contributes to the emergence of novel strains with unpredictable virulence and epidemiology.</p>
+
+                    <h3>Ecology, Hosts, and Transmission Dynamics</h3>
+
+                    <h4>Tick Vectors</h4>
+                    <p><em>Hyalomma</em> ticks are both the long-term home and the main vector for CCHFV. They can carry the virus throughout their multi-stage life cycle—larva, nymph, adult—and even transmit it to their offspring. Once infected, ticks remain carriers for life and transmit the virus to animals and sometimes humans.</p>
+
+                    <h4>Vertebrate Hosts</h4>
+                    <p>A wide array of animals—cattle, sheep, goats, camels, horses, hares, hedgehogs, rodents—can host CCHFV. Most animals show no symptoms but get short-lived viremia, providing a bridge for ticks to pick up and spread the virus. Some ground-feeding birds may carry infected ticks but generally do not get sick.</p>
+
+                    <h4>Human Infection</h4>
+                    <p>Humans are accidental hosts, typically becoming infected by:</p>
+                    <ul>
+                        <li><strong>Tick bites,</strong> the primary pathway.</li>
+                        <li><strong>Contact with blood/tissues.</strong> Farmers, veterinarians, and abattoir workers are at heightened risk when handling livestock, particularly during slaughter or birthing, as the virus can spread through small cuts or abrasions.</li>
+                        <li><strong>Nosocomial (hospital-acquired) or household transmission,</strong> via blood or body fluids.</li>
+                        <li><strong>Laboratory exposure.</strong> Rare, but laboratory workers can become infected while handling patient samples or cultures if strict biosafety practices are not observed.</li>
+                    </ul>
+                    <p>Humans, however, generally do not develop high enough viremia to infect new ticks, so human-to-tick transmission is usually insignificant in the spread of the virus.</p>
+
+                    <div class="intermezzo-box" style="background-color: #f0f8ff; border-left: 4px solid #4a90e2; padding: 20px; margin: 25px 0; border-radius: 8px;">
+                        <h4 style="color: #4a90e2; margin-top: 0;">📚 Laboratory-Acquired Infections: Historical Cases</h4>
+                        <p style="font-style: italic; color: #555; margin-bottom: 15px;">Throughout history, laboratory workers have been at risk of CCHFV infection. Here are some documented cases:</p>
+                        <ul style="line-height: 1.8;">
+                            <li><strong>Soviet Union (1944–1950s):</strong> The earliest recognized CCHF cases in Crimea included laboratory and medical personnel infected while handling patient samples or working with the virus (Chumakov, 1965).</li>
+                            <li><strong>South Africa (1969):</strong> A laboratory worker developed CCHF following a needlestick injury while handling infectious material (Gear et al., 1975).</li>
+                            <li><strong>Bulgaria (1974):</strong> A laboratory technician became infected while processing blood from a CCHF patient, likely due to inadequate personal protective equipment (PPE) and handling errors (Kovács et al., 1980).</li>
+                            <li><strong>Pakistan (1976):</strong> A fatal LAI occurred after a laboratory accident involving a broken ampoule containing CCHFV (Burney et al., 1980).</li>
+                            <li><strong>Iran (2000s):</strong> Multiple laboratory-acquired infections have been reported in recent decades, often linked to improper handling of blood or tissues or accidental exposure during diagnostic procedures (Mardani & Keshtkar-Jahromi, 2007).</li>
+                        </ul>
+                        <p style="margin-top: 15px; color: #333;"><em>These incidents underscore the critical importance of strict biosafety protocols when working with CCHFV.</em></p>
+                    </div>
+
+                    <h4>Geographic Distribution</h4>
+                    <p>The virus is endemic in over 30 countries spanning Africa, the Middle East, Eastern Europe, and Asia. Its geographic footprint closely shadows the range of its preferred tick hosts, particularly <em>Hyalomma</em> ticks. This distribution is not random; instead, it is shaped by environmental and human-made factors:</p>
+                    <ul>
+                        <li><strong>Ecological factors:</strong> Regions with climates that favor dense vegetation and sustain livestock provide ideal habitats for ticks, increasing the risk of CCHFV transmission.</li>
+                        <li><strong>Animal trade and migration:</strong> The movement of animals across borders, whether for trade or seasonal migration, can carry infected ticks into new regions.</li>
+                        <li><strong>Human activities:</strong> Agricultural practices, animal husbandry, and even simple travel to endemic areas enhance opportunities for people and animals to encounter infected ticks.</li>
+                    </ul>
+                    <p>Countries such as Turkey, Iran, Russia, Pakistan, Afghanistan, South Africa, and those in the Balkans have reported important outbreaks. These occurrences tend to spike seasonally, usually during periods when tick activity reaches its peak, often coinciding with warmer weather or heightened agricultural activity.</p>
+
+                    <div class="continue-section">
+                        <button class="continue-btn" data-next="prevention-control">CONTINUE</button>
+                    </div>
+                </div>
+
+                <!-- Prevention & Control Section -->
+                <div id="prevention-control" class="content-section">
+                    <h2>Prevention & Control</h2>
+                    
+                    <p>Protecting against Crimean-Congo hemorrhagic fever (CCHF) calls for a multi-sector, collaborative defense, including farms, clinics, households, and public health systems. Although no licensed vaccine is currently available for humans and animals, a variety of proactive strategies can sharply reduce the risk of infection and control the spread of the virus.</p>
+
+                    <h3>Personal Protective Measures</h3>
+                    
+                    <h4>Tick bite prevention</h4>
+                    <p>On the front lines, farm workers and rural residents should wear long sleeves, pants, and closed footwear when working in tick-infested fields or with livestock. Simple clothing choices serve as the first line of defense against tick bites.</p>
+
+                    <h4>Workplace safety</h4>
+                    <p>In healthcare and slaughterhouse settings, personal protective equipment (PPE) are barriers that limit exposure to infected blood or body fluids and reduce the chances of accidental transmission. Examples of PPE include laboratory gowns, gloves, face shields, and masks.</p>
+
+                    <h4>Training and protocols</h4>
+                    <p>Abattoir and healthcare staff should be trained in proper animal handling, safe butchering techniques, and infection prevention protocols to reinforce PPE effectiveness.</p>
+
+                    <h3>Controlling Ticks and Livestock</h3>
+                    
+                    <h4>Vector control</h4>
+                    <p>Managing the tick population is critical. This may involve applying acaricides to livestock and in pastures, regular tick checks, and keeping farm animals treated and monitored for infestations.</p>
+
+                    <h4>Quarantine and inspection</h4>
+                    <p>Animals moving from endemic areas should undergo careful inspection and, if necessary, quarantine.</p>
+
+                    <h4>Animal vaccination development</h4>
+                    <p>Despite the promising vaccine trials, there are currently <strong>no licensed CCHFV vaccines</strong> for widespread use in animals. Efforts to vaccinate livestock against CCHFV face a significant challenge: since infected animals rarely show obvious signs of illness, farmers and agricultural businesses often lack an economic reason to invest in vaccination solely to protect human health.</p>
+
+                    <h3>Education and Community Awareness</h3>
+                    
+                    <h4>Informing at-risk groups</h4>
+                    <p>At-risk communities can be taught to avoid risky exposures, recognize symptoms early, and take precautions when working with animals or spending time outdoors. The more people know about tick risks and the importance of early detection, the better they can protect themselves and limit the virus's spread.</p>
+
+                    <div class="continue-section">
+                        <button class="continue-btn" data-next="laboratory-diagnosis">CONTINUE</button>
+                    </div>
+                </div>
+
+                <!-- Laboratory diagnosis Section -->
+                <div id="laboratory-diagnosis" class="content-section">
+                    <h2>Laboratory Diagnosis</h2>
+                    
+                    <p>Since initial symptoms—fever, headache, and general malaise—often mimic other diseases like malaria or leptospirosis, laboratory testing is required to distinguish CCHF from other illnesses. This process relies on the coordinated use of both molecular and serological techniques, each selected based on the stage of disease presentation.</p>
+
+                    <h3>Diagnostic Methods: Molecular vs. Serological</h3>
+
+                    <h4>Early Phase (Days 1–7): Detecting the Virus</h4>
+                    <p><strong>Reverse Transcriptase-Polymerase Chain Reaction (RT-PCR)</strong> is the frontline tool, providing rapid, sensitive, and specific detection of viral RNA in blood, plasma, serum, urine, or tissue. RT-PCR is most effective in the first five days, before the patient's immune system responds with antibodies.</p>
+
+                    <p><strong>Prognostic insights</strong> can be provided with Quantitative RT-PCR. This allows measurement of viral load, which is closely linked to patient outcome. Higher viral loads (lower Ct values) indicate greater severity and a poorer prognosis.</p>
+
+                    <p>Due to the virus's wide genetic variability, protocols must be validated to detect all known lineages for reliable results.</p>
+
+                    <h4>Later Phase (After Day 5–7): Detecting the Immune Response</h4>
+                    <p><strong>Serological Tests (ELISA, IFA)</strong> identify specific IgM and IgG antibodies against the CCHFV. IgM emerges 5–7 days after infection, peaking at 2–3 weeks and fading by month four. IgG appears slightly later and can persist for several years, indicating past exposure. Acute infection is confirmed by IgM detection or a four-fold rise in IgG titers between paired samples. However, in severe or fatal cases, antibody responses may be absent or delayed; molecular tests remain essential for confirmation.</p>
+
+                    <p>Supplementing biomarkers of CCHFV infection are low platelets, white cell counts, elevated liver enzymes, and increased inflammatory cytokines such as IL-6 and TNF-α point to severe disease.</p>
+
+                    <p>For post-mortem studies, <strong>Immunohistochemistry</strong> can be applied on tissue samples to locate viral antigens in cells. Next-Generation Sequencing enables the identification and evolution tracking of CCHFV strains for surveillance of the disease.</p>
+
+                    <h3>Summary Table: Quick Reference for CCHF Laboratory Diagnosis</h3>
+
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Phase</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Preferred Method</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Main Specimens</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Biosafety Need</th>
+                                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Acute (1–5 days)</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">RT-PCR, Antigen Detection</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Blood, plasma, urine</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">BSL-2 to BSL-4</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Detects viral RNA, early antigens</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Convalescent (>5 days)</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Serology (ELISA, IFA)</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Serum, plasma</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">BSL-2</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Detects IgM, IgG antibodies</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Fatal/Pathology cases</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">IHC, NGS</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Biopsies, tissues</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">BSL-2/BSL-4</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">For confirmation/study</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div> <!-- End content-area -->
+        </div> <!-- End main-layout -->
+    </div> <!-- End course-container -->
+
+    <!-- Load main script -->
+    <script src="script.js"></script>
+</body>
+</html>
