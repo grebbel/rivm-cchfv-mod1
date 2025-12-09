@@ -250,14 +250,66 @@
                     <p>CCHFV demonstrates broad cellular tropism, infecting cells that are central to both immune response and organ function. Infection of <strong>endothelial cells</strong> undermines the vascular barrier, increasing permeability and paving the way for hemorrhagic manifestations. <strong>Monocytes, macrophages, and dendritic cells</strong>, crucial for orchestrating immune defense, become dysfunctional, leading to immune dysregulation. <strong>Hepatic infection</strong> results in liver injury, while <strong>renal and gastrointestinal tissues</strong> may also be affected.</p>
 
                     <h3>Clinical Stages</h3>
-                    <p>CCHF in humans follows a characteristic trajectory, defined by four clinical stages. CCHF generally progresses through four clinical phases:</p>
+                    <p>CCHF in humans follows a characteristic trajectory, defined by four clinical stages. Use the navigation buttons to explore each phase.</p>
                     
-                    <ol>
-                        <li><strong>Asymptomatic incubation phase.</strong></li>
-                        <li><strong>Pre-hemorrhagic (or prodromal) phase</strong>, characterized by the abrupt onset of symptoms such as high fever, severe muscle aches (often in the back and legs), intense headaches, and signs of gastrointestinal disturbance. Mood changes, irritability, confusion, and a sore throat may also be present. These symptoms, however, are non-specific, often complicating early diagnosis unless a recent risky exposure is recognized.</li>
-                        <li><strong>Hemorrhagic phase</strong>, defined by diffuse bleeding—visible as petechial rash, larger bruises, and frank bleeding from mucosal surfaces. Blood may be found in vomitus, stool, urine, or from sites of venipuncture and medical intervention. At this stage, disseminated intravascular coagulation, multiorgan dysfunction, and shock can rapidly ensue.</li>
-                        <li><strong>The convalescent phase</strong>, if the patient survives the previous phase, can last up to one year. This phase is often marked by prolonged weakness, hair loss, and even persistent neurological and psychiatric symptoms.</li>
-                    </ol>
+                    <!-- Interactive Clinical Stages -->
+                    <div class="timeline-container">
+                        <!-- Detail panels for each stage -->
+                        <div id="stage-1" class="stage-detail active">
+                            <h4>Incubation Phase</h4>
+                            <img src="images/pic_5_infection_CCHFV.png" alt="CCHF Infection Phase" style="max-width: 600px; width: 100%; height: 350px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 20px 0;">
+                            <ul>
+                                <li>Asymptomatic period following exposure to the virus</li>
+                                <li>Duration varies but typically lasts 1-3 days after tick bite</li>
+                                <li>No clinical signs of infection during this phase</li>
+                                <li>Virus replicates silently in infected cells</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="stage-2" class="stage-detail">
+                            <h4>Pre-hemorrhagic (Prodromal) Phase</h4>
+                            <img src="images/pic_6_prehemmo.png" alt="Pre-hemorrhagic Phase" style="max-width: 600px; width: 100%; height: 350px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 20px 0;">
+                            <ul>
+                                <li>Abrupt onset of symptoms such as high fever (often above 39°C)</li>
+                                <li>Severe muscle aches, particularly in the back and legs</li>
+                                <li>Intense headaches and signs of gastrointestinal disturbance</li>
+                                <li>Mood changes, irritability, confusion, and sore throat may be present</li>
+                                <li>Non-specific symptoms often complicate early diagnosis unless recent risky exposure is recognized</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="stage-3" class="stage-detail">
+                            <h4>Hemorrhagic Phase</h4>
+                            <img src="images/pic_7_haemorrhagic.png" alt="Hemorrhagic Phase" style="max-width: 600px; width: 100%; height: 350px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 20px 0;">
+                            <ul>
+                                <li>Defined by diffuse bleeding—visible as petechial rash and larger bruises</li>
+                                <li>Frank bleeding from mucosal surfaces (gums, nose, gastrointestinal tract)</li>
+                                <li>Blood may be found in vomitus, stool, urine, or from sites of venipuncture</li>
+                                <li>Disseminated intravascular coagulation (DIC) develops</li>
+                                <li>Multiorgan dysfunction and shock can rapidly ensue</li>
+                                <li>Critical phase with high mortality risk</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="stage-4" class="stage-detail">
+                            <h4>Convalescent Phase</h4>
+                            <img src="images/pic_8_convalescence.jpeg" alt="Convalescent Phase" style="max-width: 600px; width: 100%; height: 350px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 20px 0;">
+                            <ul>
+                                <li>Recovery phase that begins if the patient survives the hemorrhagic phase</li>
+                                <li>Can last up to one year or longer</li>
+                                <li>Marked by prolonged weakness and fatigue</li>
+                                <li>Hair loss (alopecia) is commonly observed</li>
+                                <li>Persistent neurological symptoms may occur (memory problems, hearing loss)</li>
+                                <li>Psychiatric symptoms such as depression or anxiety may persist</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Navigation buttons -->
+                        <div class="timeline-nav">
+                            <button id="prev-stage" class="nav-btn" disabled>← Previous</button>
+                            <button id="next-stage" class="nav-btn">Next →</button>
+                        </div>
+                    </div>
 
                     <h3>Pathophysiological Mechanisms</h3>
                     <p>The virus has the ability to devastate the vascular system. Endothelial cells are directly infected and damaged, breaking down the vascular barrier and causing leakage of fluids and cells into tissues. Simultaneously, a cytokine storm is unleashed overwhelming the immune activation with a massive wave of pro-inflammatory cytokines. This intensifies vascular damage, encourages apoptosis, and activates clotting pathways that get rapidly depleted, manifesting as coagulopathy and widespread hemorrhage.</p>
@@ -336,10 +388,20 @@
                     <h3>Virion Structure and Morphology</h3>
                     <p>CCHFV virions are spherical to pleomorphic, enveloped particles with a diameter of 80–120 nm. The viral envelope is derived from the host cell membrane and is studded with two types of glycoprotein spikes: Gn and Gc.</p>
 
+                    <div class="image-container">
+                        <img src="images/pic_3_CCHFVparticle.png" alt="CCHF virus particle" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <p class="image-caption" style="font-style: italic; color: #666; margin-top: 8px; font-size: 0.9em;">Schematic view of CCHF virus particle.</p>
+                    </div>
+
                     <p>CCHFV particles are generally spherical (80–120 nm in diameter) with a flexible envelope derived from the host cell. Embedded in this envelope are two types of spiky glycoproteins (Gn and Gc), which give the virus both its ability to latch onto new cells and to dodge immune defenses. The interior contains the tripartite genome as ribonucleoprotein complexes, expertly packaged for rapid replication.</p>
 
                     <h3>Genome Organization</h3>
                     <p>The CCHFV genome is neatly divided into three segments, each segment with a specific job.</p>
+
+                    <div class="image-container">
+                        <img src="images/pic_4_CCHFVgenome.png" alt="CCHF virus genome" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <p class="image-caption" style="font-style: italic; color: #666; margin-top: 8px; font-size: 0.9em;">Schematic view of CCHF virus genome.</p>
+                    </div>
 
                     <p><strong>Small (S) Segment:</strong> Encodes the nucleoprotein (N).</p>
                     <p><strong>Medium (M) Segment:</strong> Encodes the glycoprotein precursor (GPC), which is processed into Gn, Gc, and several nonstructural proteins.</p>

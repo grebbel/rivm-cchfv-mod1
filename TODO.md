@@ -90,5 +90,28 @@ All tasks have been completed successfully:
    - Use content from document 'Laboratory Diagnosis.md'
    - **Status**: Completed - Laboratory Diagnosis section content updated with diagnostic methods and summary table   
 
+## Adding illustrations 
+- [x] Add image to section Biology,  Virion Structure and Morphology 
+   - add/image/pic_3_CCHFVparticle.png 
+   - Adapt size
+   - add description: Schematic view of CCHF virus particle. 
+   - **Status**: 
+
+- [x] Add image to section Biology, Genome Organization 
+   - add/image/pic_4_CCHFVgenome.png 
+   - Adapt size
+   - add description: CCHFvirus genes 
+   - **Status**: 
+
+## Adding interactive parts 
+- [X] change paragraph from plain text to interactive part in section Pathology, Clinical Stages 
+   - Use /image/pic_5_infection_CCHFV.png,  pic_6_prehemmo.png, pic_7_haemorrhagic.png and pic_8_convalescence.jpeg
+   - Adapt size
+   - Replace the long paragraph + list with: A horizontal 4-step timeline (Incubation → Pre‑hemorrhagic → Hemorrhagic → Convalescent). A detail panel showing: Stage title. The stage image. 3–5 concise bullet points (pulled from the current text). Navigation buttons (Previous/Next) to encourage sequential exploration.
+   - **Status**: 
+
+
+
+
 
 

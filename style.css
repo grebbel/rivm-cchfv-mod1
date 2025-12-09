@@ -1554,3 +1554,175 @@ body {
 	50% { transform: scale(1.05); }
 }
 
+
+/* Interactive Clinical Stages Timeline */
+.timeline-container {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 40px 0;
+    padding: 0 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    right: 50px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rh-green) 0%, var(--rh-blue) 50%, var(--rh-violet) 100%);
+    z-index: 0;
+}
+
+.timeline-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.timeline-stage:hover {
+    transform: translateY(-5px);
+}
+
+.timeline-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--rh-white);
+    border: 4px solid var(--rh-light-gray);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.timeline-stage.active .timeline-dot {
+    background-color: var(--rh-blue);
+    border-color: var(--rh-blue);
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(0, 123, 199, 0.4);
+}
+
+.timeline-label {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--rh-black);
+    text-align: center;
+    max-width: 100px;
+    transition: color 0.3s ease;
+}
+
+.timeline-stage.active .timeline-label {
+    color: var(--rh-blue);
+}
+
+.stage-detail {
+    display: none;
+    padding: 30px;
+    background-color: var(--rh-white);
+    border-radius: 8px;
+    border-left: 5px solid var(--rh-blue);
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.stage-detail.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stage-detail h4 {
+    color: var(--rh-blue);
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 2px solid var(--rh-light-blue);
+    padding-bottom: 10px;
+}
+
+.stage-detail ul {
+    margin-top: 20px;
+    padding-left: 30px;
+}
+
+.stage-detail li {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    color: var(--rh-black);
+}
+
+.timeline-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 12px 24px;
+    background-color: var(--rh-blue);
+    color: var(--rh-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.nav-btn:hover:not(:disabled) {
+    background-color: var(--rh-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.nav-btn:disabled {
+    background-color: var(--rh-light-gray);
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .timeline {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .timeline::before {
+        display: none;
+    }
+    
+    .timeline-label {
+        max-width: none;
+    }
+    
+    .timeline-nav {
+        flex-direction: column;
+    }
+}

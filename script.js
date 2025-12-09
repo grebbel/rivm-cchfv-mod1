@@ -1748,5 +1748,67 @@ let courseProgress = {
         }
     }, 30000);
 
+    // ====================================
+    // Interactive Clinical Stages
+    // ====================================
+    const timelineContainer = document.querySelector('.timeline-container');
+    
+    // Only initialize if container exists on the page
+    if (timelineContainer) {
+        let currentStage = 1;
+        const totalStages = 4;
+        
+        function showStage(stageNumber) {
+            // Update current stage
+            currentStage = stageNumber;
+            
+            // Update detail panels
+            document.querySelectorAll('.stage-detail').forEach((detail, index) => {
+                if (index + 1 === stageNumber) {
+                    detail.classList.add('active');
+                } else {
+                    detail.classList.remove('active');
+                }
+            });
+            
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prev-stage');
+            const nextBtn = document.getElementById('next-stage');
+            
+            if (prevBtn && nextBtn) {
+                prevBtn.disabled = (stageNumber === 1);
+                nextBtn.disabled = (stageNumber === totalStages);
+            }
+            
+            // Scroll to container
+            if (timelineContainer) {
+                timelineContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+        
+        // Previous button
+        const prevBtn = document.getElementById('prev-stage');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (currentStage > 1) {
+                    showStage(currentStage - 1);
+                }
+            });
+        }
+        
+        // Next button
+        const nextBtn = document.getElementById('next-stage');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (currentStage < totalStages) {
+                    showStage(currentStage + 1);
+                }
+            });
+        }
+        
+        // Initialize - show first stage
+        showStage(1);
+    }
+
     console.log('PCR Module JavaScript loaded successfully');
 }); // End of DOMContentLoaded
