@@ -722,8 +722,6 @@ let courseProgress = {
         endTime: null
     };
 
-
-
     if (troubleshootingQuiz2Form) {
         troubleshootingQuiz2Form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1468,13 +1466,107 @@ let courseProgress = {
     // Initialize thermometer
     loadSavedScore();
 
-        // Call initialization when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeTroubleshootingDashboard);
-        } else {
-            initializeTroubleshootingDashboard();
+        // ====================================
+    // Interactive Clinical Stages
+    // ====================================
+    const timelineContainer = document.querySelector('.timeline-container');
+    
+    // Only initialize if container exists on the page
+    if (timelineContainer) {
+        let currentStage = 1;
+        const totalStages = 4;
+        
+        function showStage(stageNumber) {
+            // Update current stage
+            currentStage = stageNumber;
+            
+            // Update detail panels
+            document.querySelectorAll('.stage-detail').forEach((detail, index) => {
+                if (index + 1 === stageNumber) {
+                    detail.classList.add('active');
+                } else {
+                    detail.classList.remove('active');
+                }
+            });
+            
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prev-stage');
+            const nextBtn = document.getElementById('next-stage');
+            
+            if (prevBtn && nextBtn) {
+                prevBtn.disabled = (stageNumber === 1);
+                nextBtn.disabled = (stageNumber === totalStages);
+            }
+            
+            // Scroll to container
+            if (timelineContainer) {
+                timelineContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
+        
+        // Previous button
+        const prevBtn = document.getElementById('prev-stage');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Previous clicked, current stage:', currentStage);
+                if (currentStage > 1) {
+                    showStage(currentStage - 1);
+                }
+            });
+        }
+        
+        // Next button
+        const nextBtn = document.getElementById('next-stage');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Next clicked, current stage:', currentStage);
+                if (currentStage < totalStages) {
+                    showStage(currentStage + 1);
+                }
+            });
+        }
+        
+        // Initialize - show first stage
+        showStage(1);
+        
+        console.log('Clinical stages initialized:', {
+            prevBtn: prevBtn ? 'found' : 'not found',
+            nextBtn: nextBtn ? 'found' : 'not found',
+            totalStages: document.querySelectorAll('.stage-detail').length
+        });
+    }
 
+        // Hotspot functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const hotspots = document.querySelectorAll('.hotspot');
+    
+    hotspots.forEach(hotspot => {
+        const marker = hotspot.querySelector('.hotspot-marker');
+        
+        marker.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Close other hotspots
+            hotspots.forEach(h => {
+                if (h !== hotspot) {
+                    h.classList.remove('active');
+                }
+            });
+            
+            // Toggle current hotspot
+            hotspot.classList.toggle('active');
+        });
+    });
+    
+    // Close hotspots when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.hotspot')) {
+            hotspots.forEach(h => h.classList.remove('active'));
+        }
+    });
+});
     // 🆕 ADD: Progress calculation function
     // Enhanced Progress Calculation Function - REPLACE YOUR EXISTING updateCourseProgress()
     function updateCourseProgress() {
@@ -1574,7 +1666,9 @@ let courseProgress = {
             courseProgress.quizzesCompleted = { 
                 quiz1: false, 
                 rtExercise: false, 
-                multiplexExercise: false 
+                multiplexExercise: false,
+                troubleshootingQuiz1: false,
+                troubleshootingQuiz2: false
             };
             courseProgress.startTime = new Date();
         }
@@ -1626,7 +1720,7 @@ let courseProgress = {
                 completed: false,
                 score: 0,
                 correctAnswers: ['a', 'e'],
-                maxPointsPerAnswer: 30,
+                maxPointsPerAnswer: 60,
                 startTime: null,
                 endTime: null
             };
@@ -1648,6 +1742,7 @@ let courseProgress = {
         localStorage.removeItem('courseScore');
         localStorage.removeItem('pcr_course_data');
         localStorage.removeItem('troubleshooting_interactions');
+        localStorage.removeItem('courseProgress');
     
         // Reset SCORM progress if available
         if (window.scormAPI && window.scormAPI.isScormAvailable()) {
@@ -1661,154 +1756,156 @@ let courseProgress = {
         console.log('All progress and scores have been reset to zero');
     }
 
-    function resetQuizDisplay(quizType) {
-        // Reset quiz form and feedback displays
-        const formId = quizType + 'Form';
-        const feedbackId = quizType + 'Feedback';
-        const statusId = quizType + 'Status';
-        const scoreId = quizType + 'Score';
-    
-        const form = document.getElementById(formId);
-        const feedback = document.getElementById(feedbackId);
-        const status = document.getElementById(statusId);
-        const scoreDisplay = document.getElementById(scoreId);
-    
-        if (form) {
-
-            // Reset all radio buttons/checkboxes
-           // FIXED: Only target inputs within the specific form
-            const inputs = form.querySelectorAll('input[type="radio"], input[type="checkbox"]');
-        inputs.forEach(input => {
-            input.checked = false;
-            input.disabled = false;
-        });
-        
-        // FIXED: Only target options within the specific form
-        const options = form.querySelectorAll('.quiz-option');
-        options.forEach(option => {
-            option.classList.remove('disabled', 'correct', 'incorrect', 'selected');
-            option.style.backgroundColor = '';
-            option.style.borderColor = '';
-            
-            const indicator = option.querySelector('.option-indicator');
-            if (indicator) {
-                indicator.textContent = '';
-                indicator.style.display = 'none';
+    function resetMultiplexDropdowns() {
+        const interpretationDropdowns = document.querySelectorAll('.interpretation-dropdown');
+        interpretationDropdowns.forEach(dropdown => {
+            dropdown.value = '';
+            dropdown.style.borderColor = '#ddd';
+            dropdown.style.backgroundColor = 'white';
+            const sampleNumber = dropdown.getAttribute('data-sample');
+            const resultIndicator = document.querySelector(`.result-indicator[data-sample="${sampleNumber}"]`);
+            if (resultIndicator) {
+                resultIndicator.innerHTML = '';
             }
         });
+    }
+
+    // Organ diagram interactive functionality
+    function initOrganDiagram() {
+        const organPoints = document.querySelectorAll('.organ-point');
+        const organInfoDivs = document.querySelectorAll('.organ-info');
+        const closeButtons = document.querySelectorAll('.close-info');
+        const container = document.querySelector('.organ-diagram-container');
         
-        // Reset submit/retry buttons within the specific form
-        const submitBtn = form.querySelector('.submit-btn, [id^="submit"]');
-        const retryBtn = form.querySelector('.retry-btn, [id^="retry"]');
+        console.log('Initializing organ diagram:', {
+            points: organPoints.length,
+            infoDivs: organInfoDivs.length,
+            closeButtons: closeButtons.length
+        });
         
-        if (submitBtn) {
-            submitBtn.style.display = 'inline-block';
-            submitBtn.disabled = false;
+        if (!container) {
+            console.error('organ-diagram-container not found!');
+            return;
         }
-        if (retryBtn) {
-            retryBtn.style.display = 'none';
-        }
-    }
-    
-    if (feedback) {
-        feedback.style.display = 'none';
-    }
-    
-    if (status) {
-        status.textContent = 'Not Started';
-        status.classList.remove('completed', 'failed', 'partial');
-    }
-    
-    if (scoreDisplay) {
-        scoreDisplay.style.display = 'none';
-    }
-}
-
-
-
-    // Export functions for potential external use
-    window.troubleshootingDashboard = {
-        showModal: showModal,
-        hideAllModals: hideAllModals,
-        trackInteraction: trackTroubleshootingInteraction
-    };
-
-    console.log('Troubleshooting Dashboard JavaScript loaded successfully');
-
-    // Console log to confirm script loaded
-    console.log('PCR Module JavaScript loaded successfully');
-
-    
-    // 🆕 ADD: Save progress every 30 seconds
-    setInterval(() => {
-        if (window.scormAPI && window.scormAPI.isScormAvailable()) {
-            const sessionTime = Math.floor((new Date() - courseProgress.startTime) / 1000);
-            window.scormAPI.setSessionTime(sessionTime);
-            window.scormAPI.commit();
-        }
-    }, 30000);
-
-    // ====================================
-    // Interactive Clinical Stages
-    // ====================================
-    const timelineContainer = document.querySelector('.timeline-container');
-    
-    // Only initialize if container exists on the page
-    if (timelineContainer) {
-        let currentStage = 1;
-        const totalStages = 4;
         
-        function showStage(stageNumber) {
-            // Update current stage
-            currentStage = stageNumber;
+        function positionTooltip(point, tooltip) {
+            // Get the point's position relative to the container
+            const pointRect = point.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
             
-            // Update detail panels
-            document.querySelectorAll('.stage-detail').forEach((detail, index) => {
-                if (index + 1 === stageNumber) {
-                    detail.classList.add('active');
-                } else {
-                    detail.classList.remove('active');
-                }
-            });
+            // Calculate position relative to container
+            const pointX = pointRect.left - containerRect.left + (pointRect.width / 2);
+            const pointY = pointRect.top - containerRect.top + (pointRect.height / 2);
             
-            // Update navigation buttons
-            const prevBtn = document.getElementById('prev-stage');
-            const nextBtn = document.getElementById('next-stage');
+            // Position tooltip to the right of the point
+            let left = pointX + 20;
+            let top = pointY - 20;
             
-            if (prevBtn && nextBtn) {
-                prevBtn.disabled = (stageNumber === 1);
-                nextBtn.disabled = (stageNumber === totalStages);
+            // Get tooltip dimensions (temporarily show it to measure)
+            tooltip.style.display = 'block';
+            tooltip.style.visibility = 'hidden';
+            const tooltipRect = tooltip.getBoundingClientRect();
+            tooltip.style.visibility = 'visible';
+            
+            // Check if tooltip goes off right edge
+            if (left + tooltipRect.width > containerRect.width) {
+                // Position to the left of the point instead
+                left = pointX - tooltipRect.width - 20;
             }
             
-            // Scroll to container
-            if (timelineContainer) {
-                timelineContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Check if tooltip goes off bottom
+            if (top + tooltipRect.height > containerRect.height) {
+                top = containerRect.height - tooltipRect.height - 10;
             }
+            
+            // Check if tooltip goes off top
+            if (top < 0) {
+                top = 10;
+            }
+            
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
         }
         
-        // Previous button
-        const prevBtn = document.getElementById('prev-stage');
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                if (currentStage > 1) {
-                    showStage(currentStage - 1);
+        organPoints.forEach(point => {
+            point.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const organType = this.getAttribute('data-organ');
+                const targetPanel = document.getElementById(`info-${organType}`);
+                
+                console.log('Clicked organ point:', organType, 'Panel found:', targetPanel ? 'yes' : 'no');
+                
+                // Hide all tooltips first
+                organInfoDivs.forEach(panel => {
+                    panel.classList.remove('visible');
+                    panel.style.display = 'none';
+                });
+                
+                // Show and position the selected tooltip
+                if (targetPanel) {
+                    targetPanel.classList.add('visible');
+                    positionTooltip(this, targetPanel);
                 }
             });
-        }
-        
-        // Next button
-        const nextBtn = document.getElementById('next-stage');
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                if (currentStage < totalStages) {
-                    showStage(currentStage + 1);
+            
+            // Add keyboard support
+            point.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
                 }
             });
-        }
+        });
         
-        // Initialize - show first stage
-        showStage(1);
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('Close button clicked');
+                
+                // Hide the parent tooltip
+                const parentInfo = this.closest('.organ-info');
+                if (parentInfo) {
+                    parentInfo.classList.remove('visible');
+                    parentInfo.style.display = 'none';
+                }
+            });
+        });
+        
+        // Close all tooltips when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.organ-diagram-container')) {
+                organInfoDivs.forEach(panel => {
+                    panel.classList.remove('visible');
+                    panel.style.display = 'none';
+                });
+            }
+        });
+        
+        // Reposition tooltips on window resize
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                organInfoDivs.forEach(panel => {
+                    if (panel.classList.contains('visible')) {
+                        const organType = panel.getAttribute('data-organ');
+                        const point = document.querySelector(`.organ-point[data-organ="${organType}"]`);
+                        if (point) {
+                            positionTooltip(point, panel);
+                        }
+                    }
+                });
+            }, 250);
+        });
     }
 
-    console.log('PCR Module JavaScript loaded successfully');
-}); // End of DOMContentLoaded
+    // Initialize organ diagram when DOM is ready
+    if (document.querySelector('.organ-diagram-container')) {
+        initOrganDiagram();
+    }
+
+});

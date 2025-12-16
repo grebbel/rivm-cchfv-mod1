@@ -95,23 +95,53 @@ All tasks have been completed successfully:
    - add/image/pic_3_CCHFVparticle.png 
    - Adapt size
    - add description: Schematic view of CCHF virus particle. 
-   - **Status**: 
+   - **Status**: Completed
 
 - [x] Add image to section Biology, Genome Organization 
    - add/image/pic_4_CCHFVgenome.png 
    - Adapt size
    - add description: CCHFvirus genes 
-   - **Status**: 
+   - **Status**: Completed
 
 ## Adding interactive parts 
-- [X] change paragraph from plain text to interactive part in section Pathology, Clinical Stages 
+- [x] change paragraph from plain text to interactive part in section Pathology, Clinical Stages 
    - Use /image/pic_5_infection_CCHFV.png,  pic_6_prehemmo.png, pic_7_haemorrhagic.png and pic_8_convalescence.jpeg
    - Adapt size
    - Replace the long paragraph + list with: A horizontal 4-step timeline (Incubation → Pre‑hemorrhagic → Hemorrhagic → Convalescent). A detail panel showing: Stage title. The stage image. 3–5 concise bullet points (pulled from the current text). Navigation buttons (Previous/Next) to encourage sequential exploration.
-   - **Status**: 
+   - **Status**: Completed - Interactive clinical stages timeline added with navigation
+
+- [x] Create hotspot-image in course chapter Pathology, paragraph 'Organ-Specific Pathology'. 
+   - Use /image/pic_9_organs.jpg
+   - Adapt size
+   - Create pop-ups for the following points:
+     - x=600, y=400 
+       - text: Liver. The liver is a major target organ. Clinical and pathological findings include: Hepatomegaly and liver tenderness, elevation of liver enzymes, histopathology and jaundice. 
+     - x=630, y=700 
+       - text: Kidney. Acute tubular necrosis and interstitial nephritis may be seen. Hematuria, oliguria or anuria due to hypovolemia, shock, or direct renal injury.
+     - x=400, y=550
+       - text: Spleen and Lymphoid Tissue. Splenomegaly.
+   - **Status**: Completed - Interactive organ diagram with tooltip-style popups that appear next to clicked hotspots
+
+- [x] Add image to chapter Biology, sub-chapter Virology and Transmission, second paragraph.  
+   - Use /image/pic_10_phylotree.png
+   - Adapt size
+   - Wrap text tight, with image on left side.
+   - **Status**: Completed - Phylogenetic tree image added with left-aligned text wrapping
+
+---
+
+## All Tasks Completed! 🎉
+
+Module 1: Crimean-Congo hemorrhagic fever is now fully transformed with:
+- All chapter content updated and relevant to CCHF
+- All images properly integrated with captions
+- Interactive elements (clinical stages timeline and organ diagram hotspots) functioning
+- Professional layout with responsive design
+- SCORM tracking integrated
 
 
-
-
-
+## Making editorial changes
+- [x] Remove one of the double bulletpoints from lists in: 
+  - Chapter Biology, subchapter Replication cycle
+  - **Status**: Completed - Removed duplicate `<ol></ol>` tag causing double bullet points
 

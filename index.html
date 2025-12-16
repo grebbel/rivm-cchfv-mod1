@@ -117,6 +117,158 @@
                 margin: 10px;
             }
         }
+
+        /* Organ-specific pathology diagram styles */
+        .organ-diagram-wrapper {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .organ-diagram-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .organ-base-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .organ-point {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(57, 135, 12, 0.8);
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transform: translate(-50%, -50%);
+        }
+
+        .organ-point:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .point-indicator {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .organ-info-panels {
+            display: none; /* Hidden - not used in tooltip version */
+        }
+
+        .organ-info {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 2px solid var(--rh-green);
+            border-radius: 10px;
+            padding: 20px 40px 20px 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            z-index: 1000;
+            min-width: 280px;
+            max-width: 400px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .organ-info.visible {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .organ-info-header {
+            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: var(--rh-green);
+        }
+
+        .organ-info-content {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .close-info {
+            background: var(--rh-green);
+            border: none;
+            font-size: 1.2em;
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: background-color 0.3s;
+            padding: 0;
+        }
+
+        .close-info:hover {
+            background-color: var(--rh-orange);
+        }
+
+        /* Responsive adjustments for tooltips */
+        @media (max-width: 768px) {
+            .organ-info {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 90%;
+                z-index: 10000;
+            }
+            
+            .organ-info.visible::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: -1;
+            }
+        }
     </style>
 </head>
 
@@ -293,7 +445,7 @@
                         
                         <div id="stage-4" class="stage-detail">
                             <h4>Convalescent Phase</h4>
-                            <img src="images/pic_8_convalescence.jpeg" alt="Convalescent Phase" style="max-width: 600px; width: 100%; height: 350px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 20px 0;">
+                            <img src="images/pic_8_convalescence.png" alt="Convalescent Phase" style="max-width: 600px; width: 100%; height: 350px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 20px 0;">
                             <ul>
                                 <li>Recovery phase that begins if the patient survives the hemorrhagic phase</li>
                                 <li>Can last up to one year or longer</li>
@@ -317,29 +469,46 @@
                     <p>Animal studies reveal a strong correlation between genetic background, the degree of viral replication, and organ damage in the liver and spleen, highlighting the importance of host genetic factors in determining disease outcome.</p>
 
                     <h3>Organ-Specific Pathology</h3>
-                    <ul>
-                        <li><strong>Liver</strong>
-                            <ul>
-                                <li>The liver is a major target organ. Clinical and pathological findings include:</li>
-                                <li>Hepatomegaly and liver tenderness</li>
-                                <li>Elevation of liver enzymes</li>
-                                <li>Histopathology</li>
-                                <li>Jaundice</li>
-                            </ul>
-                        </li>
-                        <li><strong>Spleen and Lymphoid Tissue</strong>
-                            <ul>
-                                <li>Splenomegaly</li>
-                            </ul>
-                        </li>
-                        <li><strong>Kidneys</strong>
-                            <ul>
-                                <li>Acute tubular necrosis and interstitial nephritis may be seen.</li>
-                                <li>Hematuria</li>
-                                <li>Oliguria or anuria due to hypovolemia, shock, or direct renal injury.</li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <p>The virus affects multiple organs, leading to a range of pathological changes. Use the hotspot image to explore the organ-specific pathology associated with CCHF.</p>
+                    
+                    <!-- Interactive Hotspot Image -->
+                    <div class="organ-diagram-wrapper">
+    <div class="organ-diagram-container">
+        <img src="images/pic_9_organs.jpg" alt="Human organs affected by CCHF" class="organ-base-image">
+        <button class="organ-point" data-organ="liver" style="left: 300px; top: 450px;" aria-label="View liver pathology">
+            <span class="point-indicator"></span>
+        </button>
+        <button class="organ-point" data-organ="kidney" style="left: 480px; top: 540px;" aria-label="View kidney pathology">
+            <span class="point-indicator"></span>
+        </button>
+        <button class="organ-point" data-organ="spleen" style="left: 480px; top: 340px;" aria-label="View spleen pathology">
+            <span class="point-indicator"></span>
+        </button>
+        
+        <!-- Tooltips inside container for absolute positioning -->
+        <div class="organ-info" id="info-liver" data-organ="liver">
+            <button class="close-info" aria-label="Close">&times;</button>
+            <div class="organ-info-header">Liver</div>
+            <div class="organ-info-content">
+                The liver is a major target organ. Clinical and pathological findings include: Hepatomegaly and liver tenderness, elevation of liver enzymes, histopathology and jaundice.
+            </div>
+        </div>
+        <div class="organ-info" id="info-kidney" data-organ="kidney">
+            <button class="close-info" aria-label="Close">&times;</button>
+            <div class="organ-info-header">Kidney</div>
+            <div class="organ-info-content">
+                Acute tubular necrosis and interstitial nephritis may be seen. Hematuria, oliguria or anuria due to hypovolemia, shock, or direct renal injury.
+            </div>
+        </div>
+        <div class="organ-info" id="info-spleen" data-organ="spleen">
+            <button class="close-info" aria-label="Close">&times;</button>
+            <div class="organ-info-header">Spleen and Lymphoid Tissue</div>
+            <div class="organ-info-content">
+                Splenomegaly.
+            </div>
+        </div>
+    </div>
+</div>
 
                     <h3>Long-Term Sequelae</h3>
                     <p>For those who recover, convalescence can be lengthy. Survivors may deal with complications like persistent low blood pressure, irregular heart rhythms, nerve inflammation, breathing problems, dryness of the mouth, sensory deficits, hair loss, and varying degrees of memory impairment.</p>
@@ -374,13 +543,20 @@
 
                     <h3>Virology and Transmission</h3>
                     <p>Crimean-Congo hemorrhagic fever virus (CCHFV) is a master of adaptation. As an enveloped, negative-sense single-stranded RNA virus with three genome segments (S, M, L), it employs a clever strategy: different segments separately code for the nucleoprotein, glycoproteins, and RNA-dependent RNA polymerase, allowing for rapid genetic shifts and survival in diverse environments, such as different hosts. The virus relies on <em>Hyalomma</em> ticks as both vectors and reservoirs. Humans typically become infected via tick bites, through crushing ticks, or contact with blood or tissues from infected animals or people. In healthcare, the threat is heightened by documented nosocomial outbreaks, underscoring CCHFV's capability for person-to-person spread if precautions lapse.</p>
-
-                    <p>CCHFV is an enveloped negative-sense RNA virus belonging to the Orthonairovirus genus in the Nairoviridae family of the Bunyavirales order. In addition to CCHFV, the Nairoviridae family consists of arthropod-borne viruses such as Nairobi sheep disease virus, Dugbe virus and Hazara virus (HAZV), although these viruses seem to cause little-to-no disease in humans. As in other bunyaviruses, the tri-segmented viral genome is coated with the viral nucleoprotein (NP) and bound by the L protein. The viral proteins are encoded by three genomic segments, and relative to other members of the order that can cause human disease, CCHFV has a more complex genomic organization. On entry, these proteins produce positive-sense viral RNA using the genomic negative-sense viral RNA as a template to initiate viral protein production and replication. The viral glycoproteins Gn and Gc are found on the virion surface and are responsible for receptor binding and viral entry.</p>
-
                     <h3>Taxonomy and Classification</h3>
                     <p>The genus to where CCHFV belongs to comprises several species, but CCHFV is the most significant human pathogen. The family Nairoviridae contains viruses primarily transmitted by ticks and is distinct from other bunyaviruses transmitted by mosquitoes or rodents.</p>
+                  
+                    <div style="float: left; margin: 0 20px 15px 0; max-width: 400px;">
+                        <img src="images/pic_10_phylotree.png" alt="CCHFV Phylogenetic Tree" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <p class="image-caption" style="font-style: italic; color: #666; margin-top: 8px; font-size: 0.9em;">Phylogenetic tree showing genetic diversity of CCHFV strains across different geographical regions.</p>
+                    </div>
+
+                    <p>CCHFV is an enveloped negative-sense RNA virus belonging to the Orthonairovirus genus in the Nairoviridae family of the Bunyavirales order. In addition to CCHFV, the Nairoviridae family consists of arthropod-borne viruses such as Nairobi sheep disease virus, Dugbe virus and Hazara virus (HAZV), although these viruses seem to cause little-to-no disease in humans. As in other bunyaviruses, the tri-segmented viral genome is coated with the viral nucleoprotein (NP) and bound by the L protein. The viral proteins are encoded by three genomic segments, and relative to other members of the order that can cause human disease, CCHFV has a more complex genomic organization. On entry, these proteins produce positive-sense viral RNA using the genomic negative-sense viral RNA as a template to initiate viral protein production and replication. The viral glycoproteins Gn and Gc are found on the virion surface and are responsible for receptor binding and viral entry.</p>
                     
-                    <p><strong>Order:</strong> Bunyavirales<br>
+                    <div style="clear: both;"></div>
+
+                    
+                    <p><strong>Order:</strong> Bunyavirales/Elliovirales<br>
                     <strong>Family:</strong> Nairoviridae<br>
                     <strong>Genus:</strong> Orthonairovirus<br>
                     <strong>Species:</strong> Orthonairovirus haemorrhagiae (Crimean-Congo Hemorrhagic Fever Virus)</p>
@@ -429,7 +605,7 @@
                                 <td style="border: 1px solid #ddd; padding: 8px;">Glycoproteins (Gn, Gc)</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">Host entry, immune evasion</td>
                             </tr>
-                            <tr>
+                            <tr></tr>
                                 <td style="border: 1px solid #ddd; padding: 8px;">L</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">~12.1</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">Polymerase (L)</td>
