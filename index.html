@@ -269,6 +269,68 @@
                 z-index: -1;
             }
         }
+
+        /* Ensure proper list styling in content area only */
+        .content-area ol {
+            list-style-type: decimal;
+            padding-left: 40px;
+            margin: 15px 0;
+        }
+
+        .content-area ol li {
+            list-style: none;
+            margin-bottom: 10px;
+            counter-increment: list-counter;
+        }
+
+        .content-area ol {
+            counter-reset: list-counter;
+        }
+
+        .content-area ol li::before {
+            content: counter(list-counter) ". ";
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .content-area ul {
+            list-style-type: disc;
+            padding-left: 40px;
+            margin: 15px 0;
+        }
+
+        .content-area ul li {
+            list-style: none;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .content-area ul li::before {
+            content: "•";
+            position: absolute;
+            left: -20px;
+            font-weight: bold;
+        }
+
+        /* Override any styles from external stylesheet for chapter list */
+        .chapter-list,
+        .chapter-list li {
+            list-style: none !important;
+        }
+
+        /* Ensure intermezzo box lists have proper styling */
+        .intermezzo-box ul li {
+            list-style: none;
+            position: relative;
+            padding-left: 0;
+        }
+
+        .intermezzo-box ul li::before {
+            content: "•";
+            position: absolute;
+            left: -20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -378,11 +440,32 @@
                     
                     <p>Today, CCHF is monitored globally, and its presence in new geographical regions, including potential incursions into western Europe, is watched closely as climate change alters tick distribution.</p>
 
+                    <h3>Knowledge Check</h3>
+                    <p>Test your understanding of the history and key concepts of Crimean-Congo hemorrhagic fever. Answer all questions and submit to see your score!</p>
+
+                    <div class="quiz-section">
+                        <form id="historyQuizForm">
+                            <!-- Quiz questions will be dynamically inserted here -->
+                            <div id="historyQuizQuestions"></div>
+                            
+                            <button type="button" id="submitHistoryQuiz" class="quiz-submit">Submit Answers</button>
+                            <button type="button" id="retryHistoryQuiz" class="quiz-submit" style="display: none;">Try Again</button>
+                        </form>
+
+                        <div id="historyQuizFeedback" class="quiz-feedback" style="display: none;"></div>
+                    </div>
+
                     <h3>Conclusion</h3>
                     <p>The early discovery of Crimean-Congo hemorrhagic fever virus is a fascinating example of parallel investigations converging to reveal the global significance of an emerging pathogen. From the initial outbreak in Crimea during World War II, through the isolation of a similar virus in Africa, to the eventual recognition of their identity, the story of CCHFV is a testament to the importance of international collaboration and vigilance in infectious disease research. Today, CCHF remains a major public health concern, particularly in regions where human-tick contact is common.</p>
                     
                     <div class="continue-section">
                         <button class="continue-btn" data-next="pathology">CONTINUE</button>
+                    </div>
+                    
+                    <!-- Source Attribution -->
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
+                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
+                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
                     </div>
                 </div>
 
@@ -535,6 +618,12 @@
                     <div class="continue-section">
                         <button class="continue-btn" data-next="biology">CONTINUE</button>
                     </div>
+                    
+                    <!-- Source Attribution -->
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
+                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
+                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
+                    </div>
                 </div>
 
                 <!-- Biology Section -->
@@ -675,8 +764,20 @@
                     </ul>
                     <p>Countries such as Turkey, Iran, Russia, Pakistan, Afghanistan, South Africa, and those in the Balkans have reported important outbreaks. These occurrences tend to spike seasonally, usually during periods when tick activity reaches its peak, often coinciding with warmer weather or heightened agricultural activity.</p>
 
+                    <div class="image-container">
+                        <img src="images/pic_11_map_CCHF.png" alt="Geographic distribution of CCHF" style="max-width: 100%; height: auto;">
+                        <p class="image-caption"><strong>Geographic distribution of Crimean-Congo Haemorrhagic Fever (2022)</strong><br>
+                        Data Source: WHO - Viral Haemorrhagic Fevers (VHF) Map Production: J. Bader, EYE Secretariat on 01-09-2022. <a href="https://www.who.int/multi-media/details/geographic-distribution-of-crimean-congo-haemorrhagic-fever" target="_blank">https://www.who.int/multi-media/details/geographic-distribution-of-crimean-congo-haemorrhagic-fever</a></p>
+                    </div>
+
                     <div class="continue-section">
                         <button class="continue-btn" data-next="prevention-control">CONTINUE</button>
+                    </div>
+                    
+                    <!-- Source Attribution -->
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
+                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
+                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
                     </div>
                 </div>
 
@@ -716,6 +817,12 @@
                     <div class="continue-section">
                         <button class="continue-btn" data-next="laboratory-diagnosis">CONTINUE</button>
                     </div>
+                    
+                    <!-- Source Attribution -->
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
+                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
+                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
+                    </div>
                 </div>
 
                 <!-- Laboratory diagnosis Section -->
@@ -739,6 +846,10 @@
                     <p>Supplementing biomarkers of CCHFV infection are low platelets, white cell counts, elevated liver enzymes, and increased inflammatory cytokines such as IL-6 and TNF-α point to severe disease.</p>
 
                     <p>For post-mortem studies, <strong>Immunohistochemistry</strong> can be applied on tissue samples to locate viral antigens in cells. Next-Generation Sequencing enables the identification and evolution tracking of CCHFV strains for surveillance of the disease.</p>
+
+                    <div class="image-container">
+                        <img src="images/pic_12_course_CCHF.png" alt="CCHF diagnostic course" style="max-width: 100%; height: auto;">
+                    </div>
 
                     <h3>Summary Table: Quick Reference for CCHF Laboratory Diagnosis</h3>
 
@@ -776,6 +887,12 @@
                             </tr>
                         </tbody>
                     </table>
+                    
+                    <!-- Source Attribution -->
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
+                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
+                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
+                    </div>
                 </div>
 
             </div> <!-- End content-area -->

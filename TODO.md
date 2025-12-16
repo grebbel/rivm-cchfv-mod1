@@ -145,3 +145,22 @@ Module 1: Crimean-Congo hemorrhagic fever is now fully transformed with:
   - Chapter Biology, subchapter Replication cycle
   - **Status**: Completed - Removed duplicate `<ol></ol>` tag causing double bullet points
 
+- [x] Add map to Chapter Biology, subchapter Ecology, Hosts, and Transmission Dynamics, paragraph Geographic Distribution. 
+-  Use /image/pic_11_map_CCHF.png 
+-  adapt size
+-  Add image title: Geographic distribution of Crimean-Congo Haemorrhagic Fever (2022) 
+-  Add subtext: Date Source: WHO - Viral Haemorrhagic Fevers (VHF) Map Production: J. Bader, EYE Secretariat on 01-09-2022. https://www.who.int/multi-media/details/geographic-distribution-of-crimean-congo-haemorrhagic-fever
+-  **Status**: Completed - Geographic distribution map added with WHO attribution 
+ 
+
+- [x] Add image to Chapter Laboratory diagnosis, between sub-chapters 'Diagnostic methods ...' and 'Summary Table ...' 
+  -  Use /image/pic_12_course_CCHF.png 
+  -  adapt size
+  -  **Status**: Completed - Diagnostic course image added between sections  
+
+- [x] Add to chapter 'History' between sub-chapters 'Expansion ...' and 'Conclusion' a sub-chapter called 'Knowledge check', containing interactive quiz-questions. 
+  -  Use quiz-questions from the file Quiz-wuestions.js. 
+  -  For each correct answer, the user gets 25 points. 
+  -  The user first has to answer the questions, and then submit them all at once by clicking the submit-button. 
+  -  The score is visualized in the Score Thermometer. 
+  -  **Status**: Completed - Interactive History Knowledge Check quiz added with 6 questions (25 points each), submit functionality, score thermometer visualization, retry option, and individual question feedback 

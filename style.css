@@ -660,8 +660,32 @@ body {
 }
 
 .quiz-submit {
-	text-align: center;
+	background: linear-gradient(135deg, var(--rh-orange) 0%, var(--rh-green) 100%);
+	color: var(--rh-white);
+	border: none;
+	padding: 15px 40px;
+	border-radius: 50px;
+	cursor: pointer;
+	font-size: 1.1rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: all 0.3s ease;
+	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 	margin: 20px 0;
+	display: inline-block;
+}
+
+.quiz-submit:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.quiz-submit:disabled {
+	background: #cccccc;
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .submit-btn, .retry-btn {

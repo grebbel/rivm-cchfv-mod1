@@ -577,6 +577,299 @@ let courseProgress = {
         });
 
 
+    // ====================================
+    // Fun Thermometer Score Tracking
+    // ====================================
+    let courseScore = 0;
+    const maxScore = 540;
+
+    const statusMessages = [
+        { threshold: 0, message: "🌱 Just getting started!", color: "#ff6b6b" },
+        { threshold: 10, message: "🚀 Off to a great start!", color: "#ff8a65" },
+        { threshold: 25, message: "⭐ Making progress!", color: "#ffa726" },
+        { threshold: 40, message: "🔥 You're on fire!", color: "#66bb6a" },
+        { threshold: 60, message: "💪 Awesome work!", color: "#42a5f5" },
+        { threshold: 80, message: "🏆 Almost there!", color: "#ab47bc" },
+        { threshold: 95, message: "🎉 Perfect score!", color: "#9c27b0" }
+    ];
+
+    function updateThermometer() {
+        const percentage = Math.round((courseScore / maxScore) * 100);
+    
+        // Update displays
+        document.querySelector('.current-score').textContent = courseScore;
+        document.getElementById('percentageDisplay').textContent = percentage + '%';
+    
+        // Update mercury fill
+        const mercuryFill = document.getElementById('mercuryFill');
+        const mercuryBulb = document.getElementById('mercuryBulb');
+    
+        mercuryFill.style.height = percentage + '%';
+    
+        // Update status message and colors
+        let currentStatus = statusMessages[0];
+        for (let status of statusMessages) {
+            if (percentage >= status.threshold) {
+                currentStatus = status;
+            }
+        }
+    
+        document.getElementById('statusMessage').textContent = currentStatus.message;
+        mercuryBulb.style.backgroundColor = currentStatus.color;
+    
+        // Add bubble animation for scores above 50%
+        if (percentage > 50) {
+            mercuryBulb.classList.add('active');
+        } else {
+            mercuryBulb.classList.remove('active');
+        }
+    
+        // Save score
+        localStorage.setItem('courseScore', courseScore.toString());
+    }
+
+    function addToScore(points) {
+        courseScore = Math.min(courseScore + points, maxScore); // Cap at max score
+        updateThermometer();
+    
+        // Fun notification for score increases
+        if (points > 0) {
+            showScoreNotification(points);
+        }
+    }
+
+    function showScoreNotification(points) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--rh-green) 0%, var(--rh-orange) 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            z-index: 10000;
+            animation: slideIn 0.5s ease, slideOut 0.5s ease 2s forwards;
+        `;
+        notification.textContent = `+${points} points! 🎉`;
+    
+        // Add animation keyframes if not already added
+        if (!document.getElementById('score-animations')) {
+            const style = document.createElement('style');
+            style.id = 'score-animations';
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 3000);
+    }
+
+    // Load saved score
+    function loadSavedScore() {
+        const saved = localStorage.getItem('courseScore');
+        if (saved) {
+            courseScore = parseInt(saved) || 0;
+        }
+        updateThermometer();
+    }
+
+    // Initialize thermometer
+    loadSavedScore();
+
+
+        // History Quiz Functionality
+        const historyQuizQuestions = [
+            {
+                text: "1. Crimean‑Congo hemorrhagic fever (CCHF) is recognized as:",
+                options: [
+                    "A minor localized tick‑borne disease confined to Crimea",
+                    "The most important tick‑borne viral disease affecting humans",
+                    "A mosquito‑borne viral disease mainly in South America",
+                    "A bacterial zoonosis limited to livestock"
+                ],
+                correctIndex: 1,
+                feedback: "CCHF is described as the most important tick‑borne viral disease affecting humans, with a wide geographic range."
+            },
+            {
+                text: "2. Which tick genus is most strongly associated with transmission of CCHFV?",
+                options: [
+                    "Ixodes",
+                    "Amblyomma",
+                    "Hyalomma",
+                    "Rhipicephalus"
+                ],
+                correctIndex: 2,
+                feedback: "Module 1 highlights Hyalomma ticks as both vector and reservoir in the tick‑vertebrate‑tick cycle."
+            },
+            {
+                text: "3. Which statement best reflects the current global concern about CCHF?",
+                options: [
+                    "The virus has been eradicated in all endemic regions",
+                    "CCHF is monitored globally, with concern about spread into new regions as climate change alters tick distribution",
+                    "CCHF is now limited to a few islands in the Pacific",
+                    "CCHF only occurs in hospital settings"
+                ],
+                correctIndex: 1,
+                feedback: "The module mentions global monitoring and concern about CCHF appearing in new geographical regions, including potential spread into western Europe."
+            }
+        ];
+
+        const historyQuizContainer = document.getElementById('historyQuizQuestions');
+        const historyQuizForm = document.getElementById('historyQuizForm');
+        const submitHistoryQuizBtn = document.getElementById('submitHistoryQuiz');
+        const retryHistoryQuizBtn = document.getElementById('retryHistoryQuiz');
+        const historyQuizFeedback = document.getElementById('historyQuizFeedback');
+
+        // Render quiz questions
+        if (historyQuizContainer) {
+            historyQuizQuestions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.innerHTML = `
+                    <p><strong>${question.text}</strong></p>
+                    <div class="quiz-options">
+                        ${question.options.map((option, optIndex) => `
+                            <label class="quiz-option">
+                                <input type="radio" name="historyQ${index}" value="${optIndex}">
+                                <span class="option-text">${option}</span>
+                                <span class="option-indicator"></span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="question-feedback" style="display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-size: 0.9em;"></div>
+                `;
+                historyQuizContainer.appendChild(questionDiv);
+            });
+        }
+
+        // Submit quiz
+        if (submitHistoryQuizBtn) {
+            submitHistoryQuizBtn.addEventListener('click', function() {
+                let totalCorrect = 0;
+                const totalQuestions = historyQuizQuestions.length;
+
+                // Check if all questions are answered
+                let allAnswered = true;
+                historyQuizQuestions.forEach((_, index) => {
+                    const selected = document.querySelector(`input[name="historyQ${index}"]:checked`);
+                    if (!selected) allAnswered = false;
+                });
+
+                if (!allAnswered) {
+                    alert('Please answer all questions before submitting.');
+                    return;
+                }
+
+                // Grade each question
+                historyQuizQuestions.forEach((question, index) => {
+                    const selected = document.querySelector(`input[name="historyQ${index}"]:checked`);
+                    const questionDiv = document.querySelectorAll('.quiz-question')[index];
+                    const feedbackDiv = questionDiv.querySelector('.question-feedback');
+                    const options = questionDiv.querySelectorAll('.quiz-option');
+
+                    if (selected) {
+                        const userAnswer = parseInt(selected.value);
+                        const isCorrect = userAnswer === question.correctIndex;
+
+                        if (isCorrect) {
+                            totalCorrect++;
+                        }
+
+                        // Mark all options
+                        options.forEach((option, optIndex) => {
+                            const input = option.querySelector('input');
+                            input.disabled = true;
+                            const indicator = option.querySelector('.option-indicator');
+
+                            if (optIndex === question.correctIndex) {
+                                option.classList.add('correct');
+                                indicator.textContent = '✓';
+                                indicator.style.display = 'inline';
+                            } else if (optIndex === userAnswer && !isCorrect) {
+                                option.classList.add('incorrect');
+                                indicator.textContent = '✗';
+                                indicator.style.display = 'inline';
+                            }
+                        });
+
+                        // Show feedback
+                        feedbackDiv.style.display = 'block';
+                        feedbackDiv.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
+                        feedbackDiv.style.color = isCorrect ? '#155724' : '#721c24';
+                        feedbackDiv.style.border = isCorrect ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
+                        feedbackDiv.innerHTML = `<strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong> ${question.feedback}`;
+                    }
+                });
+
+                // Calculate score (25 points per correct answer)
+                const score = totalCorrect * 25;
+                const maxScore = totalQuestions * 25;
+                const percentage = (score / maxScore) * 100;
+
+                // Show feedback
+                historyQuizFeedback.style.display = 'block';
+                historyQuizFeedback.innerHTML = `
+                    <h4 style="color: ${percentage >= 75 ? '#28a745' : '#dc3545'};">
+                        Quiz Complete!
+                    </h4>
+                    <p>You scored <strong>${score} out of ${maxScore} points</strong> (${totalCorrect} out of ${totalQuestions} correct)</p>
+                `;
+
+                // Hide submit, show retry
+                submitHistoryQuizBtn.style.display = 'none';
+                retryHistoryQuizBtn.style.display = 'inline-block';
+
+                // Add to course score
+                addToScore(score);
+                
+                // Report to LMS
+                reportToLMS('historyQuiz', score, percentage >= 75);
+            });
+        }
+
+        // Retry quiz
+        if (retryHistoryQuizBtn) {
+            retryHistoryQuizBtn.addEventListener('click', function() {
+                // Reset all questions
+                document.querySelectorAll('.quiz-question').forEach((questionDiv, index) => {
+                    const options = questionDiv.querySelectorAll('.quiz-option');
+                    const feedbackDiv = questionDiv.querySelector('.question-feedback');
+                    
+                    options.forEach(option => {
+                        const input = option.querySelector('input');
+                        input.disabled = false;
+                        input.checked = false;
+                        option.classList.remove('correct', 'incorrect');
+                        const indicator = option.querySelector('.option-indicator');
+                        indicator.textContent = '';
+                        indicator.style.display = 'none';
+                    });
+                    
+                    feedbackDiv.style.display = 'none';
+                });
+
+                // Reset UI
+                historyQuizFeedback.style.display = 'none';
+                submitHistoryQuizBtn.style.display = 'inline-block';
+                retryHistoryQuizBtn.style.display = 'none';
+                
+                // Scroll to quiz
+                historyQuizForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
+
         // Troubleshooting Quiz 1 Functionality
         const troubleshootingQuiz1Form = document.getElementById('troubleshootingQuiz1Form');
         const troubleshootingQuiz1Feedback = document.getElementById('troubleshootingQuiz1Feedback');
@@ -1358,115 +1651,7 @@ let courseProgress = {
             }
         }
 
-    // Fun Thermometer Score Tracking
-    let courseScore = 0;
-    const maxScore = 540;
-
-    const statusMessages = [
-        { threshold: 0, message: "🌱 Just getting started!", color: "#ff6b6b" },
-        { threshold: 10, message: "🚀 Off to a great start!", color: "#ff8a65" },
-        { threshold: 25, message: "⭐ Making progress!", color: "#ffa726" },
-        { threshold: 40, message: "🔥 You're on fire!", color: "#66bb6a" },
-        { threshold: 60, message: "💪 Awesome work!", color: "#42a5f5" },
-        { threshold: 80, message: "🏆 Almost there!", color: "#ab47bc" },
-        { threshold: 95, message: "🎉 Perfect score!", color: "#9c27b0" }
-    ];
-
-    function updateThermometer() {
-        const percentage = Math.round((courseScore / maxScore) * 100);
-    
-        // Update displays
-        document.querySelector('.current-score').textContent = courseScore;
-        document.getElementById('percentageDisplay').textContent = percentage + '%';
-    
-        // Update mercury fill
-        const mercuryFill = document.getElementById('mercuryFill');
-        const mercuryBulb = document.getElementById('mercuryBulb');
-    
-        mercuryFill.style.height = percentage + '%';
-    
-        // Update status message and colors
-        let currentStatus = statusMessages[0];
-        for (let status of statusMessages) {
-            if (percentage >= status.threshold) {
-                currentStatus = status;
-            }
-        }
-    
-        document.getElementById('statusMessage').textContent = currentStatus.message;
-        mercuryBulb.style.backgroundColor = currentStatus.color;
-    
-        // Add bubble animation for scores above 50%
-        if (percentage > 50) {
-            mercuryBulb.classList.add('active');
-        } else {
-            mercuryBulb.classList.remove('active');
-        }
-    
-        // Save score
-        localStorage.setItem('courseScore', courseScore.toString());
-    }
-
-    function addToScore(points) {
-        courseScore = Math.min(courseScore + points, maxScore); // Cap at max score
-        updateThermometer();
-    
-        // Fun notification for score increases
-        if (points > 0) {
-            showScoreNotification(points);
-        }
-    }
-
-    function showScoreNotification(points) {
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--rh-green) 0%, var(--rh-orange) 100%);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            z-index: 10000;
-            animation: slideIn 0.5s ease, slideOut 0.5s ease 2s forwards;
-        `;
-        notification.textContent = `+${points} points! 🎉`;
-    
-        // Add animation keyframes if not already added
-        if (!document.getElementById('score-animations')) {
-            const style = document.createElement('style');
-            style.id = 'score-animations';
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes slideOut {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(100%); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-    
-        document.body.appendChild(notification);
-        setTimeout(() => notification.remove(), 3000);
-    }
-
-    // Load saved score
-    function loadSavedScore() {
-        const saved = localStorage.getItem('courseScore');
-        if (saved) {
-            courseScore = parseInt(saved) || 0;
-        }
-        updateThermometer();
-    }
-
-    // Initialize thermometer
-    loadSavedScore();
-
-        // ====================================
+    // ====================================
     // Interactive Clinical Stages
     // ====================================
     const timelineContainer = document.querySelector('.timeline-container');
