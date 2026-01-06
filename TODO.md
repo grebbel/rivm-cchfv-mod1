@@ -159,8 +159,20 @@ Module 1: Crimean-Congo hemorrhagic fever is now fully transformed with:
   -  **Status**: Completed - Diagnostic course image added between sections  
 
 - [x] Add to chapter 'History' between sub-chapters 'Expansion ...' and 'Conclusion' a sub-chapter called 'Knowledge check', containing interactive quiz-questions. 
-  -  Use quiz-questions from the file Quiz-wuestions.js. 
+  -  Use quiz-questions from the file Quiz-questions.js. 
   -  For each correct answer, the user gets 25 points. 
   -  The user first has to answer the questions, and then submit them all at once by clicking the submit-button. 
   -  The score is visualized in the Score Thermometer. 
   -  **Status**: Completed - Interactive History Knowledge Check quiz added with 6 questions (25 points each), submit functionality, score thermometer visualization, retry option, and individual question feedback 
+-  
+- [x] Add to chapter 'Pathology', before 'Continue button', a sub-chapter called 'Knowledge check', containing the following quiz question: 
+  - Which of the following best describes the key determinant of clinical outcome of a patient with CCHF?
+    -  One correct answer possible:   
+       -  A. The specific tick species responsible for viral transmission 
+       -  B. The intrinsic virulence of the infecting CCHFV strain only 
+       -  C. The magnitude and regulation of the patient immune response to infection 
+       -  D. The presence of co-infection with other arboviruses
+    - Correct answer is C. 
+    - Additional explanation: The key determinant of outcome in CCHF is the patient's immune response (rather than the extent of viral replication alone).
+  - **Status**: Completed - Interactive Pathology Knowledge Check quiz added with 1 question (25 points), submit functionality, score visualization, retry option, and individual question feedback
+

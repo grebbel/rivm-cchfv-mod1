@@ -870,6 +870,166 @@ let courseProgress = {
         }
 
 
+        // Pathology Quiz Functionality
+        const pathologyQuizQuestions = [
+            {
+                text: "Which of the following best describes the key determinant of clinical outcome of a patient with CCHF?",
+                options: [
+                    "A. The specific tick species responsible for viral transmission",
+                    "B. The intrinsic virulence of the infecting CCHFV strain only",
+                    "C. The magnitude and regulation of the patient immune response to infection",
+                    "D. The presence of co-infection with other arboviruses"
+                ],
+                correctIndex: 2,
+                feedback: "The key determinant of outcome in CCHF is the patient's immune response (rather than the extent of viral replication alone)."
+            }
+        ];
+
+        const pathologyQuizContainer = document.getElementById('pathologyQuizQuestions');
+        const pathologyQuizForm = document.getElementById('pathologyQuizForm');
+        const submitPathologyQuizBtn = document.getElementById('submitPathologyQuiz');
+        const retryPathologyQuizBtn = document.getElementById('retryPathologyQuiz');
+        const pathologyQuizFeedback = document.getElementById('pathologyQuizFeedback');
+
+        // Render quiz questions
+        if (pathologyQuizContainer) {
+            pathologyQuizQuestions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.innerHTML = `
+                    <p><strong>${question.text}</strong></p>
+                    <div class="quiz-options">
+                        ${question.options.map((option, optIndex) => `
+                            <label class="quiz-option">
+                                <input type="radio" name="pathologyQ${index}" value="${optIndex}">
+                                <span class="option-text">${option}</span>
+                                <span class="option-indicator"></span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="question-feedback" style="display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-size: 0.9em;"></div>
+                `;
+                pathologyQuizContainer.appendChild(questionDiv);
+            });
+        }
+
+        // Submit quiz
+        if (submitPathologyQuizBtn) {
+            submitPathologyQuizBtn.addEventListener('click', function() {
+                let totalCorrect = 0;
+                const totalQuestions = pathologyQuizQuestions.length;
+
+                // Check if all questions are answered
+                let allAnswered = true;
+                pathologyQuizQuestions.forEach((_, index) => {
+                    const selected = document.querySelector(`input[name="pathologyQ${index}"]:checked`);
+                    if (!selected) allAnswered = false;
+                });
+
+                if (!allAnswered) {
+                    alert('Please answer the question before submitting.');
+                    return;
+                }
+
+                // Grade each question
+                pathologyQuizQuestions.forEach((question, index) => {
+                    const selected = document.querySelector(`input[name="pathologyQ${index}"]:checked`);
+                    const questionDiv = document.querySelectorAll('#pathologyQuizQuestions .quiz-question')[index];
+                    const feedbackDiv = questionDiv.querySelector('.question-feedback');
+                    const options = questionDiv.querySelectorAll('.quiz-option');
+
+                    if (selected) {
+                        const userAnswer = parseInt(selected.value);
+                        const isCorrect = userAnswer === question.correctIndex;
+
+                        if (isCorrect) {
+                            totalCorrect++;
+                        }
+
+                        // Mark all options
+                        options.forEach((option, optIndex) => {
+                            const input = option.querySelector('input');
+                            input.disabled = true;
+                            const indicator = option.querySelector('.option-indicator');
+
+                            if (optIndex === question.correctIndex) {
+                                option.classList.add('correct');
+                                indicator.textContent = '✓';
+                                indicator.style.display = 'inline';
+                            } else if (optIndex === userAnswer && !isCorrect) {
+                                option.classList.add('incorrect');
+                                indicator.textContent = '✗';
+                                indicator.style.display = 'inline';
+                            }
+                        });
+
+                        // Show feedback
+                        feedbackDiv.style.display = 'block';
+                        feedbackDiv.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
+                        feedbackDiv.style.color = isCorrect ? '#155724' : '#721c24';
+                        feedbackDiv.style.border = isCorrect ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
+                        feedbackDiv.innerHTML = `<strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong> ${question.feedback}`;
+                    }
+                });
+
+                // Calculate score (25 points per correct answer)
+                const score = totalCorrect * 25;
+                const maxScore = totalQuestions * 25;
+                const percentage = (score / maxScore) * 100;
+
+                // Show feedback
+                pathologyQuizFeedback.style.display = 'block';
+                pathologyQuizFeedback.innerHTML = `
+                    <h4 style="color: ${percentage >= 75 ? '#28a745' : '#dc3545'};">
+                        Quiz Complete!
+                    </h4>
+                    <p>You scored <strong>${score} out of ${maxScore} points</strong> (${totalCorrect} out of ${totalQuestions} correct)</p>
+                `;
+
+                // Hide submit, show retry
+                submitPathologyQuizBtn.style.display = 'none';
+                retryPathologyQuizBtn.style.display = 'inline-block';
+
+                // Add to course score
+                addToScore(score);
+                
+                // Report to LMS
+                reportToLMS('pathologyQuiz', score, percentage >= 75);
+            });
+        }
+
+        // Retry quiz
+        if (retryPathologyQuizBtn) {
+            retryPathologyQuizBtn.addEventListener('click', function() {
+                // Reset all questions
+                document.querySelectorAll('#pathologyQuizQuestions .quiz-question').forEach((questionDiv, index) => {
+                    const options = questionDiv.querySelectorAll('.quiz-option');
+                    const feedbackDiv = questionDiv.querySelector('.question-feedback');
+                    
+                    options.forEach(option => {
+                        const input = option.querySelector('input');
+                        input.disabled = false;
+                        input.checked = false;
+                        option.classList.remove('correct', 'incorrect');
+                        const indicator = option.querySelector('.option-indicator');
+                        indicator.textContent = '';
+                        indicator.style.display = 'none';
+                    });
+                    
+                    feedbackDiv.style.display = 'none';
+                });
+
+                // Reset UI
+                pathologyQuizFeedback.style.display = 'none';
+                submitPathologyQuizBtn.style.display = 'inline-block';
+                retryPathologyQuizBtn.style.display = 'none';
+                
+                // Scroll to quiz
+                pathologyQuizForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
+
         // Troubleshooting Quiz 1 Functionality
         const troubleshootingQuiz1Form = document.getElementById('troubleshootingQuiz1Form');
         const troubleshootingQuiz1Feedback = document.getElementById('troubleshootingQuiz1Feedback');
