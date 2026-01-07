@@ -220,3 +220,139 @@
         font-size: 14px;
     }
 }
+
+/* Drag & Drop Quiz Styles */
+.drag-drop-container {
+    margin: 30px 0;
+    width: 100%;
+}
+
+.drag-drop-game {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: block; /* Changed from inline-block */
+}
+
+.cycle-background {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-stack {
+    position: absolute;
+    z-index: 50;
+    pointer-events: none; /* Let clicks pass through to cards */
+}
+
+/* Drop zone styling - CRITICAL for positioning */
+.drop-zone {
+    position: absolute;
+    border: 2px dashed transparent;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.drop-zone.drag-over {
+    border-color: rgba(52, 152, 219, 0.6);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.drop-zone.has-card {
+    border-color: transparent;
+}
+
+.drop-zone.correct {
+    border-color: rgba(39, 174, 96, 0.6);
+    background-color: rgba(39, 174, 96, 0.05);
+}
+
+.drop-zone.incorrect {
+    border-color: rgba(231, 76, 60, 0.6);
+    background-color: rgba(231, 76, 60, 0.05);
+}
+
+.draggable-card {
+    position: absolute;
+    cursor: grab;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    touch-action: none;
+    pointer-events: auto; /* Cards should be clickable */
+}
+
+.draggable-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.draggable-card.dragging {
+    cursor: grabbing;
+    opacity: 0.8;
+    z-index: 1000;
+    transform: scale(1.1);
+}
+
+.draggable-card.placed {
+    cursor: grab;
+}
+
+.draggable-card.snapping {
+    transition: all 0.3s ease;
+}
+
+.draggable-card.bouncing {
+    animation: bounceBack 0.5s ease;
+}
+
+@keyframes bounceBack {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+.draggable-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.draggable-card.correct-placement {
+    border: 3px solid #27ae60;
+    box-shadow: 0 0 15px rgba(39, 174, 96, 0.5);
+}
+
+.draggable-card.incorrect-placement {
+    border: 3px solid #e74c3c;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+}
+
+.drag-drop-controls {
+    text-align: center;
+    margin: 30px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .drag-drop-game {
+        max-width: 100%;
+    }
+    
+    .draggable-card {
+        touch-action: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .drag-drop-controls .quiz-submit {
+        width: 100%;
+        margin: 10px 0;
+    }
+}

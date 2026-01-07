@@ -615,21 +615,6 @@
                     
                     <p>CCHF RNA can be detected via RT-PCR, and viral loads typically peak during the first week of illness. Serum and whole blood being considered the gold standard. Viral RNA detection is also possible in peripheral samples such as saliva, urine, nasal, conjunctival, rectal, and vaginal swabs, especially in severe cases.</p>
                     
-                    <h3>Knowledge Check</h3>
-                    <p>Test your understanding of CCHF pathology. Answer the question and submit to see your score!</p>
-
-                    <div class="quiz-section">
-                        <form id="pathologyQuizForm">
-                            <!-- Quiz questions will be dynamically inserted here -->
-                            <div id="pathologyQuizQuestions"></div>
-                            
-                            <button type="button" id="submitPathologyQuiz" class="quiz-submit">Submit Answer</button>
-                            <button type="button" id="retryPathologyQuiz" class="quiz-submit" style="display: none;">Try Again</button>
-                        </form>
-
-                        <div id="pathologyQuizFeedback" class="quiz-feedback" style="display: none;"></div>
-                    </div>
-                    
                     <div class="continue-section">
                         <button class="continue-btn" data-next="biology">CONTINUE</button>
                     </div>
@@ -740,6 +725,37 @@
                     <p>Phylogenetic studies show major lineages in Africa, Asia, Eastern Europe, and the Middle East. This diversity of the virus contributes to the emergence of novel strains with unpredictable virulence and epidemiology.</p>
 
                     <h3>Ecology, Hosts, and Transmission Dynamics</h3>
+
+                    <!-- ADD KNOWLEDGE CHECK SECTION HERE - BEFORE the "Ecology, Hosts..." subsection continues -->
+                    <h3>Knowledge Check</h3>
+                    <p>Test your understanding of CCHFV biology by matching the images to the correct stages of the viral replication cycle.</p>
+                    
+                    <!-- Drag & Drop Quiz Container -->
+                    <div class="drag-drop-container" id="biologyDragDropContainer">
+                        <div class="drag-drop-game">
+                            <img src="images/pic_20_cchf_cycle.png" alt="CCHF Replication Cycle" id="cycleBackground" class="cycle-background">
+                            
+                            <!-- Drop Zones -->
+                            <div class="drop-zone" id="dropZone2" data-zone="2"></div>
+                            <div class="drop-zone" id="dropZone3" data-zone="3"></div>
+                            <div class="drop-zone" id="dropZone4" data-zone="4"></div>
+                            <div class="drop-zone" id="dropZone5" data-zone="5"></div>
+                            <div class="drop-zone" id="dropZone6" data-zone="6"></div>
+                            <div class="drop-zone" id="dropZone7" data-zone="7"></div>
+                            
+                            <!-- Card Stack (center area) -->
+                            <div class="card-stack" id="cardStack"></div>
+                        </div>
+                        
+                        <!-- Controls -->
+                        <div class="drag-drop-controls">
+                            <button type="button" id="submitBiologyDragDrop" class="quiz-submit" disabled>Submit Answer</button>
+                            <button type="button" id="retryBiologyDragDrop" class="quiz-submit" style="display: none;">Try Again</button>
+                        </div>
+                        
+                        <!-- Feedback -->
+                        <div id="biologyDragDropFeedback" class="quiz-feedback" style="display: none;"></div>
+                    </div>
 
                     <h4>Tick Vectors</h4>
                     <p><em>Hyalomma</em> ticks are both the long-term home and the main vector for CCHFV. They can carry the virus throughout their multi-stage life cycle—larva, nymph, adult—and even transmit it to their offspring. Once infected, ticks remain carriers for life and transmit the virus to animals and sometimes humans.</p>

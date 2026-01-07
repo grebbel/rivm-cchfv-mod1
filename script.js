@@ -33,19 +33,32 @@ let courseProgress = {
     const contentSections = document.querySelectorAll('.content-section');
 
     chapterItems.forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', function() {
+            // Remove active class from all chapters and sections
             chapterItems.forEach(chapter => chapter.classList.remove('active'));
             contentSections.forEach(section => section.classList.remove('active'));
-            item.classList.add('active');
-            const tabId = item.dataset.tab;
-            document.getElementById(tabId).classList.add('active');
-
-                // 🆕 ADD: Track chapter visits
-    courseProgress.chaptersVisited.add(tabId);
-    updateCourseProgress();
-
-        // Scroll to top when clicking sidebar chapters
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Add active class to clicked chapter
+            this.classList.add('active');
+            
+            // Get and show corresponding content section
+            const tabId = this.dataset.tab;
+            const targetSection = document.getElementById(tabId);
+            
+            if (targetSection) {
+                targetSection.classList.add('active');
+                
+                // Track chapter visits
+                if (typeof courseProgress !== 'undefined') {
+                    courseProgress.chaptersVisited.add(tabId);
+                    if (typeof updateCourseProgress === 'function') {
+                        updateCourseProgress();
+                    }
+                }
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         });
     });
 
@@ -1030,6 +1043,462 @@ let courseProgress = {
         }
 
 
+        // Biology Drag & Drop Quiz Functionality
+        const biologyDragDropContainer = document.getElementById('biologyDragDropContainer');
+        const submitBiologyDragDropBtn = document.getElementById('submitBiologyDragDrop');
+        const retryBiologyDragDropBtn = document.getElementById('retryBiologyDragDrop');
+        const biologyDragDropFeedback = document.getElementById('biologyDragDropFeedback');
+        
+        if (biologyDragDropContainer) {
+            // Card configurations
+            const cards = [
+                { id: 'card2', image: 'images/pic_14_card2.png', correctZone: 2 },
+                { id: 'card3', image: 'images/pic_15_card3.png', correctZone: 3 },
+                { id: 'card4', image: 'images/pic_16_card4.png', correctZone: 4 },
+                { id: 'card5', image: 'images/pic_17_card5.png', correctZone: 5 },
+                { id: 'card6', image: 'images/pic_18_card6.png', correctZone: 6 },
+                { id: 'card7', image: 'images/pic_19_card7.png', correctZone: 7 }
+            ];
+
+            // Drop zone coordinates (percentage-based for responsiveness)
+            // Background image: 610px × 800px
+            // Cards: 160px × 182px
+            const dropZones = {
+                2: { x: 70.66, y: 13.13, width: 26.23, height: 22.75 },
+                3: { x: 70.66, y: 43.25, width: 26.23, height: 22.75 },
+                4: { x: 57.87, y: 73.75, width: 26.23, height: 22.75 },
+                5: { x: 17.21, y: 73.75, width: 26.23, height: 22.75 },
+                6: { x: 3.77, y: 43.38, width: 26.23, height: 22.75 },
+                7: { x: 3.77, y: 13.13, width: 26.23, height: 22.75 }
+            };
+            
+            const centerStack = { x: 36.07, y: 37.50, width: 26.23, height: 22.75 };
+            
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            // Initialize the game
+            function initGame() {
+                const cycleBackground = document.getElementById('cycleBackground');
+                const cardStack = document.getElementById('cardStack');
+                
+                // Clear existing cards
+                cardStack.innerHTML = '';
+                cardPositions = {};
+                
+                // Wait for background image to load
+                if (!cycleBackground.complete) {
+                    cycleBackground.addEventListener('load', setupGame);
+                } else {
+                    setupGame();
+                }
+
+                function setupGame() {
+                    // Ensure proper positioning context
+                    const gameContainer = document.querySelector('.drag-drop-game');
+                    gameContainer.style.position = 'relative';
+                    
+                    // Position drop zones
+                    Object.keys(dropZones).forEach(zoneNum => {
+                        const zone = document.getElementById(`dropZone${zoneNum}`);
+                        if (!zone) return;
+                        const coords = dropZones[zoneNum];
+                        zone.style.position = 'absolute';
+                        zone.style.left = coords.x + '%';
+                        zone.style.top = coords.y + '%';
+                        zone.style.width = coords.width + '%';
+                        zone.style.height = coords.height + '%';
+                    });
+
+                    // Position card stack container
+                    cardStack.style.position = 'absolute';
+                    cardStack.style.left = centerStack.x + '%';
+                    cardStack.style.top = centerStack.y + '%';
+                    cardStack.style.width = centerStack.width + '%';
+                    cardStack.style.height = centerStack.height + '%';
+
+                    // Shuffle and create cards
+                    const shuffledCards = [...cards].sort(() => Math.random() - 0.5);
+                    shuffledCards.forEach((card, index) => {
+                        createCard(card, index);
+                    });
+
+                    updateSubmitButton();
+                }
+            }
+
+            function createCard(cardData, stackIndex) {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'draggable-card';
+                cardElement.dataset.cardId = cardData.id;
+                cardElement.dataset.correctZone = cardData.correctZone;
+                cardElement.draggable = true;
+
+                const img = document.createElement('img');
+                img.src = cardData.image;
+                img.alt = `Card ${cardData.correctZone}`;
+                cardElement.appendChild(img);
+
+                // FIXED: Card size matches drop zones exactly
+                const stackOffsetY = stackIndex * 2; // Reduced offset for better stacking
+                cardElement.style.position = 'absolute';
+                cardElement.style.left = '0';
+                cardElement.style.top = stackOffsetY + '%';
+                cardElement.style.width = '100%'; // 100% of card-stack container (which is 31.8%)
+                cardElement.style.height = '100%'; // Match card-stack height (29.7%)
+                cardElement.style.zIndex = 100 + stackIndex;
+                cardElement.style.opacity = '1';
+                cardElement.style.visibility = 'visible';
+
+                // Add to card stack
+                document.getElementById('cardStack').appendChild(cardElement);
+
+                // Initialize position tracking
+                cardPositions[cardData.id] = { zone: null, element: cardElement };
+
+                // Desktop drag events
+                cardElement.addEventListener('dragstart', handleDragStart);
+                cardElement.addEventListener('dragend', handleDragEnd);
+
+                // Touch events for mobile
+                cardElement.addEventListener('touchstart', handleTouchStart, { passive: false });
+                cardElement.addEventListener('touchmove', handleTouchMove, { passive: false });
+                cardElement.addEventListener('touchend', handleTouchEnd, { passive: false });
+            }
+
+            // Desktop drag handlers
+            function handleDragStart(e) {
+                draggedCard = this;
+                this.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', this.innerHTML);
+            }
+
+            function handleDragEnd(e) {
+                this.classList.remove('dragging');
+                document.querySelectorAll('.drop-zone').forEach(zone => {
+                    zone.classList.remove('drag-over');
+                });
+            }
+
+            // Touch handlers for mobile
+            function handleTouchStart(e) {
+                e.preventDefault();
+                draggedCard = this;
+                const touch = e.touches[0];
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+                this.classList.add('dragging');
+                this.style.zIndex = 1000;
+            }
+
+            function handleTouchMove(e) {
+                e.preventDefault();
+                if (!draggedCard) return;
+
+                const touch = e.touches[0];
+                
+                draggedCard.style.position = 'fixed';
+                draggedCard.style.left = (touch.clientX - draggedCard.offsetWidth / 2) + 'px';
+                draggedCard.style.top = (touch.clientY - draggedCard.offsetHeight / 2) + 'px';
+            }
+
+            function handleTouchEnd(e) {
+                e.preventDefault();
+                if (!draggedCard) return;
+
+                const touch = e.changedTouches[0];
+                const dropZone = getDropZoneAtPosition(touch.clientX, touch.clientY);
+                const stackZone = getStackAtPosition(touch.clientX, touch.clientY);
+                
+                if (dropZone) {
+                    handleDrop(dropZone);
+                } else if (stackZone) {
+                    returnToStack(draggedCard);
+                } else {
+                    returnToStack(draggedCard);
+                }
+
+                draggedCard.classList.remove('dragging');
+                draggedCard = null;
+            }
+
+            function getDropZoneAtPosition(x, y) {
+                const zones = document.querySelectorAll('.drop-zone');
+                for (let zone of zones) {
+                    const rect = zone.getBoundingClientRect();
+                    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                        return zone;
+                    }
+                }
+                return null;
+            }
+
+            function getStackAtPosition(x, y) {
+                const stack = document.getElementById('cardStack');
+                if (stack) {
+                    const rect = stack.getBoundingClientRect();
+                    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                        return stack;
+                    }
+                }
+                return null;
+            }
+
+            // Setup drop zones
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleDrop(e.currentTarget);
+                });
+                zone.addEventListener('dragleave', handleDragLeave);
+            });
+
+            // Setup card stack as a drop zone for returning cards
+            const cardStack = document.getElementById('cardStack');
+            if (cardStack) {
+                cardStack.addEventListener('dragover', (e) => {
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
+                    cardStack.classList.add('drag-over');
+                    e.dataTransfer.dropEffect = 'move';
+                    return false;
+                });
+                
+                cardStack.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (draggedCard) {
+                        returnToStack(draggedCard);
+                        cardStack.classList.remove('drag-over');
+                    }
+                });
+                
+                cardStack.addEventListener('dragleave', () => {
+                    cardStack.classList.remove('drag-over');
+                });
+            }
+
+            function handleDragOver(e) {
+                if (e.preventDefault) {
+                    e.preventDefault();
+                }
+                this.classList.add('drag-over');
+                e.dataTransfer.dropEffect = 'move';
+                return false;
+            }
+
+            function handleDragLeave(e) {
+                this.classList.remove('drag-over');
+            }
+
+            function handleDrop(dropZone) {
+                if (!draggedCard) return;
+
+                const zoneNum = parseInt(dropZone.dataset.zone);
+                const cardId = draggedCard.dataset.cardId;
+
+                // Check if zone already has a card
+                const existingCard = findCardInZone(zoneNum);
+                if (existingCard && existingCard !== draggedCard) {
+                    // Swap: return existing card to stack
+                    returnToStack(existingCard);
+                }
+
+                // Remove card from previous zone if any
+                const previousZone = cardPositions[cardId].zone;
+                if (previousZone !== null) {
+                    const prevZoneElement = document.getElementById(`dropZone${previousZone}`);
+                    if (prevZoneElement) {
+                        prevZoneElement.classList.remove('has-card');
+                    }
+                }
+
+                // FIXED: Place card in new zone with proper positioning
+                placeCardInZone(draggedCard, dropZone, zoneNum);
+                dropZone.classList.remove('drag-over');
+                updateSubmitButton();
+            }
+
+            function placeCardInZone(card, zone, zoneNum) {
+                card.classList.add('snapping', 'placed');
+                
+                // FIXED: Reset to absolute positioning relative to parent
+                card.style.position = 'absolute';
+                
+                // Get zone coordinates from our dropZones object
+                const coords = dropZones[zoneNum];
+                
+                // FIXED: Apply percentage-based positioning and sizing to match drop zones
+                card.style.left = coords.x + '%';
+                card.style.top = coords.y + '%';
+                card.style.width = coords.width + '%';
+                card.style.height = coords.height + '%';
+                card.style.zIndex = 200 + zoneNum;
+                
+                // Ensure card remains draggable
+                card.draggable = true;
+                card.style.cursor = 'grab';
+
+                // Update position tracking
+                cardPositions[card.dataset.cardId].zone = zoneNum;
+                zone.classList.add('has-card');
+
+                // FIXED: Move card to main container (not card stack)
+                const mainContainer = document.querySelector('.drag-drop-game');
+                mainContainer.appendChild(card);
+
+                setTimeout(() => card.classList.remove('snapping'), 300);
+            }
+
+            function returnToStack(card) {
+                const cardId = card.dataset.cardId;
+                const previousZone = cardPositions[cardId].zone;
+                
+                if (previousZone !== null) {
+                    const prevZoneElement = document.getElementById(`dropZone${previousZone}`);
+                    if (prevZoneElement) {
+                        prevZoneElement.classList.remove('has-card');
+                    }
+                }
+
+                card.classList.add('bouncing');
+                card.style.position = 'absolute';
+                
+                // FIXED: Return to stack with proper positioning
+                const cardStack = document.getElementById('cardStack');
+                const stackIndex = Array.from(cardStack.children).length;
+                
+                card.style.left = '0';
+                card.style.top = (stackIndex * 3) + '%';
+                card.style.width = '100%';
+                card.style.height = 'auto';
+                card.style.zIndex = 100 + stackIndex;
+
+                // Move back to card stack
+                cardStack.appendChild(card);
+
+                cardPositions[cardId].zone = null;
+                card.classList.remove('placed');
+
+                setTimeout(() => card.classList.remove('bouncing'), 500);
+                updateSubmitButton();
+            }
+
+            function findCardInZone(zoneNum) {
+                for (let cardId in cardPositions) {
+                    if (cardPositions[cardId].zone === zoneNum) {
+                        return cardPositions[cardId].element;
+                    }
+                }
+                return null;
+            }
+
+            function updateSubmitButton() {
+                // Check if all cards are placed
+                const allPlaced = Object.values(cardPositions).every(pos => pos.zone !== null);
+                submitBiologyDragDropBtn.disabled = !allPlaced;
+            }
+
+            // Submit handler
+            if (submitBiologyDragDropBtn) {
+                submitBiologyDragDropBtn.addEventListener('click', function() {
+                    let correctCount = 0;
+                    const totalCards = cards.length;
+
+                    // Check each card placement
+                    Object.keys(cardPositions).forEach(cardId => {
+                        const card = cardPositions[cardId].element;
+                        const placedZone = cardPositions[cardId].zone;
+                        const correctZone = parseInt(card.dataset.correctZone);
+                        const zone = document.getElementById(`dropZone${placedZone}`);
+
+                        if (placedZone === correctZone) {
+                            // Correct placement
+                            correctCount++;
+                            card.classList.add('correct-placement');
+                            zone.classList.add('correct');
+                        } else {
+                            // Incorrect placement
+                            card.classList.add('incorrect-placement');
+                            zone.classList.add('incorrect');
+                        }
+
+                        // Disable dragging
+                        card.draggable = false;
+                        card.style.cursor = 'default';
+                    });
+
+                    // Calculate score
+                    const baseScore = correctCount * 10;
+                    const bonus = (correctCount === totalCards) ? 50 : 0;
+                    const totalScore = baseScore + bonus;
+                    const percentage = (correctCount / totalCards) * 100;
+
+                    // Show feedback
+                    biologyDragDropFeedback.style.display = 'block';
+                    biologyDragDropFeedback.innerHTML = `
+                        <h4 style="color: ${percentage === 100 ? '#28a745' : '#dc3545'};">
+                            ${percentage === 100 ? 'Perfect! 🎉' : 'Quiz Complete!'}
+                        </h4>
+                        <p>You placed <strong>${correctCount} out of ${totalCards} cards</strong> correctly.</p>
+                        <p>Score: <strong>${baseScore} points</strong>${bonus > 0 ? ` + <strong>${bonus} bonus points</strong>` : ''} = <strong>${totalScore} points</strong></p>
+                    `;
+
+                    // Hide submit, show retry
+                    submitBiologyDragDropBtn.style.display = 'none';
+                    retryBiologyDragDropBtn.style.display = 'inline-block';
+
+                    // Add to course score
+                    addToScore(totalScore);
+
+                    // Report to LMS
+                    reportToLMS('biologyDragDrop', totalScore, percentage === 100);
+                });
+            }
+
+            // Retry handler
+            if (retryBiologyDragDropBtn) {
+                retryBiologyDragDropBtn.addEventListener('click', function() {
+                    // Remove ALL cards from the DOM (both in zones and stack)
+                    document.querySelectorAll('.draggable-card').forEach(card => {
+                        card.remove();
+                    });
+
+                    // Reset drop zones completely
+                    document.querySelectorAll('.drop-zone').forEach(zone => {
+                        zone.classList.remove('has-card', 'correct', 'incorrect', 'drag-over');
+                    });
+
+                    // Remove any feedback styling from cards
+                    document.querySelectorAll('.draggable-card').forEach(card => {
+                        card.classList.remove('correct-placement', 'incorrect-placement', 'placed', 'dragging', 'snapping', 'bouncing');
+                    });
+
+                    // Reset feedback
+                    biologyDragDropFeedback.style.display = 'none';
+                    biologyDragDropFeedback.innerHTML = '';
+
+                    // Re-initialize game (this will recreate cards in stack)
+                    initGame();
+
+                    // Reset buttons
+                    submitBiologyDragDropBtn.style.display = 'inline-block';
+                    submitBiologyDragDropBtn.disabled = true;
+                    retryBiologyDragDropBtn.style.display = 'none';
+
+                    // Scroll to quiz
+                    biologyDragDropContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+
+            // Initialize the game on page load
+            initGame();
+        } // Close biologyDragDropContainer if block
+
         // Troubleshooting Quiz 1 Functionality
         const troubleshootingQuiz1Form = document.getElementById('troubleshootingQuiz1Form');
         const troubleshootingQuiz1Feedback = document.getElementById('troubleshootingQuiz1Feedback');
@@ -1883,8 +2352,7 @@ let courseProgress = {
         });
     }
 
-        // Hotspot functionality
-document.addEventListener('DOMContentLoaded', function() {
+    // Hotspot functionality
     const hotspots = document.querySelectorAll('.hotspot');
     
     hotspots.forEach(hotspot => {
@@ -1911,7 +2379,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hotspots.forEach(h => h.classList.remove('active'));
         }
     });
-});
+
     // 🆕 ADD: Progress calculation function
     // Enhanced Progress Calculation Function - REPLACE YOUR EXISTING updateCourseProgress()
     function updateCourseProgress() {
@@ -2246,11 +2714,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }, 250);
         });
-    }
+    } // Close initOrganDiagram function
 
     // Initialize organ diagram when DOM is ready
     if (document.querySelector('.organ-diagram-container')) {
         initOrganDiagram();
     }
 
-});
+}); // Close DOMContentLoaded

@@ -1731,22 +1731,163 @@ body {
     opacity: 0.6;
 }
 
-/* Responsive adjustments */
+/* ============================================
+   DRAG & DROP QUIZ STYLES
+   ============================================ */
+
+.drag-drop-container {
+    margin: 30px 0;
+    width: 100%;
+}
+
+.drag-drop-game {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+}
+
+.cycle-background {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Drop Zones - CRITICAL POSITIONING */
+.drop-zone {
+    position: absolute;
+    border: 2px dashed transparent;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    z-index: 10;
+}
+
+.drop-zone.drag-over {
+    border-color: #3498db;
+    background: rgba(52, 152, 219, 0.2);
+    transform: scale(1.05);
+}
+
+.drop-zone.has-card {
+    border-color: transparent;
+}
+
+.drop-zone.correct {
+    border-color: #27ae60;
+    background: rgba(39, 174, 96, 0.15);
+    animation: correctPulse 0.5s ease;
+}
+
+.drop-zone.incorrect {
+    border-color: #e74c3c;
+    background: rgba(231, 76, 60, 0.15);
+    animation: shake 0.5s ease;
+}
+
+@keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Card Stack Container */
+.card-stack {
+    position: absolute;
+    z-index: 50;
+    pointer-events: auto;
+    /* Size matches drop zones for consistent card sizing */
+}
+
+/* Draggable Cards */
+.draggable-card {
+    position: absolute;
+    cursor: grab;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    touch-action: none;
+    pointer-events: auto;
+    /* Cards inherit size from parent card-stack container */
+}
+
+.draggable-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 6px;
+    pointer-events: none;
+    object-fit: contain; /* Fit image within card bounds */
+}
+
+.draggable-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.draggable-card.dragging {
+    cursor: grabbing;
+    opacity: 0.8;
+    z-index: 1000;
+    transform: scale(1.1);
+}
+
+.draggable-card.placed {
+    cursor: grab;
+}
+
+.draggable-card.snapping {
+    transition: all 0.3s ease;
+}
+
+.draggable-card.bouncing {
+    animation: bounceBack 0.5s ease;
+}
+
+@keyframes bounceBack {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+.draggable-card.correct-placement {
+    border: 3px solid #27ae60;
+    box-shadow: 0 0 15px rgba(39, 174, 96, 0.5);
+}
+
+.draggable-card.incorrect-placement {
+    border: 3px solid #e74c3c;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+}
+
+/* Controls */
+.drag-drop-controls {
+    text-align: center;
+    margin: 30px 0;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .timeline {
-        flex-direction: column;
-        gap: 30px;
+    .drag-drop-game {
+        max-width: 100%;
     }
     
-    .timeline::before {
-        display: none;
+    .draggable-card {
+        touch-action: none;
     }
-    
-    .timeline-label {
-        max-width: none;
-    }
-    
-    .timeline-nav {
-        flex-direction: column;
+}
+
+@media (max-width: 480px) {
+    .drag-drop-controls .quiz-submit {
+        width: 100%;
+        margin: 10px 0;
     }
 }

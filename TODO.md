@@ -176,3 +176,105 @@ Module 1: Crimean-Congo hemorrhagic fever is now fully transformed with:
     - Additional explanation: The key determinant of outcome in CCHF is the patient's immune response (rather than the extent of viral replication alone).
   - **Status**: Completed - Interactive Pathology Knowledge Check quiz added with 1 question (25 points), submit functionality, score visualization, retry option, and individual question feedback
 
+# Knowledge check BIOLOGY
+
+- [x] In chapter Biology, before 'Continue button', add sub-chapter called 'Knowledge check'. 
+- [x] In this sub-chapter, create a drag & drop interactive quiz question. 
+  - Format: HTML5/JavaScript. 
+  - Background: pic_20_cchf_cycle.png 
+  - The Background contains a center area with a dashed line. On top of the background is already filled in. Clock wise are the following six areas indicated with numbers 2, 3, 4, 5, 6, and 7.
+- [x] Drop zone coordinates on pic_20_cchf_cycle.png:
+  - Area 2: x=509, y=190, width=253, height=288
+  - Area 3: x=509, y=434, width=253, height=288
+  - Area 4: x=433, y=679, width=253, height=288
+  - Area 5: x=179, y=679, width=253, height=288
+  - Area 6: x=100, y=433, width=253, height=288
+  - Area 7: x=100, y=190, width=253, height=288
+  - Center stack: x=303, y=388, width=253, height=288
+- [x] Card dimensions:
+  - All cards have width=253px and height=288px
+- [x] use percentage-based positioning for all images and zone coordinates to make everything fit in the knowlegde section. 
+- [x] In center field of background in area with dashed line, stack in random order: pic_14_card2.png, pic_15_card3.png, pic_16_card4.png, pic_17_card5.png, pic_18_card6.png, pic_19_card7.png. 
+- [x] "Random order" stacking behavior: Stack cards with a slight vertical offset (like 3% between each), so users can see all card edges. Random order on each page load or quiz retry.
+  
+- [x] Create rules: 
+  - The card imgages need to be dragged to the correct numbered area around the center stack: pic_14_card2.png on area indicated with a 2, pic_15_card3.png oon area indicated with a 3, pic_16_card4.png on area indicated with a 4, pic_17_card5.png on area indicated with a 5, pic_18_card6.png on area indicated with a 6, pic_19_card7.png on area indicated with a 7.
+  - Cards that are placed, can be dragged back to the stack or to another area. 
+  - When the user placed all cards, the button SUBMIT ANSWER can be clicked. 
+  - For each correct placement, the user receives 10 points. 
+  - The user can reset and try again with the cards placed in a random stack again. 
+  
+  - [x] add feedback message 
+    - Correct: Green highlight of card(s). 
+    - Incorrect: Red highlight of card(s) 
+    - If all cards correct, add 50 bonus points.  
+  
+  - [x] animation or transition requirements: 
+    - Smooth drag with cursor. 
+    - Gentle "snap" animation when dropped in zone (0.3s ease). 
+    - Card flips back to stack with bounce effect if wrong placement.
+    - No sound effects.
+  
+  - [x] Scoring: 
+    - 60 points max + bonus
+    - Add to overall course score
+    - Report to SCORM/LMS
+    - Shown in the score thermometer like History quiz.
+  
+  - [x] Collision detection with other cards and let loose:
+    - 'let loose' means: if user drops card on an area that already has a card, it should Swap positions (dropped card takes zone, original goes to stack)
+  - [x] Mobile/touch device compatibility requirements: Use HTML5 drag and drop API with touch event polyfill for mobile devices (touchstart, touchmove, touchend). This ensures it works on tablets and phones.
+
+  - [x] Add SUBMIT ANSWER button. 
+    - Partial submissions are not allowed: all 6 cards must be placed.
+
+  - [x] Reset/Try again button placement and styling. 
+    - make it look awesome. 
+    - Hidden initially 
+    - Shown AFTER submission 
+    - Always enabled (so users can retry)
+
+  - **Status**: Completed - Interactive Biology Knowledge Check drag & drop quiz added with 6 cards (10 points each + 50 bonus = 110 max), percentage-based responsive positioning, touch/mobile support, swap collision detection, submit validation, visual feedback (green/red highlights), animations (snap/bounce), retry functionality, and SCORM/LMS integration.
+
+# Error handling
+The drag and drop quiz is not working:
+
+**Issue 1: Cards not stacked in center**
+- Fix: Set initial position of all cards to center stack coordinates (x=303, y=388 or percentage equivalent)
+- Add vertical offset of ~3% between stacked cards so edges are visible
+- Ensure z-index increases with each card in stack
+
+**Issue 2: Cards don't stay in drop-zones**
+- Fix: In drop event handler, prevent default behavior with `e.preventDefault()` and `e.stopPropagation()`
+- Update card's absolute position to match drop zone coordinates
+- Remove dragging class and update card's data-zone attribute
+- Ensure drop zones have proper event listeners (dragover with preventDefault, drop handler)
+
+**Required fixes in script.js:**
+1. Initialize cards at center stack position on load/reset
+2. Add proper drop event handling with position updates
+3. Implement swap logic when dropping on occupied zone
+4. Ensure percentage-based positioning is calculated correctly
+
+
+
+**Finetuning drag&drop**
+- [x] Use these corrected coordinates (with the top-left positions)
+- Background image pic_20_cchf_cycle.png size: Image width = 610 px; Image height = 800 px
+  - [x] Drop zone coordinates on pic_20_cchf_cycle.png:
+  - Area 2: x=431, y=105, width=160, height=182
+  - Area 3: x=431, y=346, width=160, height=182
+  - Area 4: x=353 y=590, width=160, height=182
+  - Area 5: x=105, y=590, width=160, height=182
+  - Area 6: x=23, y=347, width=160, height=182
+  - Area 7: x=23, y=105, width=160, height=182
+  - Center stack: x=255, y=300, width=160, height=182 (adjusted 35px left)
+- [x] Card dimensions:
+  - All cards have width=160px and height=182px
+- [x] Fine-tune the exact positioning of the drop zones and cards
+- [x] Adjust the sizing to perfectly match the background image areas
+- [x] Enable cards to be dragged back to deck from zones
+- [x] Fixed pointer-events issue preventing deck from receiving drops
+- [x] Test the alignment on different screen sizes
+
+**Status**: Completed - All coordinates updated, cards properly aligned, and full drag & drop functionality working (cards can be swapped between deck and zones)
