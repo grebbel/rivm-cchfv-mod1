@@ -615,6 +615,44 @@
                     
                     <p>CCHF RNA can be detected via RT-PCR, and viral loads typically peak during the first week of illness. Serum and whole blood being considered the gold standard. Viral RNA detection is also possible in peripheral samples such as saliva, urine, nasal, conjunctival, rectal, and vaginal swabs, especially in severe cases.</p>
                     
+                    <!-- Knowledge Check -->
+                    <h3>Knowledge Check</h3>
+                    <div class="quiz-container" id="pathology-quiz">
+                        <div class="quiz-question">
+                            <p class="question-text"><strong>Which of the following best describes the key determinant of clinical outcome of a patient with CCHF?</strong></p>
+                            <div class="quiz-options">
+                                <label class="quiz-option">
+                                    <input type="radio" name="pathology-q1" value="A">
+                                    <span>A. The specific tick species responsible for viral transmission</span>
+                                </label>
+                                <label class="quiz-option">
+                                    <input type="radio" name="pathology-q1" value="B">
+                                    <span>B. The intrinsic virulence of the infecting CCHFV strain only</span>
+                                </label>
+                                <label class="quiz-option">
+                                    <input type="radio" name="pathology-q1" value="C">
+                                    <span>C. The magnitude and regulation of the patient immune response to infection</span>
+                                </label>
+                                <label class="quiz-option">
+                                    <input type="radio" name="pathology-q1" value="D">
+                                    <span>D. The presence of co-infection with other arboviruses</span>
+                                </label>
+                            </div>
+                            <div class="feedback" style="display: none;"></div>
+                        </div>
+
+                        <button type="button" class="quiz-submit" onclick="submitPathologyQuiz()">Submit Answers</button>
+                        <button type="button" class="quiz-submit" onclick="retryPathologyQuiz()" style="display: none;">Try Again</button>
+
+                        <div class="score-display">
+                            <h4>Your Score</h4>
+                            <div class="score-thermometer">
+                                <div class="thermometer-fill" id="pathology-score-fill"></div>
+                                <div class="score-text" id="pathology-score-text">0 / 25</div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="continue-section">
                         <button class="continue-btn" data-next="biology">CONTINUE</button>
                     </div>

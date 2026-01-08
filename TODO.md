@@ -278,3 +278,13 @@ The drag and drop quiz is not working:
 - [x] Test the alignment on different screen sizes
 
 **Status**: Completed - All coordinates updated, cards properly aligned, and full drag & drop functionality working (cards can be swapped between deck and zones)
+
+
+**Prevention and Control** 
+- Create new quiz fun quiz-game. 
+Epic “Tick Hunter” game for Prevention-Control: 10s timer, 8-12 Hyalomma ticks spawn randomly on farmer pic every 1-2s. Click to squash (‘SPLAT! Questing tick removed!’), miss = “Tick questing 2-6 days undetected!” High score boosts thermometer 50-150pts based on kills/accuracy. 
+Game Mechanics
+	•	Spawn: Ticks appear at random body positions, animate crawl (translate/wiggle).
+	•	Click: Instant remove + score (+10pt), particle splat effect.
+	•	Timer: Countdown bar pulses red <3s, game over shows kills/total spawned/accuracy.
+	•	Score: Kills*10 + bonus (90%+ accuracy *50).” 

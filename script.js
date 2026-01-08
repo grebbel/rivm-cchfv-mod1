@@ -2722,3 +2722,109 @@ let courseProgress = {
     }
 
 }); // Close DOMContentLoaded
+
+// Pathology Quiz Functions (defined globally for onclick handlers)
+function submitPathologyQuiz() {
+    const quizContainer = document.getElementById('pathology-quiz');
+    const selectedAnswer = document.querySelector('input[name="pathology-q1"]:checked');
+    
+    if (!selectedAnswer) {
+        alert('Please select an answer before submitting.');
+        return;
+    }
+    
+    const correctAnswer = 'C';
+    const isCorrect = selectedAnswer.value === correctAnswer;
+    const feedbackDiv = quizContainer.querySelector('.feedback');
+    const submitBtn = quizContainer.querySelector('.quiz-submit');
+    const retryBtn = quizContainer.querySelectorAll('.quiz-submit')[1];
+    
+    // Disable all radio buttons
+    quizContainer.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.disabled = true;
+    });
+    
+    // Mark correct and incorrect answers
+    quizContainer.querySelectorAll('.quiz-option').forEach(option => {
+        const input = option.querySelector('input');
+        if (input.value === correctAnswer) {
+            option.style.backgroundColor = '#d4edda';
+            option.style.borderColor = '#c3e6cb';
+        } else if (input.checked && input.value !== correctAnswer) {
+            option.style.backgroundColor = '#f8d7da';
+            option.style.borderColor = '#f5c6cb';
+        }
+    });
+    
+    // Show feedback
+    feedbackDiv.style.display = 'block';
+    feedbackDiv.style.padding = '15px';
+    feedbackDiv.style.marginTop = '15px';
+    feedbackDiv.style.borderRadius = '5px';
+    feedbackDiv.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
+    feedbackDiv.style.color = isCorrect ? '#155724' : '#721c24';
+    feedbackDiv.style.border = isCorrect ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
+    feedbackDiv.innerHTML = `
+        <strong>${isCorrect ? '✓ Correct!' : '✗ Incorrect.'}</strong><br>
+        The key determinant of outcome in CCHF is the patient's immune response (rather than the extent of viral replication alone).
+    `;
+    
+    // Calculate and show score
+    const score = isCorrect ? 25 : 0;
+    const scoreFill = document.getElementById('pathology-score-fill');
+    const scoreText = document.getElementById('pathology-score-text');
+    
+    scoreFill.style.width = (score / 25 * 100) + '%';
+    scoreFill.style.backgroundColor = isCorrect ? '#28a745' : '#dc3545';
+    scoreText.textContent = `${score} / 25`;
+    
+    // Update buttons
+    submitBtn.style.display = 'none';
+    retryBtn.style.display = 'inline-block';
+    
+    // Add to course score
+    if (typeof addToScore === 'function') {
+        addToScore(score);
+    }
+    
+    // Report to LMS
+    if (typeof reportToLMS === 'function') {
+        reportToLMS('pathologyQuiz', score, isCorrect);
+    }
+}
+
+function retryPathologyQuiz() {
+    const quizContainer = document.getElementById('pathology-quiz');
+    const feedbackDiv = quizContainer.querySelector('.feedback');
+    const submitBtn = quizContainer.querySelector('.quiz-submit');
+    const retryBtn = quizContainer.querySelectorAll('.quiz-submit')[1];
+    
+    // Reset all radio buttons
+    quizContainer.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.disabled = false;
+        input.checked = false;
+    });
+    
+    // Reset option styling
+    quizContainer.querySelectorAll('.quiz-option').forEach(option => {
+        option.style.backgroundColor = '';
+        option.style.borderColor = '';
+    });
+    
+    // Hide feedback
+    feedbackDiv.style.display = 'none';
+    feedbackDiv.innerHTML = '';
+    
+    // Reset score display
+    const scoreFill = document.getElementById('pathology-score-fill');
+    const scoreText = document.getElementById('pathology-score-text');
+    scoreFill.style.width = '0%';
+    scoreText.textContent = '0 / 25';
+    
+    // Update buttons
+    submitBtn.style.display = 'inline-block';
+    retryBtn.style.display = 'none';
+    
+    // Scroll to quiz
+    quizContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
