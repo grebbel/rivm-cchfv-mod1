@@ -594,7 +594,7 @@ let courseProgress = {
     // Fun Thermometer Score Tracking
     // ====================================
     let courseScore = 0;
-    const maxScore = 540;
+    const maxScore = 900;
 
     const statusMessages = [
         { threshold: 0, message: "🌱 Just getting started!", color: "#ff6b6b" },
@@ -2410,7 +2410,7 @@ let courseProgress = {
         
             // Calculate and set score
             const currentScore = window.courseScore || 0;
-            const maxScore = window.maxScore || 540;
+            const maxScore = window.maxScore || 900;
             const scorePercentage = (currentScore / maxScore) * 100;
             window.scormAPI.setScore(scorePercentage, 0, 100);
         

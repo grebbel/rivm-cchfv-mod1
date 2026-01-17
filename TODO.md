@@ -97,7 +97,137 @@ All tasks have been completed successfully:
    - add description: Schematic view of CCHF virus particle. 
    - **Status**: Completed
 
-- [x] Add image to section Biology, Genome Organization 
+- [x] Add image to section Biology, Genome Organization
+
+---
+
+## Module 1 Quiz Questions and Scoring Overview
+
+### Total Maximum Score: 900 points
+
+### Quiz Breakdown by Section:
+
+#### 1. History Section
+**History Quiz** - 25 points
+- Type: Multiple choice quiz
+- Questions: 1 question
+- Scoring: 25 points per correct answer
+- Topics: History and key concepts of CCHF
+
+#### 2. Pathology Section
+**RT Exercise** - 100 points
+- Type: Interactive exercise
+- Scoring: 100 points for correct completion
+
+**Quiz 1** - 100 points
+- Type: Single question quiz
+- Scoring: 100 points for correct answer
+
+**Pathology Quiz** - 25 points
+- Type: Multiple choice quiz
+- Questions: 1 question
+- Question: "Which of the following best describes the key determinant of clinical outcome of a patient with CCHF?"
+- Options:
+  - A. The specific tick species responsible for viral transmission
+  - B. The intrinsic virulence of the infecting CCHFV strain only
+  - C. The magnitude and regulation of the patient immune response to infection (CORRECT)
+  - D. The presence of co-infection with other arboviruses
+- Scoring: 25 points for correct answer
+
+#### 3. Biology Section
+**Biology Drag & Drop Quiz** - 110 points
+- Type: Drag and drop matching exercise
+- Questions: Match 6 images to correct stages of viral replication cycle
+- Scoring: 
+  - 10 points per correct card placement (6 cards)
+  - 50 bonus points for perfect score (all 6 correct)
+  - Maximum: 110 points
+
+#### 4. Troubleshooting Exercises
+**Troubleshooting Quiz 1** - 100 points
+- Type: Single question quiz
+- Scoring: 100 points for correct answer
+
+**Troubleshooting Quiz 2** - 120 points
+- Type: Multiple select quiz
+- Correct answers: 2 (air bubble and improper sealing)
+- Scoring logic:
+  - 0 correct selected: 0 points
+  - 1 correct selected: 60 points (regardless of incorrect selections)
+  - 2 correct selected with no incorrect: 120 points
+  - 2 correct selected with incorrect: 30 points
+- Maximum: 120 points
+
+#### 5. Multiplex Exercise
+**Multiplex Exercise** - 120 points
+- Type: PCR result interpretation
+- Questions: 12 questions
+- Scoring: 10 points per correct answer
+- Maximum: 120 points
+
+#### 6. Laboratory Diagnosis Section
+**Laboratory Diagnosis Clinical Case Quiz** - 200 points
+
+**Question 1: Clinical Stage** - 25 points
+- Type: Button selection
+- Question: "In which stage is the patient most likely?"
+- Options:
+  - Pre-hemorrhagic stage (CORRECT)
+  - Hemorrhagic stage
+  - Convalescence (recovering)
+- Scoring: 25 points for correct answer
+
+**Question 2: Laboratory Tests** - 175 points
+- Type: Multiple dropdown selections
+- Clinical scenario: Shepherd with 2-day fever, plasma sample sent to lab
+- Tests and expected results:
+
+  1. **RT-PCR** - 25 points
+     - Expected: Positive
+     - Rationale: Viremia peaks in the first week; RT-PCR is the primary diagnostic tool
+
+  2. **Viral Antigen (ELISA)** - 25 points
+     - Expected: Positive
+     - Rationale: Antigen is most detectable during high viremia in the first 5 days
+
+  3. **CCHFV IgM / IgG** - 25 points
+     - Expected: Negative
+     - Rationale: Antibodies are generally not detectable until day 4–7 of symptoms
+
+  4. **Platelet count** - 50 points
+     - Expected: Inconclusive
+     - Rationale: Declining platelets are observable even in the pre-haemorrhagic phase, BUT cannot be analysed from PLASMA
+
+  5. **Liver enzymes (AST / ALT)** - 50 points
+     - Expected: Elevated
+     - Rationale: AST and ALT levels rise early due to hepatic involvement
+
+---
+
+### Score Distribution Summary:
+
+| Section | Quiz/Exercise | Points | Cumulative |
+|---------|--------------|--------|------------|
+| History | History Quiz | 25 | 25 |
+| Pathology | RT Exercise | 100 | 125 |
+| Pathology | Quiz 1 | 100 | 225 |
+| Pathology | Pathology Quiz | 25 | 250 |
+| Biology | Drag & Drop | 110 | 360 |
+| Troubleshooting | Quiz 1 | 100 | 460 |
+| Troubleshooting | Quiz 2 | 120 | 580 |
+| Multiplex | Exercise | 120 | 700 |
+| Lab Diagnosis | Clinical Stage | 25 | 725 |
+| Lab Diagnosis | Lab Tests | 175 | 900 |
+| **TOTAL** | **All Quizzes** | **900** | **900** |
+
+---
+
+### Notes:
+- All quizzes award 25 points per question unless otherwise specified
+- The Biology Drag & Drop quiz offers bonus points for perfect completion
+- Troubleshooting Quiz 2 has complex scoring based on correct/incorrect selection combinations
+- Laboratory Diagnosis section platelet count and liver enzymes questions are worth 50 points each (double value)
+- Score thermometer in the interface now correctly reflects the 900-point maximum 
    - add/image/pic_4_CCHFVgenome.png 
    - Adapt size
    - add description: CCHFvirus genes 
