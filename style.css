@@ -114,6 +114,38 @@ body {
 	font-weight: 700;
 }
 
+/* Sub-chapter Navigation */
+.subchapter-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	background-color: var(--rh-light-gray);
+}
+
+.subchapter-item {
+	display: block;
+	cursor: pointer;
+	padding: 10px 20px 10px 35px;
+	color: var(--rh-dark-blue);
+	font-weight: 400;
+	font-size: 0.9rem;
+	border-bottom: 1px solid #e0e0e0;
+	transition: all 0.2s ease;
+	background-color: #f9f9f9;
+}
+
+.subchapter-item:hover {
+	background-color: var(--rh-mint-green);
+	color: var(--rh-violet);
+	padding-left: 40px;
+}
+
+.subchapter-item:before {
+	content: "▸ ";
+	color: var(--rh-teal);
+	font-weight: bold;
+}
+
 /* Main Content Area */
 .content-area {
 	flex: 1;

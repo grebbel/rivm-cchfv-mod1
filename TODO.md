@@ -280,11 +280,48 @@ The drag and drop quiz is not working:
 **Status**: Completed - All coordinates updated, cards properly aligned, and full drag & drop functionality working (cards can be swapped between deck and zones)
 
 
-**Prevention and Control** 
-- Create new quiz fun quiz-game. 
-Epic “Tick Hunter” game for Prevention-Control: 10s timer, 8-12 Hyalomma ticks spawn randomly on farmer pic every 1-2s. Click to squash (‘SPLAT! Questing tick removed!’), miss = “Tick questing 2-6 days undetected!” High score boosts thermometer 50-150pts based on kills/accuracy. 
-Game Mechanics
-	•	Spawn: Ticks appear at random body positions, animate crawl (translate/wiggle).
-	•	Click: Instant remove + score (+10pt), particle splat effect.
-	•	Timer: Countdown bar pulses red <3s, game over shows kills/total spawned/accuracy.
-	•	Score: Kills*10 + bonus (90%+ accuracy *50).” 
+**add illustrations to Prevention and Control** 
+- [x] Add image pic_21_Workers.png to sub-chapter Prevention and Control, BEFORE <h3>Controlling Ticks and Livestock</h3>
+  - **Status**: Completed - Image added with responsive sizing
+- [x] Add image pic_22_Horses.png to sub-chapter Prevention and Control, BEFORE <h4>Quarantine and inspection</h4>
+  - **Status**: Completed - Image added with responsive sizing 
+
+**add knowledge check in subchapter laboratory diagnosis** 
+
+A doctor sees the following patient
+
+*Anamnesis*
+Shepard with recent contact with livestock
+Two days ago abrupt onset of high fever (39–41°C), chills, and a severe headache. The patient experiences intense myalgia (specifically back and limb pain), dizziness, and photophobia.
+
+*Physical signs*
+Examination reveals facial flushing (hyperaemia), a reddened throat, and conjunctival hyperemia (red eyes). There are no visible signs of haemorrhage (such as petechiae or ecchymosis). 
+
+The doctor suspects infection with CCHF virus. 
+In which stage is the patient most likely? 
+Choose the suspeced clinical stage [from three buttons]: 
+- Pre-hemorrhagic stage [correct]
+- Hemorrhagic stage
+- Convalescence (recovering)
+
+[After clicking one button, the buttons change colour to green for the right button or red from the wrong buttons. ]
+
+Plasma sample is send to the laboratory. The next morning the results arrive. 
+What do you expect based on the patient’s clinical stage? 
+
+| Laboratory test           | Expected result                               | Rationale [is made visible after selection]                                                                 |
+|---------------------------|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| RT PCR                    | Positive [correct] / Negative / Inconclusive  | Viremia peaks in the first week; NAAT is the primary diagnostic tool.                                       |
+| Viral Antigen (ELISA)     | Positive [correct] / Negative / Inconclusive  | Antigen is most detectable during high viremia in the first 5 days.                                         |
+| CCHFV IgM / IgG           | Positive / Negative [correct] / Inconclusive  | Antibodies are generally not detectable until day 4–7 of symptoms.                                          |
+| Platelet count            | High / Low / Inconclusive [correct]           | Declining platelets are observable even in the pre-haemorrhagic phase, BUT cannot be analysed from SERUM. . |
+| Liver enzymes (AST / ALT) | Elevated [correct] / decreased / Inconclusive | AST and ALT levels rise early due to hepatic involvement.                                                   | 
+
+
+For each correct selection, the user receives 25 points. If all are correct, the user received a bonus of 50 points.
+ 
+**ERRORS** 
+- [ ] Buttons of side column with sub-chapters are not responding anymore
+  - **Status**: Fixed - Added missing closing `});` for DOMContentLoaded event listener in script.js
+- [ ] The quiz-questions have disappeared
+  - **Status**: Fixed - Quiz questions now render correctly after fixing DOMContentLoaded closure  

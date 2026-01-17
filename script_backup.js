@@ -1801,8 +1801,8 @@ let courseProgress = {
                 nextChapter.classList.add('active');
                 nextSection.classList.add('active');
             
-                // Scroll to top when changing chapters
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Scroll to top when changing chapters
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
@@ -2721,8 +2721,10 @@ let courseProgress = {
         initOrganDiagram();
     }
 
-// Pathology Quiz Functions (defined globally for onclick handlers in HTML)
-window.submitPathologyQuiz = function() {
+}); // Close DOMContentLoaded
+
+// Pathology Quiz Functions (defined globally for onclick handlers)
+function submitPathologyQuiz() {
     const quizContainer = document.getElementById('pathology-quiz');
     const selectedAnswer = document.querySelector('input[name="pathology-q1"]:checked');
     
@@ -2791,7 +2793,7 @@ window.submitPathologyQuiz = function() {
     }
 }
 
-window.retryPathologyQuiz = function() {
+function retryPathologyQuiz() {
     const quizContainer = document.getElementById('pathology-quiz');
     const feedbackDiv = quizContainer.querySelector('.feedback');
     const submitBtn = quizContainer.querySelector('.quiz-submit');
@@ -2825,7 +2827,6 @@ window.retryPathologyQuiz = function() {
     
     // Scroll to quiz
     quizContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
 
 // ========================================
 // Laboratory Diagnosis Quiz
@@ -2843,49 +2844,59 @@ let labQuizState = {
 const stageButtons = document.querySelectorAll('.lab-stage-btn');
 stageButtons.forEach(button => {
     button.addEventListener('click', function() {
-        if (labQuizState.stageAnswered) return;
+        if (labQuizState.stageAnswered) return; // Already answered
         
         const isCorrect = this.dataset.correct === 'true';
         labQuizState.stageAnswered = true;
         labQuizState.stageCorrect = isCorrect;
         
+        // Disable all buttons and apply colors
         stageButtons.forEach(btn => {
             btn.style.cursor = 'not-allowed';
             btn.style.opacity = '0.7';
             
             if (btn.dataset.correct === 'true') {
-                btn.classList.add('correct');
+                btn.style.backgroundColor = '#28a745';
+                btn.style.borderColor = '#28a745';
+                btn.style.color = 'white';
             } else if (btn === this && !isCorrect) {
-                btn.classList.add('incorrect');
+                btn.style.backgroundColor = '#dc3545';
+                btn.style.borderColor = '#dc3545';
+                btn.style.color = 'white';
             }
         });
         
+        // Add score if correct
         if (isCorrect) {
             labQuizState.score += 25;
         }
         
+        // Show laboratory tests section after 500ms
         setTimeout(() => {
             document.getElementById('lab-tests-section').style.display = 'block';
             document.getElementById('lab-tests-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 500);
     });
     
+    // Hover effect
     button.addEventListener('mouseenter', function() {
         if (!labQuizState.stageAnswered) {
-            this.style.background = 'linear-gradient(135deg, #e8f5f0 0%, #d0ebe3 100%)';
+            this.style.backgroundColor = '#e8f5f0';
         }
     });
     
     button.addEventListener('mouseleave', function() {
         if (!labQuizState.stageAnswered) {
-            this.style.background = '';
+            this.style.backgroundColor = 'white';
         }
     });
 });
 
+// Laboratory Tests Submit
 const labSubmitBtn = document.getElementById('lab-submit-btn');
 if (labSubmitBtn) {
     labSubmitBtn.addEventListener('click', function() {
+        // Check if all tests are selected
         const testSelects = document.querySelectorAll('.lab-test-select');
         let allAnswered = true;
         
@@ -2902,6 +2913,7 @@ if (labSubmitBtn) {
             return;
         }
         
+        // Grade the answers
         let correctCount = 0;
         
         testSelects.forEach(select => {
@@ -2919,17 +2931,21 @@ if (labSubmitBtn) {
                 select.style.backgroundColor = '#f8d7da';
             }
             
+            // Show rationale
             if (rationale) {
                 rationale.style.display = 'table-cell';
             }
             
+            // Disable select
             select.disabled = true;
         });
         
+        // Add bonus if all correct
         if (correctCount === 5) {
             labQuizState.score += 50;
         }
         
+        // Show results
         const resultsDiv = document.getElementById('lab-quiz-results');
         const scoreText = document.getElementById('lab-quiz-score');
         const feedbackText = document.getElementById('lab-quiz-feedback');
@@ -2951,23 +2967,29 @@ if (labSubmitBtn) {
         
         feedbackText.textContent = feedback;
         
+        // Hide submit button
         this.style.display = 'none';
         
+        // Add to course score
         if (typeof addToScore === 'function') {
             addToScore(labQuizState.score);
         }
         
+        // Report to LMS
         if (typeof reportToLMS === 'function') {
             reportToLMS('labDiagnosisQuiz', labQuizState.score, labQuizState.score === 200);
         }
         
+        // Scroll to results
         resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 }
 
+// Retry button
 const labRetryBtn = document.getElementById('lab-retry-btn');
 if (labRetryBtn) {
     labRetryBtn.addEventListener('click', function() {
+        // Reset state
         labQuizState = {
             stageAnswered: false,
             stageCorrect: false,
@@ -2975,6 +2997,7 @@ if (labRetryBtn) {
             score: 0
         };
         
+        // Reset stage buttons
         stageButtons.forEach(btn => {
             btn.style.cursor = 'pointer';
             btn.style.opacity = '1';
@@ -2983,6 +3006,7 @@ if (labRetryBtn) {
             btn.style.color = 'inherit';
         });
         
+        // Reset test selects
         const testSelects = document.querySelectorAll('.lab-test-select');
         testSelects.forEach(select => {
             select.value = '';
@@ -2997,13 +3021,16 @@ if (labRetryBtn) {
             }
         });
         
+        // Hide sections
         document.getElementById('lab-tests-section').style.display = 'none';
         document.getElementById('lab-quiz-results').style.display = 'none';
         
+        // Show submit button
         labSubmitBtn.style.display = 'inline-block';
         
+        // Scroll to top of quiz
         document.querySelector('.lab-diagnosis-quiz-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 }
 
-}); // End of DOMContentLoaded
+});

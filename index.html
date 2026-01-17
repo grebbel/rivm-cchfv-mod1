@@ -331,6 +331,44 @@
             left: -20px;
             font-weight: bold;
         }
+
+        /* Lab stage button styling */
+        .lab-stage-btn {
+            background: linear-gradient(135deg, #2c7a8f 0%, #1a5d6f 100%);
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+        }
+
+        .lab-stage-btn:hover {
+            background: linear-gradient(135deg, #1a5d6f 0%, #2c7a8f 100%);
+            color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .lab-stage-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .lab-stage-btn.correct {
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%) !important;
+            color: #ffffff !important;
+            border: 2px solid #1e7e34 !important;
+        }
+
+        .lab-stage-btn.incorrect {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+            color: #ffffff !important;
+            border: 2px solid #bd2130 !important;
+        }
+
+        .lab-stage-btn.correct:hover,
+        .lab-stage-btn.incorrect:hover {
+            transform: translateY(0);
+        }
     </style>
 </head>
 
@@ -867,10 +905,18 @@
                     <h4>Training and protocols</h4>
                     <p>Abattoir and healthcare staff should be trained in proper animal handling, safe butchering techniques, and infection prevention protocols to reinforce PPE effectiveness.</p>
 
+                    <div class="image-container">
+                        <img src="images/pic_21_Workers.png" alt="Workers in protective gear" style="max-width: 100%; height: auto;">
+                    </div>
+
                     <h3>Controlling Ticks and Livestock</h3>
                     
                     <h4>Vector control</h4>
                     <p>Managing the tick population is critical. This may involve applying acaricides to livestock and in pastures, regular tick checks, and keeping farm animals treated and monitored for infestations.</p>
+
+                    <div class="image-container">
+                        <img src="images/pic_22_Horses.png" alt="Horses in quarantine" style="max-width: 100%; height: auto;">
+                    </div>
 
                     <h4>Quarantine and inspection</h4>
                     <p>Animals moving from endemic areas should undergo careful inspection and, if necessary, quarantine.</p>
@@ -956,6 +1002,183 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <!-- Knowledge Check: Clinical Case -->
+                    <h3>Knowledge Check</h3>
+                    
+                    <div class="lab-diagnosis-quiz-container" style="background-color: #f8f9fa; padding: 25px; border-radius: 10px; margin: 30px 0;">
+                        
+                        <!-- Case Presentation -->
+                        <div style="background-color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--rh-teal);">
+                            <h4 style="margin-top: 0; color: var(--rh-teal);">Clinical Case</h4>
+                            
+                            <p style="margin-bottom: 15px;"><strong>A doctor sees the following patient:</strong></p>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <p style="margin: 5px 0; font-weight: 600; color: var(--rh-dark-blue);">Anamnesis:</p>
+                                <ul style="margin: 5px 0 10px 20px; line-height: 1.8;">
+                                    <li>Shepherd with recent contact with livestock</li>
+                                    <li>Two days ago abrupt onset of high fever (39–41°C), chills, and a severe headache</li>
+                                    <li>The patient experiences intense myalgia (specifically back and limb pain), dizziness, and photophobia</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <p style="margin: 5px 0; font-weight: 600; color: var(--rh-dark-blue);">Physical signs:</p>
+                                <ul style="margin: 5px 0 10px 20px; line-height: 1.8;">
+                                    <li>Facial flushing (hyperaemia)</li>
+                                    <li>Reddened throat</li>
+                                    <li>Conjunctival hyperemia (red eyes)</li>
+                                    <li>No visible signs of haemorrhage (such as petechiae or ecchymosis)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Question 1: Clinical Stage -->
+                        <div style="background-color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 15px;">The doctor suspects infection with CCHF virus. In which stage is the patient most likely? Click the correct stage.</p>
+                            
+                            <div class="lab-stage-buttons" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                <button class="lab-stage-btn" data-stage="prehemorrhagic" data-correct="true" 
+                                    style="flex: 1; min-width: 200px; padding: 18px 25px; border: none; color: #ffffff;
+                                    border-radius: 10px; cursor: pointer; font-size: 1.05em; font-weight: 600; transition: all 0.3s;">
+                                    Pre-hemorrhagic stage
+                                </button>
+                                <button class="lab-stage-btn" data-stage="hemorrhagic" data-correct="false"
+                                    style="flex: 1; min-width: 200px; padding: 18px 25px; border: none; color: #ffffff;
+                                    border-radius: 10px; cursor: pointer; font-size: 1.05em; font-weight: 600; transition: all 0.3s;">
+                                    Hemorrhagic stage
+                                </button>
+                                <button class="lab-stage-btn" data-stage="convalescence" data-correct="false"
+                                    style="flex: 1; min-width: 200px; padding: 18px 25px; border: none; color: #ffffff;
+                                    border-radius: 10px; cursor: pointer; font-size: 1.05em; font-weight: 600; transition: all 0.3s;">
+                                    Convalescence (recovering)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Question 2: Laboratory Tests -->
+                        <div id="lab-tests-section" style="background-color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; display: none;">
+                            <p style="font-weight: 600; margin-bottom: 15px;">A patient's <i>plasma sample</i> is sent to the laboratory. The next morning the results arrive.</p>
+                            <p style="margin-bottom: 20px;">What do you expect based on the patient's clinical stage?</p>
+                            
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background-color: #f2f2f2;">
+                                        <th style="border: 1px solid #ddd; padding: 12px; text-align: left; width: 30%;">Laboratory test</th>
+                                        <th style="border: 1px solid #ddd; padding: 12px; text-align: left; width: 40%;">Expected result</th>
+                                        <th style="border: 1px solid #ddd; padding: 12px; text-align: left; width: 30%;">Rationale</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- RT-PCR -->
+                                    <tr>
+                                        <td style="border: 1px solid #ddd; padding: 12px; font-weight: 600;">RT-PCR</td>
+                                        <td style="border: 1px solid #ddd; padding: 12px;">
+                                            <select class="lab-test-select" data-test="rtpcr" data-correct="positive" 
+                                                style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.95em;">
+                                                <option value="">-- Select --</option>
+                                                <option value="positive">Positive</option>
+                                                <option value="negative">Negative</option>
+                                                <option value="inconclusive">Inconclusive</option>
+                                            </select>
+                                        </td>
+                                        <td class="lab-rationale" style="border: 1px solid #ddd; padding: 12px; color: #666; font-style: italic; display: none;">
+                                            Viremia peaks in the first week; RT-PCR is the primary diagnostic tool.
+                                        </td>
+                                    </tr>
+                                    <!-- Viral Antigen -->
+                                    <tr>
+                                        <td style="border: 1px solid #ddd; padding: 12px; font-weight: 600;">Viral Antigen (ELISA)</td>
+                                        <td style="border: 1px solid #ddd; padding: 12px;">
+                                            <select class="lab-test-select" data-test="antigen" data-correct="positive"
+                                                style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.95em;">
+                                                <option value="">-- Select --</option>
+                                                <option value="positive">Positive</option>
+                                                <option value="negative">Negative</option>
+                                                <option value="inconclusive">Inconclusive</option>
+                                            </select>
+                                        </td>
+                                        <td class="lab-rationale" style="border: 1px solid #ddd; padding: 12px; color: #666; font-style: italic; display: none;">
+                                            Antigen is most detectable during high viremia in the first 5 days.
+                                        </td>
+                                    </tr>
+                                    <!-- IgM/IgG -->
+                                    <tr>
+                                        <td style="border: 1px solid #ddd; padding: 12px; font-weight: 600;">CCHFV IgM / IgG</td>
+                                        <td style="border: 1px solid #ddd; padding: 12px;">
+                                            <select class="lab-test-select" data-test="antibody" data-correct="negative"
+                                                style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.95em;">
+                                                <option value="">-- Select --</option>
+                                                <option value="positive">Positive</option>
+                                                <option value="negative">Negative</option>
+                                                <option value="inconclusive">Inconclusive</option>
+                                            </select>
+                                        </td>
+                                        <td class="lab-rationale" style="border: 1px solid #ddd; padding: 12px; color: #666; font-style: italic; display: none;">
+                                            Antibodies are generally not detectable until day 4–7 of symptoms.
+                                        </td>
+                                    </tr>
+                                    <!-- Platelet count -->
+                                    <tr>
+                                        <td style="border: 1px solid #ddd; padding: 12px; font-weight: 600;">Platelet count</td>
+                                        <td style="border: 1px solid #ddd; padding: 12px;">
+                                            <select class="lab-test-select" data-test="platelet" data-correct="inconclusive"
+                                                style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.95em;">
+                                                <option value="">-- Select --</option>
+                                                <option value="high">High</option>
+                                                <option value="low">Low</option>
+                                                <option value="inconclusive">Inconclusive</option>
+                                            </select>
+                                        </td>
+                                        <td class="lab-rationale" style="border: 1px solid #ddd; padding: 12px; color: #666; font-style: italic; display: none;">
+                                            Declining platelets are observable even in the pre-haemorrhagic phase, BUT cannot be analysed from SERUM.
+                                        </td>
+                                    </tr>
+                                    <!-- Liver enzymes -->
+                                    <tr>
+                                        <td style="border: 1px solid #ddd; padding: 12px; font-weight: 600;">Liver enzymes (AST / ALT)</td>
+                                        <td style="border: 1px solid #ddd; padding: 12px;">
+                                            <select class="lab-test-select" data-test="liver" data-correct="elevated"
+                                                style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.95em;">
+                                                <option value="">-- Select --</option>
+                                                <option value="elevated">Elevated</option>
+                                                <option value="decreased">Decreased</option>
+                                                <option value="inconclusive">Inconclusive</option>
+                                            </select>
+                                        </td>
+                                        <td class="lab-rationale" style="border: 1px solid #ddd; padding: 12px; color: #666; font-style: italic; display: none;">
+                                            AST and ALT levels rise early due to hepatic involvement.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div style="margin-top: 20px; text-align: center;">
+                                <button id="lab-submit-btn" 
+                                    style="padding: 18px 50px; background: linear-gradient(135deg, #2c7a8f 0%, #1a5d6f 100%); 
+                                    color: #ffffff; border: 2px solid #1a5d6f; border-radius: 10px; font-size: 1.2em; 
+                                    font-weight: 700; cursor: pointer; transition: all 0.3s; 
+                                    box-shadow: 0 6px 12px rgba(0,0,0,0.15); text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
+                                    SUBMIT ANSWERS
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Results and Score -->
+                        <div id="lab-quiz-results" style="display: none; background-color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h4 style="color: var(--rh-teal); margin-top: 0;">Results</h4>
+                            <p id="lab-quiz-score" style="font-size: 1.2em; font-weight: 600;"></p>
+                            <p id="lab-quiz-feedback"></p>
+                            
+                            <button id="lab-retry-btn" 
+                                style="padding: 12px 30px; background-color: var(--rh-dark-blue); color: white; 
+                                border: none; border-radius: 8px; font-size: 1em; font-weight: 600; 
+                                cursor: pointer; transition: all 0.3s; margin-top: 15px;">
+                                TRY AGAIN
+                            </button>
+                        </div>
+                    </div>
                     
                     <!-- Source Attribution -->
                     <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
