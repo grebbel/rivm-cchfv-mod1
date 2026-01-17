@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest identifier="CCHF_PCR_Course_Module11" version="1.0"
+<manifest identifier="CCHF_Module1_2025" version="1.0"
           xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
           xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3"
           xmlns:adlseq="http://www.adlnet.org/xsd/adlseq_v1p3"
@@ -17,13 +17,13 @@
     <schemaversion>2004 4th Edition</schemaversion>
   </metadata>
 
-  <organizations default="CCHF_PCR_ORG">
-    <organization identifier="CCHF_PCR_ORG">
-      <title>Module 11: Principles of Real-time PCR for CCHF Detection</title>
-      <item identifier="CCHF_PCR_ITEM" identifierref="CCHF_PCR_RESOURCE">
-        <title>PCR Course</title>
+  <organizations default="CCHF_ORG">
+    <organization identifier="CCHF_ORG">
+      <title>Module 1: Crimean-Congo hemorrhagic fever</title>
+      <item identifier="CCHF_ITEM" identifierref="CCHF_RESOURCE">
+        <title>Crimean-Congo hemorrhagic fever - The Biology of the virus</title>
         <adlcp:masteryscore>70</adlcp:masteryscore>
-        <adlcp:maxtimeallowed>PT2H</adlcp:maxtimeallowed>
+        <adlcp:maxtimeallowed>PT3H</adlcp:maxtimeallowed>
         <adlcp:timelimitaction>continue,no message</adlcp:timelimitaction>
         <adlcp:datafromlms></adlcp:datafromlms>
         <adlcp:completionthreshold>0.7</adlcp:completionthreshold>
@@ -32,57 +32,35 @@
   </organizations>
 
   <resources>
-    <resource identifier="CCHF_PCR_RESOURCE" type="webcontent" adlcp:scormtype="sco" href="index.html">
+    <resource identifier="CCHF_RESOURCE" type="webcontent" adlcp:scormtype="sco" href="index.html">
       <file href="index.html"/>
       <file href="script.js"/>
       <file href="style.css"/>
       <file href="scorm-wrapper.js"/>
       
       <!-- Image files -->
-      <file href="images/1_realtimePCR.png"/>
-      <file href="images/2_realtimePCR.png"/>
-      <file href="images/3_realtimePCR.png"/>
-      <file href="images/4_realtimePCR.png"/>
-      <file href="images/5_realtimePCR.png"/>
-      <file href="images/6_realtimePCR.png"/>
-      <file href="images/7_realtimePCR.png"/>
-      <file href="images/Agarose_DNA.jpeg"/>
-      <file href="images/CCHF_primers.png"/>
-      <file href="images/Melting_point_1.JPG"/>
-      <file href="images/Melting_point_2.JPG"/>
-      <file href="images/PCR_1.png"/>
-      <file href="images/PCR_2.png"/>
-      <file href="images/PCR_3.png"/>
-      <file href="images/PCR_4.png"/>
-      <file href="images/PCR_5.png"/>
-      <file href="images/PCR_6.png"/>
-      <file href="images/PCR_7.png"/>
-      <file href="images/PCR_8.png"/>
-      <file href="images/PCR_inhibition.png"/>
-      <file href="images/PCR_open.png"/>
-      <file href="images/ReatimePCR_replicates.png"/>
-      <file href="images/SYBR_Green.png"/>
-      <file href="images/dumpcore.png"/>
-      <file href="images/example_realtimePCR.png"/>
-      <file href="images/flavi_PCR.png"/>
-      <file href="images/multiplex.png"/>
-      <file href="images/multiplex2.png"/>
-      <file href="images/pcr-curves-contamination.png"/>
-      <file href="images/pcr-curves-degradation.png"/>
-      <file href="images/pcr-curves-high-template.png"/>
-      <file href="images/pcr-curves-inhibition.png"/>
-      <file href="images/pcr-curves-low-template.png"/>
-      <file href="images/pcr-curves-negatives.png"/>
-      <file href="images/pcr-curves-normal.png"/>
-      <file href="images/pcr-curves-primer-dimer.png"/>
-      <file href="images/probe_step1.png"/>
-      <file href="images/probe_step2.png"/>
-      <file href="images/probe_step3.png"/>
-      <file href="images/probe_step4.png"/>
-      <file href="images/probe_step5.png"/>
-      <file href="images/realtime_plate.jpg"/>
-      <file href="images/reverse_transcriptase.png"/>
-      <file href="images/taqmanprobe.png"/>
+      <file href="images/pic_1_Hyalomma.jpg"/>
+      <file href="images/pic_2_congo.jpg"/>
+      <file href="images/pic_3_CCHFVparticle.png"/>
+      <file href="images/pic_4_CCHFVgenome.png"/>
+      <file href="images/pic_5_infection_CCHFV.png"/>
+      <file href="images/pic_6_prehemmo.png"/>
+      <file href="images/pic_7_haemorrhagic.png"/>
+      <file href="images/pic_8_convalescence.png"/>
+      <file href="images/pic_9_organs.jpg"/>
+      <file href="images/pic_10_phylotree.png"/>
+      <file href="images/pic_11_map_CCHF.png"/>
+      <file href="images/pic_12_course_CCHF.png"/>
+      <file href="images/pic_13_card1.png"/>
+      <file href="images/pic_14_card2.png"/>
+      <file href="images/pic_15_card3.png"/>
+      <file href="images/pic_16_card4.png"/>
+      <file href="images/pic_17_card5.png"/>
+      <file href="images/pic_18_card6.png"/>
+      <file href="images/pic_19_card7.png"/>
+      <file href="images/pic_20_cchf_cycle.png"/>
+      <file href="images/pic_21_Workers.png"/>
+      <file href="images/pic_22_Horses.png"/>
     </resource>
   </resources>
 </manifest>

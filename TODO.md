@@ -455,3 +455,27 @@ For each correct selection, the user receives 25 points. If all are correct, the
   - **Status**: Fixed - Added missing closing `});` for DOMContentLoaded event listener in script.js
 - [ ] The quiz-questions have disappeared
   - **Status**: Fixed - Quiz questions now render correctly after fixing DOMContentLoaded closure  
+
+
+
+
+**SCORM PACKAGE** 
+Updated imsmanifest.xml with:
+
+New title: "Module 1: Crimean-Congo hemorrhagic fever"
+Updated identifiers for the new module
+All 22 CCHF image files properly listed
+Time limit set to 3 hours (PT3H)
+Mastery score: 70%
+Completion threshold: 70%
+Package includes:
+
+✅ imsmanifest.xml (SCORM manifest)
+✅ index.html (main content)
+✅ script.js (all quiz logic)
+✅ style.css (styling)
+✅ scorm-wrapper.js (LMS communication)
+✅ All 22 images (pic_1 through pic_22)
+
+
+
