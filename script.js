@@ -768,7 +768,8 @@ let courseProgress = {
 
         // Submit quiz
         if (submitHistoryQuizBtn) {
-            submitHistoryQuizBtn.addEventListener('click', function() {
+            submitHistoryQuizBtn.addEventListener('click', function(e) {
+                e.preventDefault();
                 let totalCorrect = 0;
                 const totalQuestions = historyQuizQuestions.length;
 
@@ -928,7 +929,8 @@ let courseProgress = {
 
         // Submit quiz
         if (submitPathologyQuizBtn) {
-            submitPathologyQuizBtn.addEventListener('click', function() {
+            submitPathologyQuizBtn.addEventListener('click', function(e) {
+                e.preventDefault();
                 let totalCorrect = 0;
                 const totalQuestions = pathologyQuizQuestions.length;
 
@@ -1405,7 +1407,8 @@ let courseProgress = {
 
             // Submit handler
             if (submitBiologyDragDropBtn) {
-                submitBiologyDragDropBtn.addEventListener('click', function() {
+                submitBiologyDragDropBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
                     let correctCount = 0;
                     const totalCards = cards.length;
 

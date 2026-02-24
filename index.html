@@ -390,7 +390,7 @@
         <div class="main-layout">
             <!-- Left Sidebar Navigation -->
             <nav class="sidebar">
-                <div class="sidebar-header">Course Chapters</div>
+                <div class="sidebar-header">Module chapters</div>
                 <ul class="chapter-list">
                     <li class="chapter-item active" data-tab="history">History</li>
                     <li class="chapter-item" data-tab="pathology">Pathology</li>
@@ -486,8 +486,8 @@
                             <!-- Quiz questions will be dynamically inserted here -->
                             <div id="historyQuizQuestions"></div>
                             
-                            <button type="button" id="submitHistoryQuiz" class="quiz-submit">Submit Answers</button>
-                            <button type="button" id="retryHistoryQuiz" class="quiz-submit" style="display: none;">Try Again</button>
+                            <button type="submit" id="submitHistoryQuiz" class="submit-btn">Submit Answers</button>
+                            <button type="button" id="retryHistoryQuiz" class="submit-btn" style="display: none;">Try Again</button>
                         </form>
 
                         <div id="historyQuizFeedback" class="quiz-feedback" style="display: none;"></div>
@@ -498,12 +498,6 @@
                     
                     <div class="continue-section">
                         <button class="continue-btn" data-next="pathology">CONTINUE</button>
-                    </div>
-                    
-                    <!-- Source Attribution -->
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
-                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
-                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
                     </div>
                 </div>
 
@@ -679,8 +673,8 @@
                             <div class="feedback" style="display: none;"></div>
                         </div>
 
-                        <button type="button" class="quiz-submit" onclick="submitPathologyQuiz()">Submit Answers</button>
-                        <button type="button" class="quiz-submit" onclick="retryPathologyQuiz()" style="display: none;">Try Again</button>
+                        <button type="submit" class="submit-btn" onclick="submitPathologyQuiz()">Submit Answers</button>
+                        <button type="button" class="submit-btn" onclick="retryPathologyQuiz()" style="display: none;">Try Again</button>
 
                         <div class="score-display">
                             <h4>Your Score</h4>
@@ -693,12 +687,6 @@
                     
                     <div class="continue-section">
                         <button class="continue-btn" data-next="biology">CONTINUE</button>
-                    </div>
-                    
-                    <!-- Source Attribution -->
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
-                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
-                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
                     </div>
                 </div>
 
@@ -825,8 +813,8 @@
                         
                         <!-- Controls -->
                         <div class="drag-drop-controls">
-                            <button type="button" id="submitBiologyDragDrop" class="quiz-submit" disabled>Submit Answer</button>
-                            <button type="button" id="retryBiologyDragDrop" class="quiz-submit" style="display: none;">Try Again</button>
+                            <button type="submit" id="submitBiologyDragDrop" class="submit-btn" disabled>Submit Answer</button>
+                            <button type="button" id="retryBiologyDragDrop" class="submit-btn" style="display: none;">Try Again</button>
                         </div>
                         
                         <!-- Feedback -->
@@ -880,12 +868,6 @@
                     <div class="continue-section">
                         <button class="continue-btn" data-next="prevention-control">CONTINUE</button>
                     </div>
-                    
-                    <!-- Source Attribution -->
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
-                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
-                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
-                    </div>
                 </div>
 
                 <!-- Prevention & Control Section -->
@@ -931,12 +913,6 @@
 
                     <div class="continue-section">
                         <button class="continue-btn" data-next="laboratory-diagnosis">CONTINUE</button>
-                    </div>
-                    
-                    <!-- Source Attribution -->
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
-                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
-                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
                     </div>
                 </div>
 
@@ -1179,16 +1155,16 @@
                             </button>
                         </div>
                     </div>
-                    
-                    <!-- Source Attribution -->
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;">
-                        <p style="margin: 5px 0;"><em>Medical content adapted from WHO guidelines (Public Domain)</em></p>
-                        <p style="margin: 5px 0;"><em>Scientific data from peer-reviewed research (CC-BY licensed)</em></p>
-                    </div>
                 </div>
 
-            </div> <!-- End content-area -->
+            </main> <!-- End content-area -->
         </div> <!-- End main-layout -->
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 RIVM - National Institute for Public Health and the Environment</p>
+            <p>Medical content adapted from WHO guidelines (Public Domain). Scientific data from peer-reviewed research (CC-BY licensed)</p>
+        </footer>
     </div> <!-- End course-container -->
 
     <!-- Load main script -->
