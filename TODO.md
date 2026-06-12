@@ -451,13 +451,10 @@ What do you expect based on the patient’s clinical stage?
 For each correct selection, the user receives 25 points. If all are correct, the user received a bonus of 50 points.
  
 **ERRORS** 
-- [ ] Buttons of side column with sub-chapters are not responding anymore
+- [x] Buttons of side column with sub-chapters are not responding anymore
   - **Status**: Fixed - Added missing closing `});` for DOMContentLoaded event listener in script.js
-- [ ] The quiz-questions have disappeared
+- [x] The quiz-questions have disappeared
   - **Status**: Fixed - Quiz questions now render correctly after fixing DOMContentLoaded closure  
-
-
-
 
 **SCORM PACKAGE** 
 Updated imsmanifest.xml with:
@@ -476,6 +473,140 @@ Package includes:
 ✅ style.css (styling)
 ✅ scorm-wrapper.js (LMS communication)
 ✅ All 22 images (pic_1 through pic_22)
+
+# Tweaking 
+[x] TWEAK-001 Add Introduction chapter
+- Dependencies: 
+  - index.html
+  - style.css
+  - script.js 
+- Add chapter to MODULE 1
+- The name of the chapter is 'Introduction' 
+- Place the chapter before chapter 'History' 
+- For the content of this chapter, add:
+-                     <h2>Introduction</h2>
+                    <p>Crimean-Congo hemorrhagic fever (CCHF) is recognized as the most important tick-borne viral disease affecting humans, with a wide geographic range spanning Africa, Asia, the Middle East, and Eastern Europe. The causative agent, Crimean-Congo hemorrhagic fever virus (CCHFV), belongs to the genus <em>Orthonairovirus</em> (family <em>Nairoviridae</em>). Learn more: <a href="https://ictv.global/taxonomy/taxondetails?taxnode_id=20141737&taxon_name=Crimean-Congo%20hemorrhagic%20fever%20virus" target="_blank">International Committee on Taxonomy of Viruses</a> | <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3391156" target="_blank">NCBI</a>. The journey to understanding CCHFV highlights the convergence of discoveries from different continents and areas, illustrating the role of international collaboration in infectious disease research.</p>
+                    <h2>Learning goald</h2> 
+  - **Status**: Completed - New Introduction chapter added before History in navigation and content flow
+
+
+[x] TWEAK-002 Add learning goals to chapter Introduction
+- Dependencies: 
+  - index.html
+- Go through all the chapters and create three main learning goals according to 'Blooms Taxonomy' (https://en.wikipedia.org/wiki/Bloom's_taxonomy) 
+- Add the three learning goals in In Chapter Introduction, after <h2>Learning goald</h2> 
+  - **Status**: Completed - Added three Bloom-aligned learning goals in the Introduction chapter
+
+- [x] TWEAK-003 Change scores of active quizzes
+- Dependencies: 
+  - index.html
+  - script.js 
+- The overview below (## Overview: all quiz questions and scores ), contain adapted quiz scores of the module. 
+- Change the scores according to the overview below. 
+
+## Overview: all quiz questions and scores 
+
+### Total maximum score from active quizzes: 100 points
+
+### 1) History - Knowledge Check (3 multiple-choice questions)
+- Scoring: 5 points per correct answer
+- Maximum: 15 points
+- Questions:
+  1. Crimean-Congo hemorrhagic fever (CCHF) is recognized as:
+    - Correct: The most important tick-borne viral disease affecting humans
+  2. Which tick genus is most strongly associated with transmission of CCHFV?
+    - Correct: Hyalomma
+  3. Which statement best reflects the current global concern about CCHF?
+    - Correct: CCHF is monitored globally, with concern about spread into new regions as climate change alters tick distribution
+
+### 2) Pathology - Knowledge Check (single-choice question)
+- Scoring: 10 points if correct
+- Maximum: 10 points
+- Question:
+  1. Which of the following best describes the key determinant of clinical outcome of a patient with CCHF?
+    - Correct: C. The magnitude and regulation of the patient immune response to infection
+
+### 3) Biology - Knowledge Check (drag & drop replication cycle)
+- Scoring:
+  - 5 points per correctly placed card (6 cards)
+  - 10 bonus points if all 6 cards are correct
+- Maximum: 40 points
+- Question/task:
+  - Match each replication-cycle card image to the correct numbered area (2 to 7) on the cycle diagram.
+
+### 4) Laboratory Diagnosis - Knowledge Check (clinical case)
+- Scoring:
+  - Clinical stage selection: 5 points
+  - 5 laboratory-result selections: 5 points each (25 total)
+  - Bonus: 10 points if all 5 laboratory selections are correct
+- Maximum: 35 points
+
+- Question 1 (clinical stage):
+  - In which stage is the patient most likely?
+  - Correct: Pre-hemorrhagic stage
+
+- Question 2 (expected laboratory results):
+  1. RT-PCR
+    - Correct: Positive
+  2. Viral Antigen (ELISA)
+    - Correct: Positive
+  3. CCHFV IgM / IgG
+    - Correct: Negative
+  4. Platelet count
+    - Correct: Inconclusive
+  5. Liver enzymes (AST / ALT)
+    - Correct: Elevated
+
+
+### Score summary
+| Section | Max points |
+|---------|------------|
+| History Knowledge Check | 15 |
+| Pathology Knowledge Check | 10 |
+| Biology Drag & Drop | 40 |
+| Laboratory Diagnosis Case | 35 |
+| **TOTAL (active quizzes)** | **100** |
+
+  - **Status**: Completed - Active quiz scoring and thermometer scale updated to the 100-point model in index.html and script.js
+
+
+- [x] TWEAK-004 Repair quiz question
+- Dependencies: 
+  - index.html
+  - style.css
+  - script.js 
+- The following quez question is not working properly:
+  -  <p class="question-text"><strong>Which of the following best describes the key determinant of clinical outcome of a patient with CCHF?</strong></p>
+ - The score is not added to the thermometer / total score
+ - The button qontinues to be active (not turning grey) after submitting:
+   - <button type="submit" class="submit-btn" onclick="submitPathologyQuiz()">Submit Answer</button> 
+ - The Retry button is not appearing: 
+   - <button type="button" class="submit-btn" onclick="retryPathologyQuiz()" style="display: none;">Try Again</button>
+  - **Status**: Completed - Pathology quiz now correctly adds score to thermometer, submit button is disabled/greyed after submit, and Try Again appears as expected
+
+
+- [x] TWEAK-005 Try again quiz questions reset previous score 
+- Dependencies: 
+  - index.html
+  - style.css
+  - script.js 
+- When the user is pressening the 'Try again' button, then substract the old score of that quiz question from the cummulative score. 
+- Check if this is the case for all quiz questions. 
+  - **Status**: Completed - Retry now subtracts the previous awarded score for all active quizzes (History, Pathology, Biology Drag & Drop, Laboratory Diagnosis)
+
+- [x] TWEAK-006 Repair Reset Progress
+- Dependencies: 
+  - index.html
+  - style.css
+  - script.js 
+- div class="score-reset-section">
+    <button class="reset-score-btn" id="resetScoreBtn" title="Reset all progress and scores to zero">
+        🔄 Reset Progress
+    </button>
+- When the Reset Progress button is clicked, the Course score is reset. 
+- But the previous submitted quiz questions are not reset
+- Fix: when Reset Button is clicked, both the Course score AND the previous submitted quiz questions are reset. 
+  - **Status**: Completed - Reset Progress now clears submitted state and UI for active quizzes (History, Pathology, Biology Drag & Drop, Laboratory Diagnosis) in addition to resetting course score
 
 
 

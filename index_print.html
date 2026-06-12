@@ -369,30 +369,26 @@
         .lab-stage-btn.incorrect:hover {
             transform: translateY(0);
         }
-
-        @media print {
-            .content-section {
-                display: block !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-                height: auto !important;
-            }
-
-            .stage-detail { display: block !important; }
-
-            .organ-info {
-                display: block !important;
-                position: static !important;
-                margin: 12px 0;
-            }
-
-            #lab-tests-section,
-            #lab-quiz-results {
-                display: block !important;
-            }
-
-            .lab-rationale { display: table-cell !important; }
+    </style>
+    <style id="print-overrides">
+        /* Print overrides to reveal full content */
+        .content-section {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            height: auto !important;
         }
+        .stage-detail { display: block !important; }
+        .organ-info {
+            display: block !important;
+            position: static !important;
+            margin: 12px 0;
+        }
+        #lab-tests-section,
+        #lab-quiz-results {
+            display: block !important;
+        }
+        .lab-rationale { display: table-cell !important; }
     </style>
 </head>
 
@@ -416,8 +412,7 @@
             <nav class="sidebar">
                 <div class="sidebar-header">Module chapters</div>
                 <ul class="chapter-list">
-                    <li class="chapter-item active" data-tab="introduction">Introduction</li>
-                    <li class="chapter-item" data-tab="history">History</li>
+                    <li class="chapter-item active" data-tab="history">History</li>
                     <li class="chapter-item" data-tab="pathology">Pathology</li>
                     <li class="chapter-item" data-tab="biology">Biology</li>
                     <li class="chapter-item" data-tab="prevention-control">Prevention & Control</li>
@@ -429,7 +424,7 @@
     <div class="thermometer-header">
         <span class="thermometer-title">🎯 Course Score</span>
         <div class="thermometer-temp">
-            <span class="current-score">0</span>/<span class="max-score">100</span>
+            <span class="current-score">0</span>/<span class="max-score">900</span>
         </div>
     </div>
     
@@ -441,10 +436,10 @@
             <div class="thermometer-tube">
                 <div class="mercury-fill" id="mercuryFill"></div>
                 <div class="thermometer-marks">
-                    <div class="mark" data-temp="100%">100</div>
-                    <div class="mark" data-temp="75%">75</div>
-                    <div class="mark" data-temp="50%">50</div>
-                    <div class="mark" data-temp="25%">25</div>
+                    <div class="mark" data-temp="100%">900</div>
+                    <div class="mark" data-temp="75%">675</div>
+                    <div class="mark" data-temp="50%">450</div>
+                    <div class="mark" data-temp="25%">225</div>
                     <div class="mark" data-temp="0%">0</div>
                 </div>
             </div>
@@ -467,29 +462,12 @@
 
             <!-- Main Content Area -->
             <main class="content-area">
-                <!-- Introduction Section -->
-                <div id="introduction" class="content-section active">
-                    <h2>Introduction</h2>
-                    <p>Crimean-Congo hemorrhagic fever (CCHF) is recognized as the most important tick-borne viral disease affecting humans, with a wide geographic range spanning Africa, Asia, the Middle East, and Eastern Europe. The journey to understanding CCHFV highlights the convergence of discoveries from different continents and areas, illustrating the role of international collaboration in infectious disease research.</p>
-
-                    <h2>Learning goals</h2>
-                    <ol>
-                        <li>Explain the historical emergence, taxonomy, and biological characteristics of CCHFV, including its vectors, hosts, and global distribution.</li>
-                        <li>Analyze clinical and laboratory findings to distinguish disease stages of CCHF and interpret the most appropriate diagnostic methods across early and later phases.</li>
-                        <li>Apply evidence-based prevention and control measures in field, laboratory, and healthcare settings to reduce transmission risk and improve outbreak preparedness.</li>
-                    </ol>
-
-                    <div class="continue-section">
-                        <button class="continue-btn" data-next="history">CONTINUE</button>
-                    </div>
-                </div>
-
                 <!-- History Section -->
-                <div id="history" class="content-section">
+                <div id="history" class="content-section active">
                     <h2>History</h2>
                     
                     <h3>Introduction</h3>
-                    <p>Crimean-Congo hemorrhagic fever (CCHF) is recognized as the most important tick-borne viral disease affecting humans, with a wide geographic range spanning Africa, Asia, the Middle East, and Eastern Europe. The causative agent, Crimean-Congo hemorrhagic fever virus (CCHFV), belongs to the genus <em>Orthonairovirus</em> (family <em>Nairoviridae</em>). Learn more: <a href="https://ictv.global/taxonomy/taxondetails?taxnode_id=20141737&taxon_name=Crimean-Congo%20hemorrhagic%20fever%20virus" target="_blank">International Committee on Taxonomy of Viruses</a> | <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3391156" target="_blank">NCBI</a>. The journey to understanding CCHFV highlights the convergence of discoveries from different continents and areas, illustrating the role of international collaboration in infectious disease research.</p>
+                    <p>Crimean-Congo hemorrhagic fever (CCHF) is recognized as the most important tick-borne viral disease affecting humans, with a wide geographic range spanning Africa, Asia, the Middle East, and Eastern Europe. The causative agent, Crimean-Congo hemorrhagic fever virus (CCHFV), belongs to the genus <em>Orthonairovirus</em> (family <em>Nairoviridae</em>). The journey to understanding CCHFV highlights the convergence of discoveries from different continents and areas, illustrating the role of international collaboration in infectious disease research.</p>
 
                     <h3>The first outbreaks in Crimea</h3>
                     <p>CCHF emerged into the scientific literature in 1944, during World War II, when Soviet military personnel and local agricultural workers in Crimea experienced sudden, severe illness marked by high fever, muscle pain, and widespread bleeding. The mortality rate was alarming, leading to significant concern among public health officials. Dr. Mikhail P. Chumakov spearheaded the investigation, quickly associating the illness with exposure to <em>Hyalomma</em> ticks in the fields. Through inoculation experiments in laboratory animals, the team confirmed a viral cause. The disease was initially termed "Crimean hemorrhagic fever," but the exact identity and classification of the virus remained unclear for decades.</p>
@@ -551,7 +529,7 @@
                     <p>Crimean-Congo Hemorrhagic Fever (CCHF) is endemic in Africa, the Middle East, parts of Europe, and Asia, where sporadic outbreaks are marked by high fatality rates that can approach 40% among hospitalized patients. The virus remains a concern not only due to its potential to cause nosocomial outbreaks but also because of the historical classification as a select (formerly BSL-4) agent, underscoring its notoriety for laboratory and bioterror threat. With advances in biosafety protocols, the terminology of biosafety levels has evolved, but the stringent handling requirements remain unchanged.</p>
 
                     <h3>Incubation Period and Early Pathogenesis</h3>
-                    <p>Upon entering a human host, CCHFV targets endothelial cells, hepatocytes, mononuclear phagocytes, and other cell types, resulting in extensive cellular tropism that drives the virus's rapid dissemination and multi-organ involvement.</p>
+                    <p>Upon entering the body, CCHFV targets cells such as endothelial cells lining blood vessels, hepatocytes in the liver, mononuclear phagocytes, and various other parenchymal cells. This extensive cellular tropism is responsible for the virus's rapid dissemination and the involvement of multiple organ systems. After entry to a human, CCHFV targets endothelial cells, hepatocytes, mononuclear phagocytes, and other cell types, leading to widespread dissemination and multi-organ involvement.</p>
                     
                     <p>The incubation period for CCHF depends on the route of exposure, typically lasting one to three days after a tick bite, with a maximum of nine days. When the exposure is through direct contact with infectious animal or human tissue, the incubation can be a bit longer, up to thirteen days. Initially, the virus replicates locally, before entering the bloodstream resulting in primary viremia. This leads to systemic dissemination to organs such as the liver, spleen, and lymph nodes.</p>
 
@@ -674,15 +652,15 @@
                     <p>A key determinant of outcome in CCHF is the viral load: fatal cases are typically associated with titers exceeding one billion (10<sup>9</sup>) genome copies per milliliter of plasma, levels that can be over a thousand times higher than in survivors. Laboratory signs up to five days after symptom onset—such as severe thrombocytopenia, extremely elevated liver enzymes, and a marked increase in pro-inflammatory cytokines—strongly predict mortality. Clinical features like vomiting blood, blood in stool, strong drowsiness, and the inability to mount a timely antibody response are also signals of a possible fatal course.</p>
 
                     <h3>Laboratory Findings</h3>
-                    <p>CCHF shares many pathological features with other viral hemorrhagic fevers (VHFs) such as Ebola, Marburg, and Lassa fever. All are characterized by endothelial damage, a dysregulated cytokine and immune response, disruption to the clotting system, and multi-organ injury. The hallmark laboratory finding in CCHF is a profound drop in platelet count (thrombocytopenia), often joined by leukopenia and elevated liver enzymes such as <span class="tooltip"><abbr title="Aspartate Aminotransferase. An enzyme found in the liver, heart, and other tissues, measured in blood tests to evaluate liver function and detect liver or heart injury.">AST</abbr></span> and <span class="tooltip"><abbr title="Alanine Aminotransferase. An enzyme primarily found in the liver, used as a blood test marker to assess liver health and detect liver damage or disease.">ALT</abbr></span>.</p>
+                    <p>CCHF shares many pathological features with other viral hemorrhagic fevers (VHFs) such as Ebola, Marburg, and Lassa fever. All are characterized by endothelial damage, a dysregulated cytokine and immune response, disruption to the clotting system, and multi-organ injury. The hallmark laboratory finding in CCHF is a profound drop in platelet count (thrombocytopenia), often joined by leukopenia and elevated liver enzymes such as AST and ALT.</p>
                     
                     <p>Key laboratory abnormalities reflecting pathology include:</p>
                     <ul>
                         <li>Thrombocytopenia</li>
                         <li>Leukopenia → leukocytosis in severe cases</li>
-                        <li>Elevated liver enzymes (<span class="tooltip"><abbr title="Aspartate Aminotransferase. An enzyme found in the liver, heart, and other tissues, measured in blood tests to evaluate liver function and detect liver or heart injury.">AST</abbr></span>, <span class="tooltip"><abbr title="Alanine Aminotransferase. An enzyme primarily found in the liver, used as a blood test marker to assess liver health and detect liver damage or disease.">ALT</abbr></span>, <span class="tooltip"><abbr title="Lactate Dehydrogenase. An enzyme present in many body tissues, measured in blood tests to assess tissue damage, including liver disease, heart attack, and certain cancers.">LDH</abbr></span>)</li>
+                        <li>Elevated liver enzymes (AST, ALT, LDH)</li>
                         <li>Elevated creatinine and urea (renal involvement)</li>
-                        <li><span class="tooltip"><abbr title="Prothrombin Time. A laboratory finding indicating delayed blood clotting, often associated with liver dysfunction, vitamin K deficiency, or use of anticoagulant medications.">Prolonged PT</abbr></span>, <span class="tooltip"><abbr title="Activated Partial Thromboplastin Time. A blood test measuring the time it takes for blood to clot, used to evaluate the intrinsic and common pathways of coagulation and monitor heparin therapy. Prolonged aPTT may indicate clotting factor deficiencies or the presence of inhibitors.">aPTT</abbr></span>, <span class="tooltip"><abbr title="A laboratory finding indicating increased levels of a fibrin degradation product, suggesting active blood clot formation and breakdown. It is used to assess conditions such as deep vein thrombosis, pulmonary embolism, or disseminated intravascular coagulation.">elevated D-dimer</abbr></span>, <span class="tooltip"><abbr title="Disseminated Intravascular Coagulation. A critical reduction in fibrinogen levels due to widespread clot formation and consumption of clotting factors, leading to a paradoxical risk of both excessive bleeding and clotting. It is a hallmark of severe DIC and requires urgent medical intervention.">low fibrinogen (DIC)</abbr></span>)</li>
+                        <li>Prolonged PT, aPTT, elevated D-dimer, low fibrinogen (DIC)</li>
                         <li>Proteinuria and hematuria</li>
                         <li>High viral load in blood and tissues</li>
                     </ul>
@@ -715,14 +693,14 @@
                             <div class="feedback" style="display: none;"></div>
                         </div>
 
-                        <button type="submit" id="submitPathologyQuizBtn" class="submit-btn" onclick="submitPathologyQuiz()">Submit Answer</button>
-                        <button type="button" id="retryPathologyQuizBtn" class="submit-btn" onclick="retryPathologyQuiz()" style="display: none;">Try Again</button>
+                        <button type="submit" class="submit-btn" onclick="submitPathologyQuiz()">Submit Answers</button>
+                        <button type="button" class="submit-btn" onclick="retryPathologyQuiz()" style="display: none;">Try Again</button>
 
                         <div class="score-display">
                             <h4>Your Score</h4>
                             <div class="score-thermometer">
                                 <div class="thermometer-fill" id="pathology-score-fill"></div>
-                                <div class="score-text" id="pathology-score-text">0 / 10</div>
+                                <div class="score-text" id="pathology-score-text">0 / 25</div>
                             </div>
                         </div>
                     </div>
@@ -743,7 +721,7 @@
                   
                     <div style="float: left; margin: 0 20px 15px 0; max-width: 400px;">
                         <img src="images/pic_10_phylotree.png" alt="CCHFV Phylogenetic Tree" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                        <p class="image-caption" style="font-style: italic; color: #666; margin-top: 8px; font-size: 0.9em;">Overview of viruses, including CCHF virus belonging to the family of Bunyavirideae.</p>
+                        <p class="image-caption" style="font-style: italic; color: #666; margin-top: 8px; font-size: 0.9em;">Phylogenetic tree showing genetic diversity of CCHFV strains across different geographical regions.</p>
                     </div>
 
                     <p>CCHFV is an enveloped negative-sense RNA virus belonging to the Orthonairovirus genus in the Nairoviridae family of the Bunyavirales order. In addition to CCHFV, the Nairoviridae family consists of arthropod-borne viruses such as Nairobi sheep disease virus, Dugbe virus and Hazara virus (HAZV), although these viruses seem to cause little-to-no disease in humans. As in other bunyaviruses, the tri-segmented viral genome is coated with the viral nucleoprotein (NP) and bound by the L protein. The viral proteins are encoded by three genomic segments, and relative to other members of the order that can cause human disease, CCHFV has a more complex genomic organization. On entry, these proteins produce positive-sense viral RNA using the genomic negative-sense viral RNA as a template to initiate viral protein production and replication. The viral glycoproteins Gn and Gc are found on the virion surface and are responsible for receptor binding and viral entry.</p>
@@ -755,16 +733,16 @@
                     <strong>Family:</strong> Nairoviridae<br>
                     <strong>Genus:</strong> Orthonairovirus<br>
                     <strong>Species:</strong> Orthonairovirus haemorrhagiae (Crimean-Congo Hemorrhagic Fever Virus)</p>
-                    
-                    <p>Learn more at: <a href="https://ictv.global/taxonomy/taxondetails?taxnode_id=20141737&taxon_name=Crimean-Congo%20hemorrhagic%20fever%20virus" target="_blank">International Committee on Taxonomy of Viruses</a> | <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3391156" target="_blank">NCBI</a>.</p> 
-                    
+
                     <h3>Virion Structure and Morphology</h3>
-                    <p>CCHFV virions are spherical to pleomorphic, enveloped particles with a diameter of 80–120 nm. The viral envelope, derived from the host cell membrane, is studded with two types of spiky glycoproteins—Gn and Gc—which facilitate attachment to new cells and evasion of immune defenses. Inside, the tripartite genome is organized as ribonucleoprotein complexes, optimized for efficient replication.</p>
+                    <p>CCHFV virions are spherical to pleomorphic, enveloped particles with a diameter of 80–120 nm. The viral envelope is derived from the host cell membrane and is studded with two types of glycoprotein spikes: Gn and Gc.</p>
 
                     <div class="image-container">
                         <img src="images/pic_3_CCHFVparticle.png" alt="CCHF virus particle" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                         <p class="image-caption" style="font-style: italic; color: #666; margin-top: 8px; font-size: 0.9em;">Schematic view of CCHF virus particle.</p>
                     </div>
+
+                    <p>CCHFV particles are generally spherical (80–120 nm in diameter) with a flexible envelope derived from the host cell. Embedded in this envelope are two types of spiky glycoproteins (Gn and Gc), which give the virus both its ability to latch onto new cells and to dodge immune defenses. The interior contains the tripartite genome as ribonucleoprotein complexes, expertly packaged for rapid replication.</p>
 
                     <h3>Genome Organization</h3>
                     <p>The CCHFV genome is neatly divided into three segments, each segment with a specific job.</p>
@@ -822,21 +800,13 @@
                     </ol>
 
                     <h3>Genetic Diversity and Evolution</h3>
-                    <p>CCHFV stands out as one of the most variable tick-borne viruses—strains can differ by up to 20% in their genetic code. This remarkable diversity arises from several factors:</p>
+                    <p>CCHFV stands out as one of the most variable tick-borne viruses—strains can differ by up to 20% in their genetic code. This diversity results from:</p>
                     <ul>
                         <li><strong>The virus's segmented genome,</strong> promoting exchanges and rearrangements during co-infection by different strains within a host.</li>
                         <li>A <strong>naturally high mutation rate</strong> due to lack of proofreading during replication.</li>
                         <li>The evolution in a <strong>wide geographic range</strong> with circulation in many tick and animal hosts.</li>
                     </ul>
-
-                    <div style="float: left; margin: 0 20px 15px 0; display: flex; gap: 10px; align-items: flex-start;">
-                        <img src="images/pic_23_phylo.png" alt="Display of genetic diversity of CCHF virus from different regions" style="width: 300px; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex-shrink: 0;">
-                        <p class="image-caption" style="font-style: italic; color: #666; font-size: 0.9em; margin: 0; display: flex; align-items: center;">Display of genetic diversity of CCHF virus from different regions. The phylogenetic analysis is based on the medium gene segments virus sequences. Scale bar indicates nucleotide substitutions per site.</p>
-                    </div>
-
-                    <p>Phylogenetic studies have identified major CCHFV lineages in Africa, Asia, Eastern Europe, and the Middle East. While the 20% genetic divergence may seem substantial, the classification is done in accordance with the International Committee on Taxonomy of Viruses (ICTV) guidelines. Key criteria for defining a viral species is the amino acid sequence similarity of the RNA-dependent RNA polymerase. The genetic variability of the CCHF virus contributes to the emergence of novel strains with unpredictable virulence and epidemiological behavior.</p>
-
-                    <div style="clear: both;"></div>
+                    <p>Phylogenetic studies show major lineages in Africa, Asia, Eastern Europe, and the Middle East. This diversity of the virus contributes to the emergence of novel strains with unpredictable virulence and epidemiology.</p>
 
                     <h3>Ecology, Hosts, and Transmission Dynamics</h3>
 

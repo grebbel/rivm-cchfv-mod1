@@ -1896,3 +1896,58 @@ body {
         margin: 10px 0;
     }
 }
+
+/* Tooltip Styles for Medical Term Definitions */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+    border-bottom: 2px dotted var(--rh-blue);
+}
+
+.tooltip abbr {
+    text-decoration: none;
+    cursor: help;
+    font-weight: 600;
+    color: var(--rh-blue);
+}
+
+.tooltip abbr:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1.4;
+    white-space: normal;
+    width: 250px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+.tooltip abbr:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let courseProgress = {
     chaptersVisited: new Set(),
-    totalChapters: 5, // Updated to match actual chapter count after removing Epidemiology
+    totalChapters: 6, // Updated to include Introduction + 5 content chapters
     quizzesCompleted: { 
         quiz1: false, 
         rtExercise: false, 
@@ -594,7 +594,7 @@ let courseProgress = {
     // Fun Thermometer Score Tracking
     // ====================================
     let courseScore = 0;
-    const maxScore = 900;
+    const maxScore = 100;
 
     const statusMessages = [
         { threshold: 0, message: "🌱 Just getting started!", color: "#ff6b6b" },
@@ -642,7 +642,7 @@ let courseProgress = {
     }
 
     function addToScore(points) {
-        courseScore = Math.min(courseScore + points, maxScore); // Cap at max score
+        courseScore = Math.max(0, Math.min(courseScore + points, maxScore)); // Clamp to 0..max
         updateThermometer();
     
         // Fun notification for score increases
@@ -743,6 +743,7 @@ let courseProgress = {
         const submitHistoryQuizBtn = document.getElementById('submitHistoryQuiz');
         const retryHistoryQuizBtn = document.getElementById('retryHistoryQuiz');
         const historyQuizFeedback = document.getElementById('historyQuizFeedback');
+        let historyAwardedScore = 0;
 
         // Render quiz questions
         if (historyQuizContainer) {
@@ -788,7 +789,7 @@ let courseProgress = {
                 // Grade each question
                 historyQuizQuestions.forEach((question, index) => {
                     const selected = document.querySelector(`input[name="historyQ${index}"]:checked`);
-                    const questionDiv = document.querySelectorAll('.quiz-question')[index];
+                    const questionDiv = document.querySelectorAll('#historyQuizQuestions .quiz-question')[index];
                     const feedbackDiv = questionDiv.querySelector('.question-feedback');
                     const options = questionDiv.querySelectorAll('.quiz-option');
 
@@ -826,9 +827,9 @@ let courseProgress = {
                     }
                 });
 
-                // Calculate score (25 points per correct answer)
-                const score = totalCorrect * 25;
-                const maxScore = totalQuestions * 25;
+                // Calculate score (5 points per correct answer)
+                const score = totalCorrect * 5;
+                const maxScore = totalQuestions * 5;
                 const percentage = (score / maxScore) * 100;
 
                 // Show feedback
@@ -846,6 +847,7 @@ let courseProgress = {
 
                 // Add to course score
                 addToScore(score);
+                historyAwardedScore = score;
                 
                 // Report to LMS
                 reportToLMS('historyQuiz', score, percentage >= 75);
@@ -855,8 +857,13 @@ let courseProgress = {
         // Retry quiz
         if (retryHistoryQuizBtn) {
             retryHistoryQuizBtn.addEventListener('click', function() {
+                if (historyAwardedScore > 0) {
+                    addToScore(-historyAwardedScore);
+                    historyAwardedScore = 0;
+                }
+
                 // Reset all questions
-                document.querySelectorAll('.quiz-question').forEach((questionDiv, index) => {
+                document.querySelectorAll('#historyQuizQuestions .quiz-question').forEach((questionDiv, index) => {
                     const options = questionDiv.querySelectorAll('.quiz-option');
                     const feedbackDiv = questionDiv.querySelector('.question-feedback');
                     
@@ -987,9 +994,9 @@ let courseProgress = {
                     }
                 });
 
-                // Calculate score (25 points per correct answer)
-                const score = totalCorrect * 25;
-                const maxScore = totalQuestions * 25;
+                // Calculate score (10 points for correct answer)
+                const score = totalCorrect * 10;
+                const maxScore = totalQuestions * 10;
                 const percentage = (score / maxScore) * 100;
 
                 // Show feedback
@@ -1050,6 +1057,7 @@ let courseProgress = {
         const submitBiologyDragDropBtn = document.getElementById('submitBiologyDragDrop');
         const retryBiologyDragDropBtn = document.getElementById('retryBiologyDragDrop');
         const biologyDragDropFeedback = document.getElementById('biologyDragDropFeedback');
+        let biologyAwardedScore = 0;
         
         if (biologyDragDropContainer) {
             // Card configurations
@@ -1436,8 +1444,8 @@ let courseProgress = {
                     });
 
                     // Calculate score
-                    const baseScore = correctCount * 10;
-                    const bonus = (correctCount === totalCards) ? 50 : 0;
+                    const baseScore = correctCount * 5;
+                    const bonus = (correctCount === totalCards) ? 10 : 0;
                     const totalScore = baseScore + bonus;
                     const percentage = (correctCount / totalCards) * 100;
 
@@ -1457,6 +1465,7 @@ let courseProgress = {
 
                     // Add to course score
                     addToScore(totalScore);
+                    biologyAwardedScore = totalScore;
 
                     // Report to LMS
                     reportToLMS('biologyDragDrop', totalScore, percentage === 100);
@@ -1466,6 +1475,11 @@ let courseProgress = {
             // Retry handler
             if (retryBiologyDragDropBtn) {
                 retryBiologyDragDropBtn.addEventListener('click', function() {
+                    if (biologyAwardedScore > 0) {
+                        addToScore(-biologyAwardedScore);
+                        biologyAwardedScore = 0;
+                    }
+
                     // Remove ALL cards from the DOM (both in zones and stack)
                     document.querySelectorAll('.draggable-card').forEach(card => {
                         card.remove();
@@ -2413,7 +2427,7 @@ let courseProgress = {
         
             // Calculate and set score
             const currentScore = window.courseScore || 0;
-            const maxScore = window.maxScore || 900;
+            const maxScore = window.maxScore || 100;
             const scorePercentage = (currentScore / maxScore) * 100;
             window.scormAPI.setScore(scorePercentage, 0, 100);
         
@@ -2553,6 +2567,27 @@ let courseProgress = {
             }
             resetMultiplexDropdowns();
         }
+
+        // Reset active quiz UIs and states for Module 1
+        if (retryHistoryQuizBtn) {
+            retryHistoryQuizBtn.click();
+        }
+
+        if (typeof window.retryPathologyQuiz === 'function') {
+            window.retryPathologyQuiz();
+        }
+
+        if (retryBiologyDragDropBtn) {
+            retryBiologyDragDropBtn.click();
+        }
+
+        if (labRetryBtn) {
+            labRetryBtn.click();
+        }
+
+        // Ensure score remains hard-reset after all UI resets
+        courseScore = 0;
+        updateThermometer();
     
         // Clear local storage
         localStorage.removeItem('courseScore');
@@ -2725,6 +2760,7 @@ let courseProgress = {
     }
 
 // Pathology Quiz Functions (defined globally for onclick handlers in HTML)
+let pathologyAwardedScore = 0;
 window.submitPathologyQuiz = function() {
     const quizContainer = document.getElementById('pathology-quiz');
     const selectedAnswer = document.querySelector('input[name="pathology-q1"]:checked');
@@ -2737,8 +2773,8 @@ window.submitPathologyQuiz = function() {
     const correctAnswer = 'C';
     const isCorrect = selectedAnswer.value === correctAnswer;
     const feedbackDiv = quizContainer.querySelector('.feedback');
-    const submitBtn = quizContainer.querySelector('.quiz-submit');
-    const retryBtn = quizContainer.querySelectorAll('.quiz-submit')[1];
+    const submitBtn = document.getElementById('submitPathologyQuizBtn');
+    const retryBtn = document.getElementById('retryPathologyQuizBtn');
     
     // Disable all radio buttons
     quizContainer.querySelectorAll('input[type="radio"]').forEach(input => {
@@ -2771,21 +2807,28 @@ window.submitPathologyQuiz = function() {
     `;
     
     // Calculate and show score
-    const score = isCorrect ? 25 : 0;
+    const score = isCorrect ? 10 : 0;
     const scoreFill = document.getElementById('pathology-score-fill');
     const scoreText = document.getElementById('pathology-score-text');
     
-    scoreFill.style.width = (score / 25 * 100) + '%';
+    scoreFill.style.width = (score / 10 * 100) + '%';
     scoreFill.style.backgroundColor = isCorrect ? '#28a745' : '#dc3545';
-    scoreText.textContent = `${score} / 25`;
+    scoreText.textContent = `${score} / 10`;
     
     // Update buttons
-    submitBtn.style.display = 'none';
-    retryBtn.style.display = 'inline-block';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+        submitBtn.style.cursor = 'not-allowed';
+    }
+    if (retryBtn) {
+        retryBtn.style.display = 'inline-block';
+    }
     
     // Add to course score
     if (typeof addToScore === 'function') {
         addToScore(score);
+        pathologyAwardedScore = score;
     }
     
     // Report to LMS
@@ -2797,8 +2840,13 @@ window.submitPathologyQuiz = function() {
 window.retryPathologyQuiz = function() {
     const quizContainer = document.getElementById('pathology-quiz');
     const feedbackDiv = quizContainer.querySelector('.feedback');
-    const submitBtn = quizContainer.querySelector('.quiz-submit');
-    const retryBtn = quizContainer.querySelectorAll('.quiz-submit')[1];
+    const submitBtn = document.getElementById('submitPathologyQuizBtn');
+    const retryBtn = document.getElementById('retryPathologyQuizBtn');
+
+    if (pathologyAwardedScore > 0 && typeof addToScore === 'function') {
+        addToScore(-pathologyAwardedScore);
+    }
+    pathologyAwardedScore = 0;
     
     // Reset all radio buttons
     quizContainer.querySelectorAll('input[type="radio"]').forEach(input => {
@@ -2820,11 +2868,17 @@ window.retryPathologyQuiz = function() {
     const scoreFill = document.getElementById('pathology-score-fill');
     const scoreText = document.getElementById('pathology-score-text');
     scoreFill.style.width = '0%';
-    scoreText.textContent = '0 / 25';
+    scoreText.textContent = '0 / 10';
     
     // Update buttons
-    submitBtn.style.display = 'inline-block';
-    retryBtn.style.display = 'none';
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '';
+        submitBtn.style.cursor = '';
+    }
+    if (retryBtn) {
+        retryBtn.style.display = 'none';
+    }
     
     // Scroll to quiz
     quizContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2841,6 +2895,7 @@ let labQuizState = {
     labTestsAnswered: false,
     score: 0
 };
+let labAwardedScore = 0;
 
 // Clinical Stage Selection
 const stageButtons = document.querySelectorAll('.lab-stage-btn');
@@ -2864,7 +2919,7 @@ stageButtons.forEach(button => {
         });
         
         if (isCorrect) {
-            labQuizState.score += 25;
+            labQuizState.score += 5;
         }
         
         setTimeout(() => {
@@ -2914,7 +2969,7 @@ if (labSubmitBtn) {
             
             if (isCorrect) {
                 correctCount++;
-                labQuizState.score += 25;
+                labQuizState.score += 5;
                 select.style.borderColor = '#28a745';
                 select.style.backgroundColor = '#d4edda';
             } else {
@@ -2930,7 +2985,7 @@ if (labSubmitBtn) {
         });
         
         if (correctCount === 5) {
-            labQuizState.score += 50;
+            labQuizState.score += 10;
         }
         
         const resultsDiv = document.getElementById('lab-quiz-results');
@@ -2938,15 +2993,15 @@ if (labSubmitBtn) {
         const feedbackText = document.getElementById('lab-quiz-feedback');
         
         resultsDiv.style.display = 'block';
-        scoreText.textContent = `Your score: ${labQuizState.score} / 200 points`;
-        scoreText.style.color = labQuizState.score >= 175 ? '#28a745' : (labQuizState.score >= 100 ? '#ffc107' : '#dc3545');
+        scoreText.textContent = `Your score: ${labQuizState.score} / 35 points`;
+        scoreText.style.color = labQuizState.score >= 28 ? '#28a745' : (labQuizState.score >= 18 ? '#ffc107' : '#dc3545');
         
         let feedback = '';
-        if (labQuizState.score === 200) {
+        if (labQuizState.score === 35) {
             feedback = '🎉 Perfect score! You have excellent understanding of CCHF diagnostics.';
-        } else if (labQuizState.score >= 175) {
+        } else if (labQuizState.score >= 28) {
             feedback = '✅ Great work! You have a strong grasp of diagnostic timing and methods.';
-        } else if (labQuizState.score >= 100) {
+        } else if (labQuizState.score >= 18) {
             feedback = '📚 Good effort! Review the diagnostic timeline for early vs. late phase testing.';
         } else {
             feedback = '💡 Keep learning! Focus on when each test is most useful in the disease course.';
@@ -2958,10 +3013,11 @@ if (labSubmitBtn) {
         
         if (typeof addToScore === 'function') {
             addToScore(labQuizState.score);
+            labAwardedScore = labQuizState.score;
         }
         
         if (typeof reportToLMS === 'function') {
-            reportToLMS('labDiagnosisQuiz', labQuizState.score, labQuizState.score === 200);
+            reportToLMS('labDiagnosisQuiz', labQuizState.score, labQuizState.score === 35);
         }
         
         resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2971,6 +3027,11 @@ if (labSubmitBtn) {
 const labRetryBtn = document.getElementById('lab-retry-btn');
 if (labRetryBtn) {
     labRetryBtn.addEventListener('click', function() {
+        if (labAwardedScore > 0 && typeof addToScore === 'function') {
+            addToScore(-labAwardedScore);
+        }
+        labAwardedScore = 0;
+
         labQuizState = {
             stageAnswered: false,
             stageCorrect: false,
